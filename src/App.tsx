@@ -2,7 +2,9 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import { Button} from '@mui/material';
-import DoughnutChart from './components/DoughtChart';
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -23,8 +25,9 @@ function App() {
         Success
       </Button>
     
-      
-  
+      <Badge badgeContent={4} color="primary">
+      <MailIcon color="action" />
+    </Badge>
       <div className="card">
         <Button variant="outlined" color="error" onClick={() => setCount((count) => count + 1)}>
           count is {count}
