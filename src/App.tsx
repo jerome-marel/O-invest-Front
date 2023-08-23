@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './components/Auth/Login';
 import RegisterPage from './components/Auth/Register';
-import DashBoardPage from './pages/Dashboard/Dashboard';
+import DashBoardPage from './pages/dashboard/Dashboard';
 import Header from './components/Menu/Menu'; 
 
 const App = () => {
