@@ -9,12 +9,20 @@ export const changeField = createAction('user/changeField')
 
 export const logout = createAction('user/logout')
 
-export const login = createAsyncThunk('user/login', async (_, thunkAPI) => { // _ est racletiflabel est un objet
+export const login = createAsyncThunk('user/login', async (payload, thunkAPI) => { // _ est racletiflabel est un objet
      
+    console.log("thunkAPI", payload);
+
     // const email = thunkAPI.getState().user.credentials.email
     // const password = thunkAPI.getState().user.credentials.password
-    const { email, password } = thunkAPI.getState().user.credentials
+    // const { email, password } = thunkAPI.getState().user.credentials
+    const { email, password } = payload;
     const { data } = await axiosInstance.post('/login', { email, password })
+    console.log(data);
+
+    // Mettre à jour le state 
+    
+
     // data: {
     //     logged: true,
     //     pseudo: 'Burt',

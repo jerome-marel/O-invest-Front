@@ -19,7 +19,7 @@ const RegisterForm = () => {
     }
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePassword = (e) => {
     setPassword(e.target.value);
 
     if (e.target.value === confirmPassword) {
@@ -29,7 +29,7 @@ const RegisterForm = () => {
     }
   };
 
-  const handleConfirmPasswordChange = (e) => {
+  const handleConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
 
     if (e.target.value === password) {
@@ -90,7 +90,7 @@ const RegisterForm = () => {
             id="password"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={handlePassword}
           />
         </div>
         
@@ -104,7 +104,7 @@ const RegisterForm = () => {
             id="confirmPassword"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
             value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
+            onChange={handleConfirmPassword}
           />
           {!passwordsMatch && (
             <p className="text-red-500 mt-2">Votre mot de passe ne correspond pas !</p>

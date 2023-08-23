@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
@@ -17,7 +17,7 @@ const Header = () => {
 
   const handlePortfolioClick = (portfolio) => {
     setSelectedPortfolio(portfolio);
-    setShowPortfolioDropdown(false);
+
   };
 
   return (
