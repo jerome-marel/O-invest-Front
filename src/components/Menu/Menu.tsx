@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
@@ -17,17 +17,16 @@ const Header = () => {
 
   const handlePortfolioClick = (portfolio) => {
     setSelectedPortfolio(portfolio);
-
   };
 
   return (
     <div className="flex justify-between items-center bg-blue-500 p-4">
-      <div className="text-white text-lg font-semibold">O'Invest</div>
+      <NavLink to="/dashboard" className="text-white text-lg font-semibold">O'Invest </NavLink>
       <div className="text-white cursor-pointer hover:underline">
         <NavLink to="/dashboard">Dashboard</NavLink>
       </div>
       <div
-        className="relative text-white cursor-pointer group"
+        className="relative text-white cursor-pointer group hover:underline"
         onClick={togglePortfolioDropdown}
       >
         Portefeuille
@@ -49,12 +48,13 @@ const Header = () => {
         )}
       </div>
       <div className="text-white flex items-center space-x-2">
-        
-        <NavLink to="/profile" className="hover:underline">
+        <NavLink to="/profil" className="hover:underline">
           <div>Nom Prénom</div>
         </NavLink>
         <div className="border-l pl-4">
-          <button className="text-white hover:underline">Disconnect</button>
+          <NavLink to="/" className="text-white hover:underline">
+            Se Déconnecter
+          </NavLink>
         </div>
       </div>
     </div>

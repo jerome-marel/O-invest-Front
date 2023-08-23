@@ -9,12 +9,7 @@ const Dashboard = () => {
       <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
       <p className="mb-4">Bienvenue sur O'Invest</p>
 
-      <NavLink
-        to="/"
-        className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600"
-      >
-        Home
-      </NavLink>
+      
     </div>
 
 
