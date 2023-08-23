@@ -27,7 +27,7 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(login.fulfilled, (state, action) => {
       // Mise à jour de l'état après une connexion réussie
       state.logged = true;
-      state.pseudo = action.payload.pseudo; // Le payload est généralement utilisé pour transporter les données nécessaires à la modification de l'état
+      state.email = action.payload.email; // Le payload est généralement utilisé pour transporter les données nécessaires à la modification de l'état
       state.token = action.payload.token;
       state.credentials = {
         email: '',
@@ -37,7 +37,7 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(logout, (state) => {
       // Gestion de la déconnexion (suppression des données utilisateur du local storage)
       localStorage.removeItem('user');
-      state.pseudo = undefined;
+      state.email = undefined;
       state.logged = false;
       state.token = undefined;
     })
@@ -45,12 +45,15 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(register.fulfilled, (state, action) => {
       // Mise à jour de l'état après un enregistrement réussi
       state.logged = true;
-      state.pseudo = action.payload.pseudo;
+      state.email = action.payload.email;
       state.token = action.payload.token;
       state.credentials = {
         email: '',
         password: ''
       };
+      state.nom = action.payload.nom;
+      state.prenom = action.payload.prenom;
+      state.profilRisque = action.payload.profilRisque;
     });
 });
 

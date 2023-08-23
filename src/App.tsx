@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 
-import LandingPage from './components/LandingPage';
+import LandingPage from './pages/LandingPage';
 import LoginPage from './components/Auth/Login';
 import RegisterPage from './components/Auth/Register';
-import DashBoardPage from './components/Dashboard/Dashboard'
+import DashBoardPage from './pages/Dashboard/Dashboard'
 
 const App = () => {
   return (

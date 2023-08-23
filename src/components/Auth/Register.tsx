@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { register } from '../../stores/actions/UserAction';
@@ -8,6 +8,8 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const dispatch = useDispatch();
+  const [prenom, setPrenom] = useState('');
+  const [nom, setNom] = useState('');
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -41,8 +43,32 @@ const RegisterForm = () => {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white border rounded bg-indigo-300 shadow-md">
-      <h2 className="text-2xl font-semibold mb-2">Register</h2>
+      <h2 className="text-2xl font-semibold mb-2">S'enregistrer</h2>
       <form onSubmit={handleSignUp}>
+      <div className="mb-4">
+          <label htmlFor="nom" className="block font-medium mb-1">
+            Nom:
+          </label>
+          <input
+            type="text"
+            id="nom"
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="prenom" className="block font-medium mb-1">
+            Prénom
+          </label>
+          <input
+            type="text"
+            id="prenom"
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
+            value={prenom}
+            onChange={(e) => setPrenom(e.target.value)}
+          />
+        </div>
         <div className="mb-4">
           <label htmlFor="email" className="block font-medium mb-1">
             Email:
@@ -57,7 +83,7 @@ const RegisterForm = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block font-medium mb-1">
-            Password:
+            Mot de passe :
           </label>
           <input
             type="password"
@@ -67,9 +93,11 @@ const RegisterForm = () => {
             onChange={handlePasswordChange}
           />
         </div>
+        
+    
         <div className="mb-4">
           <label htmlFor="confirmPassword" className="block font-medium mb-1">
-            Confirm Password:
+            Confirmer votre mot de passe :
           </label>
           <input
             type="password"
@@ -79,20 +107,39 @@ const RegisterForm = () => {
             onChange={handleConfirmPasswordChange}
           />
           {!passwordsMatch && (
-            <p className="text-red-500 mt-2">Passwords do not match</p>
+            <p className="text-red-500 mt-2">Votre mot de passe ne correspond pas !</p>
           )}
         </div>
+        <fieldset>
+          <legend className='font-medium'>Selectionner votre profil de risque :</legend>
+
+          <div className='w-full px-7 py-2'>
+          <input type="radio" id="Prudent" name="risk" value="Prudent" />
+          <label htmlFor="Prudent">Prudent</label>
+        </div>
+
+        <div className='w-full px-7 py-2'>
+          <input type="radio" id="Équilibré" name="risk" value="Équilibré" />
+          <label htmlFor="Équilibré">Équilibré</label>
+        </div>
+ 
+        <div className='w-full px-7 py-2'>
+          <input type="radio" id="Dynamique" name="risk" value="Dynamique" />
+          <label htmlFor="Dynamique">Dynamique</label>
+        </div>
+        </fieldset>
         <button
           type="submit"
-          className="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
+          className="w-full mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
         >
-          Create Account
+          Créer votre compte
         </button>
+        
       </form>
       <p className="mt-2">
-        Already have an account?
-        <NavLink to="/login" className="text-blue-500 font-semibold">
-          Login here
+        Avez-vous déjà un compte ? 
+        <NavLink to="/login" className="px-3 text-blue-500 font-semibold">
+           Se connecter
         </NavLink>
       </p>
     </div>
