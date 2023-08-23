@@ -9,7 +9,8 @@ export const changeField = createAction('user/changeField')
 
 export const logout = createAction('user/logout')
 
-export const login = createAsyncThunk('user/login', async (_, thunkAPI) => {
+export const login = createAsyncThunk('user/login', async (_, thunkAPI) => { // _ est racletiflabel est un objet
+     
     // const email = thunkAPI.getState().user.credentials.email
     // const password = thunkAPI.getState().user.credentials.password
     const { email, password } = thunkAPI.getState().user.credentials
