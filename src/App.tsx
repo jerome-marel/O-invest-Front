@@ -4,6 +4,8 @@ import LoginPage from './components/Auth/Login';
 import RegisterPage from './components/Auth/Register';
 import DashBoardPage from './pages/dashboard/Dashboard';
 import Header from './components/Menu/Menu';
+import Profil from './components/Profil/Profil'
+import PortfolioDetail from './components/Portfolio/PortfolioDetail';
 
 
 
