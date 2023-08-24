@@ -18,9 +18,7 @@ export const login = createAsyncThunk('user/login', async (_, thunkAPI) => { // 
     const { data } = await axiosInstance.post('/login', { email, password })
     console.log(data);
 
-    // Mettre à jour le state 
     
-
     // data: {
     //     logged: true,
     //     pseudo: 'Burt',
