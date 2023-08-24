@@ -50,7 +50,7 @@ const Header = () => {
       </div>
       <div className="text-white flex items-center space-x-2">
         
-        <NavLink to="/profile" className="hover:underline">
+        <NavLink to="/profil" className="hover:underline">
           <div>Nom Prénom</div>
         </NavLink>
         <div className="border-l pl-4">
