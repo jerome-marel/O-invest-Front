@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../../stores/actions/UserAction';
+import { login, changeField } from '../../stores/actions/UserAction';
 import { NavLink } from 'react-router-dom';
 
 const Login = () => {
@@ -9,7 +9,13 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    dispatch(login({ email, password }));
+
+    // changeField x2 (1 email, 1 password)
+      
+    dispatch(changeField({ name: "email", value: email }));
+    dispatch(changeField({ name: "password", value: password }));
+    dispatch(login());
+
   };
 
   return (
