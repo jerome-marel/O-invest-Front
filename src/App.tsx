@@ -4,6 +4,8 @@ import LoginPage from './components/Auth/Login';
 import RegisterPage from './components/Auth/Register';
 import DashBoardPage from './pages/dashboard/Dashboard';
 import Header from './components/Menu/Menu';
+import Profil from './components/Profil/Profil'
+import PortfolioDetail from './components/Portfolio/PortfolioDetail';
 
 
 
@@ -23,6 +25,11 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
 
         <Route path="/dashboard" element={<PageWithHeader><DashBoardPage /></PageWithHeader>} />
+
+
+        <Route path="/portfolio/:portfolioId" element={<PageWithHeader> <PortfolioDetail /> </PageWithHeader>} />
+
+        <Route path="/profil" element={<PageWithHeader><Profil /></PageWithHeader>} />
 
 
          

@@ -11,7 +11,6 @@ export const initialState = {
     email: '',
     password: ''
   }, // Informations d'identification (email, mot de passe)
-  
   token: undefined, // Le token d'authentification de l'utilisateur
   ...localUser // Intégration des données utilisateur du local storage (s'il y en a)
 };
@@ -20,6 +19,8 @@ export const initialState = {
 const userReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeField, (state, action) => {
+      console.log(action)
+      // const payload = { name: "email", value: "test@test.test" }
       const { name, value } = action.payload;
       // Modification des champs d'authentification en fonction des actions changeField
       state.credentials[name] = value;
