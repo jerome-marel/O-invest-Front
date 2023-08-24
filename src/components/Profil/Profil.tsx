@@ -1,0 +1,136 @@
+import { useState } from 'react';
+
+const ProfilePage = () => {
+  const initialUserData = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '', 
+  };
+
+  const [userData, setUserData] = useState(initialUserData);
+  const [isEditing, setIsEditing] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleSaveClick = () => {
+    setIsEditing(false);
+    
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  return (
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+      <div className="bg-white rounded-lg p-8 shadow-md w-96">
+        <div className="text-center mb-4">
+          
+          <h1 className="text-2xl font-semibold">
+            {userData.firstName} {userData.lastName}
+          </h1>
+        </div>
+        <div className="mt-6">
+          <div className="mb-2">
+            <label className="text-gray-600 font-semibold">First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              value={userData.firstName}
+              readOnly={!isEditing}
+              onChange={handleChange}
+              className={`w-full bg-gray-100 border ${
+                isEditing ? 'border-blue-500' : 'border-gray-300'
+              } py-2 px-3 rounded ${
+                isEditing ? 'bg-white' : 'bg-gray-100'
+              }`}
+            />
+          </div>
+          <div className="mb-2">
+            <label className="text-gray-600 font-semibold">Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              value={userData.lastName}
+              readOnly={!isEditing}
+              onChange={handleChange}
+              className={`w-full bg-gray-100 border ${
+                isEditing ? 'border-blue-500' : 'border-gray-300'
+              } py-2 px-3 rounded ${
+                isEditing ? 'bg-white' : 'bg-gray-100'
+              }`}
+            />
+          </div>
+          <div className="mb-2">
+            <label className="text-gray-600 font-semibold">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={userData.email}
+              readOnly={!isEditing}
+              onChange={handleChange}
+              className={`w-full bg-gray-100 border ${
+                isEditing ? 'border-blue-500' : 'border-gray-300'
+              } py-2 px-3 rounded ${
+                isEditing ? 'bg-white' : 'bg-gray-100'
+              }`}
+            />
+          </div>
+          <div className="mb-2">
+            <label className="text-gray-600 font-semibold">Password</label>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              value={userData.password}
+              readOnly={!isEditing}
+              onChange={handleChange}
+              className={`w-full bg-gray-100 border ${
+                isEditing ? 'border-blue-500' : 'border-gray-300'
+              } py-2 px-3 rounded ${
+                isEditing ? 'bg-white' : 'bg-gray-100'
+              }`}
+            />
+            {isEditing && (
+              <label className="mt-2 flex items-center">
+                <input
+                  type="checkbox"
+                  className="mr-1"
+                  checked={showPassword}
+                  onChange={() => setShowPassword(!showPassword)}
+                />
+                Show Password
+              </label>
+            )}
+          </div>
+        </div>
+        <div className="mt-4 text-center">
+          {isEditing ? (
+            <button
+              onClick={handleSaveClick}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+            >
+              Save
+            </button>
+          ) : (
+            <button
+              onClick={handleEditClick}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+            >
+              Edit Profile
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProfilePage;
