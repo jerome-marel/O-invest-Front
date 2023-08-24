@@ -1,10 +1,11 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 // Importe les fonctions createAction et createAsyncThunk de Redux Toolkit.
 
+
 import { axiosInstance } from '../../utils/axios';
 // Importe votre instance personnalisée d'Axios depuis le fichier axios.js.
 
-export const userLogged = createAction('user/userLogged')
+
 
 // Crée une action Redux pour changer un champ dans le formulaire
 export const changeField = createAction('user/changeField');
@@ -33,15 +34,12 @@ export const login = createAsyncThunk('user/login', async (_, thunkAPI) => {
 // thunkAPI.getState() pour accéder à l'état global du magasin 
 export const register = createAsyncThunk('user/register', async (_, thunkAPI) => {
   const { email, password, nom, prenom, profilRisque } = thunkAPI.getState().user.credentials;
-
+    
 
   // Effectue une requête POST vers /register avec les informations d'identification
   const { data } = await axiosInstance.post('/register', { email, password, nom, prenom, profilRisque });
 
-
-  // Rediriger l'utilisateur vers la page de dashboard après l'enregistrement réussi
-  thunkAPI.getState().history.push('/dashboard');
-
+  
   return data; // Retourne les données du nouvel utilisateur créé
 
   

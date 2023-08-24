@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { register } from '../../stores/actions/UserAction';
 
+
+
 const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,6 +13,7 @@ const RegisterForm = () => {
   const [prenom, setPrenom] = useState('');
   const [nom, setNom] = useState('');
   const [profilRisque, setProfilRisque] =useState('')
+  
 
   const handleSignUp = (e) => {
     e.preventDefault();
