@@ -23,3 +23,10 @@ axiosInstance.interceptors.request.use((config) => {
 })
 
 // * On utilise cette instance dans userActions.js et recipesActions.js
+
+
+// Cependant, il y a un petit point à noter : dans l'intercepteur, vous accédez au token du local storage en utilisant
+//  la clé "user.token". Cela signifie que vous attendez que l'objet stocké dans le local storage soit de la forme { "token": "votre_token_jwt" }.
+
+// Assurez-vous que lors de la connexion et du stockage du token dans le local storage,
+//  vous l'enregistrez sous la clé "user" et que vous avez correctement formé l'objet avec la propriété "token".

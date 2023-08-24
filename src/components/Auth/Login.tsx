@@ -47,11 +47,13 @@ const Login = () => {
           />
         </div>
         <button
+        
           onClick={handleLogin}
           className="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
         >
           Se Connecter
         </button>
+        
         <p className="mt-4 text-sm">
           Créer vous un compte ?{' '}
           <NavLink to="/register" className="text-blue-500 font-semibold">

@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import {useDispatch} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import { logout } from '../../stores/actions/UserAction';
 
 // Style de la fenêtre modale
 const style = {
@@ -30,6 +32,8 @@ const Header = () => {
   const [showPortfolioDropdown, setShowPortfolioDropdown] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+
 
   // Fonction pour basculer l'affichage de la liste déroulante des portefeuilles
   const togglePortfolioDropdown = () => {
@@ -48,6 +52,12 @@ const Header = () => {
       toggleModal();
     }
   };
+
+    const handleLogout = () => {
+      dispatch(logout())
+      console.log(dispatch(logout()))
+    }
+
 
   
 
@@ -153,7 +163,10 @@ const Header = () => {
           <div>Nom Prénom</div>
         </NavLink>
         <div className="border-l pl-4">
-          <NavLink to="/" className="text-white hover:underline">
+          <NavLink 
+          to="/" 
+          className="text-white hover:underline"
+          onClick={handleLogout}>
             Se Déconnecter
           </NavLink>
         </div>

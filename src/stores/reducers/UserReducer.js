@@ -1,8 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeField, login, logout, register } from '../actions/UserAction';
 
+
 // Récupération des données utilisateur depuis le local storage savoir si il est co ou pas 
 const localUser = JSON.parse(localStorage.getItem('user'));
+// JSON.parse pour analyser la chaîne JSON et la convertir en un objet JavaScript.
+
 
 // État initial de l'utilisateur
 export const initialState = {
@@ -50,7 +53,10 @@ const userReducer = createReducer(initialState, (builder) => {
       state.token = action.payload.token;
       state.credentials = {
         email: '',
-        password: ''
+        password: '',
+        nom:'',
+        prenom:'',
+        profilrisque:'',
       };
       state.nom = action.payload.nom;
       state.prenom = action.payload.prenom;

@@ -10,13 +10,16 @@ const RegisterForm = () => {
   const dispatch = useDispatch();
   const [prenom, setPrenom] = useState('');
   const [nom, setNom] = useState('');
+  const [profilRisque, setProfilRisque] =useState('')
 
   const handleSignUp = (e) => {
     e.preventDefault();
 
     if (password === confirmPassword) {
-      dispatch(register());
+      dispatch(register({email, password, nom, prenom, profilRisque}));
+      console.log('log premier', dispatch(register({email, password, nom, prenom, profilRisque})))
     }
+    // Je recuperebien tout ce que je veux
   };
 
   const handlePassword = (e) => {
@@ -114,17 +117,27 @@ const RegisterForm = () => {
           <legend className='font-medium'>Selectionner votre profil de risque :</legend>
 
           <div className='w-full px-7 py-2'>
-          <input type="radio" id="Prudent" name="risk" value="Prudent" />
+          <input type="radio" id="Prudent" name="risk" value="Prudent"
+          checked={profilRisque === 'Prudent'}
+          onChange={() => setProfilRisque('Prudent')} />
           <label htmlFor="Prudent">Prudent</label>
         </div>
 
         <div className='w-full px-7 py-2'>
-          <input type="radio" id="Équilibré" name="risk" value="Équilibré" />
+          <input 
+          type="radio"
+           id="Équilibré"
+            name="risk"
+             value="Équilibré" 
+             checked={profilRisque === 'Equilibre'}
+              onChange={() => setProfilRisque('Equilibre')}/>
           <label htmlFor="Équilibré">Équilibré</label>
         </div>
  
         <div className='w-full px-7 py-2'>
-          <input type="radio" id="Dynamique" name="risk" value="Dynamique" />
+          <input type="radio" id="Dynamique" name="risk" value="Dynamique" 
+          checked={profilRisque === 'Dynamique'}
+          onChange={() => setProfilRisque('Dynamique')} />
           <label htmlFor="Dynamique">Dynamique</label>
         </div>
         </fieldset>
