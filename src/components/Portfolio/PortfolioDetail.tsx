@@ -30,7 +30,7 @@ const PortfolioDetail = () => {
 <div className="flex flex-col items-center justify-center bg-gray-100">
   <div className="flex flex-wrap justify-center mt-10 gap-10">
   <CardGlobal />
-  <ChartCamembert portfolio={portfolio} />
+  <ChartCamembert/>
 
   
   </div>
