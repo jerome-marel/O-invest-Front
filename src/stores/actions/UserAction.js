@@ -32,14 +32,4 @@ export const login = createAsyncThunk('/login', async (_, thunkAPI) => {
 
 // Action asynchrone pour la création d'un compte utilisateur
 // thunkAPI.getState() pour accéder à l'état global du magasin 
-export const register = createAsyncThunk('/register', async (_, thunkAPI) => {
-  const { email, password, last_name, first_name, risk_profile } = thunkAPI.getState().user.credentials;
 
-  // Effectue une requête POST vers /register avec les informations d'identification
-  const { data } = await axiosInstance.post('/register', { email, password, last_name, first_name, risk_profile });
-
-  
-  return data; // Retourne les données du nouvel utilisateur créé
-
-  
-});

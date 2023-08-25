@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeField, login, logout, register } from '../actions/UserAction';
+import { changeField, login, logout } from '../actions/UserAction';
 
 
 // Récupération des données utilisateur depuis le local storage savoir si il est co ou pas 
@@ -46,22 +46,7 @@ const userReducer = createReducer(initialState, (builder) => {
       state.token = undefined;
     })
 
-    .addCase(register.fulfilled, (state, action) => {
-      // Mise à jour de l'état après un enregistrement réussi
-      state.logged = true;
-      state.email = action.payload.email;
-      state.token = action.payload.token;
-      state.credentials = {
-        email: '',
-        password: '',
-        nom:'',
-        prenom:'',
-        profilrisque:'',
-      };
-      state.last_name = action.payload.last_name;
-      state.first_name = action.payload.first_name;
-      state.riks_profile = action.payload.riks_profile;
-    });
+    
 });
 
 export default userReducer;

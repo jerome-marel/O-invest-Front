@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { register } from '../../stores/actions/UserAction';
-
+import { axiosInstance } from '../../utils/axios';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 
 const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordConfirm, setpasswordConfirm] = useState('');
   const dispatch = useDispatch();
   const [first_name, setfirst_name] = useState('');
   const [last_name, setlast_name] = useState('');
@@ -18,25 +18,31 @@ const RegisterForm = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    if (password === confirmPassword) {
-      dispatch(register({email, password, last_name, first_name, risk_profile}));
-      console.log('log premier', dispatch(register({email, password, last_name, first_name, risk_profile})))
+    if (password === passwordConfirm) {
+      const register = createAsyncThunk('/register', async (_, thunkAPI) => {
+        const { email, password,passwordConfirm, last_name, first_name, risk_profile,  } = thunkAPI.getState().user.credentials;
+        // Effectue une requête POST vers /register avec les informations d'identification
+        const { data } = await axiosInstance.post('/register', { email, password, passwordConfirm, last_name, first_name, risk_profile });
+        return data; // Retourne les données du nouvel utilisateur créé
+      
+        
+      });
+        
     }
-    // Je recuperebien tout ce que je veux
   };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
 
-    if (e.target.value === confirmPassword) {
+    if (e.target.value === passwordConfirm) {
       setPasswordsMatch(true);
     } else {
       setPasswordsMatch(false);
     }
   };
 
-  const handleConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value);
+  const handlepasswordConfirm = (e) => {
+    setpasswordConfirm(e.target.value);
 
     if (e.target.value === password) {
       setPasswordsMatch(true);
@@ -102,15 +108,15 @@ const RegisterForm = () => {
         
     
         <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block font-medium mb-1">
+          <label htmlFor="passwordConfirm" className="block font-medium mb-1">
             Confirmer votre mot de passe :
           </label>
           <input
             type="password"
-            id="confirmPassword"
+            id="passwordConfirm"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={confirmPassword}
-            onChange={handleConfirmPassword}
+            value={passwordConfirm}
+            onChange={handlepasswordConfirm}
           />
           {!passwordsMatch && (
             <p className="text-red-500 mt-2">Votre mot de passe ne correspond pas !</p>

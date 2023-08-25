@@ -15,6 +15,7 @@ const Login = () => {
     dispatch(changeField({ name: "email", value: email }));
     dispatch(changeField({ name: "password", value: password }));
     dispatch(login());
+    console.log("teeeeest", email, password)
 
   };
 
