@@ -1,78 +1,56 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { register } from '../../stores/actions/UserAction';
+import { axiosInstance } from '../../utils/axios'; // Assurez-vous d'avoir axiosInstance configuré
+import { useNavigate } from 'react-router-dom';
 
 
+const Register = () => {
+  const Navigate = useNavigate();
 
-const RegisterForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setpasswordConfirm] = useState('');
-  const dispatch = useDispatch();
-  const [firstName, setfirstName] = useState('');
-  const [lastName, setlastName] = useState('');
-  const [riskProfile, setriskProfile] =useState('')
-  
-
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-
-    if (password === passwordConfirm) {
-      dispatch(register({email, password, passwordConfirm, lastName, firstName, riskProfile}));
-      console.log('log envoie de donnée suite register', dispatch(register({email, password, passwordConfirm, lastName, firstName, riskProfile})))
-    }
-    // Je recuperebien tout ce que je veux
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-
-    if (e.target.value === passwordConfirm) {
-      setPasswordsMatch(true);
-    } else {
-      setPasswordsMatch(false);
+  
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+  const passwordConfirm = e.target.passwordConfirm.value; 
+  const firstName = e.target.firstName.value;
+  const lastName = e.target.lastName.value;
+  const riskProfile = e.target.riskProfile.value;
+  
+    try {
+       await axiosInstance.post('/register', { email, password, passwordConfirm, firstName, lastName, riskProfile });
+      Navigate('/dashboard');
+    } catch (error) {
+      console.error('Error registering in:', error);
     }
   };
-
-  const handlepasswordConfirm = (e) => {
-    setpasswordConfirm(e.target.value);
-
-    if (e.target.value === password) {
-      setPasswordsMatch(true);
-    } else {
-      setPasswordsMatch(false);
-    }
-  };
-
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white border rounded bg-indigo-300 shadow-md">
       <h2 className="text-2xl font-semibold mb-2">S'enregistrer</h2>
       <form onSubmit={handleSignUp}>
-      <div className="mb-4">
-          <label htmlFor="lastName" className="block font-medium mb-1">
+        <div className="mb-4">
+          <label htmlFor="last_name" className="block font-medium mb-1">
             Nom:
           </label>
           <input
             type="text"
             id="lastName"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={lastName}
-            onChange={(e) => setlastName(e.target.value)}
+            name="lastName"
+            
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="firstName" className="block font-medium mb-1">
+          <label htmlFor="first_name" className="block font-medium mb-1">
             Prénom
           </label>
           <input
             type="text"
             id="firstName"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={firstName}
-            onChange={(e) => setfirstName(e.target.value)}
+            name="firstName"
+  
           />
         </div>
         <div className="mb-4">
@@ -83,8 +61,7 @@ const RegisterForm = () => {
             type="email"
             id="email"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
           />
         </div>
         <div className="mb-4">
@@ -95,34 +72,29 @@ const RegisterForm = () => {
             type="password"
             id="password"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={password}
-            onChange={handlePassword}
-          />
+                      />
         </div>
-        
-    
         <div className="mb-4">
           <label htmlFor="passwordConfirm" className="block font-medium mb-1">
             Confirmer votre mot de passe :
           </label>
           <input
-            type="password"
-            id="passwordConfirm"
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={passwordConfirm}
-            onChange={handlepasswordConfirm}
-          />
-          {!passwordsMatch && (
-            <p className="text-red-500 mt-2">Votre mot de passe ne correspond pas !</p>
-          )}
+          type="password"
+          id="passwordConfirm"
+          className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
+        />
+          {/* {password !== passwordConfirm && (
+            <p className="text-red-500 mt-2 font-semibold">
+              Votre mot de passe ne correspond pas !
+            </p> */}
+          {/* )} */}
         </div>
         <fieldset>
-          <legend className='font-medium'>Selectionner votre profil de risque :</legend>
-
+          <legend className="font-medium">Selectionner votre profil de risque :</legend>
           <div className='w-full px-7 py-2'>
-          <input type="radio" id="Prudent" name="risk" value="Prudent"
-          checked={riskProfile === 'Prudent'}
-          onChange={() => setriskProfile('Prudent')} />
+          <input type="radio" id="Prudent" name="riskProfile" value="Prudent"
+          />
+    
           <label htmlFor="Prudent">Prudent</label>
         </div>
 
@@ -130,17 +102,16 @@ const RegisterForm = () => {
           <input 
           type="radio"
            id="Équilibré"
-            name="risk"
-             value="Équilibré" 
-             checked={riskProfile === 'Equilibre'}
-              onChange={() => setriskProfile('Equilibre')}/>
+            name="riskProfile"
+            value="Équilibré"
+            />
           <label htmlFor="Équilibré">Équilibré</label>
         </div>
  
         <div className='w-full px-7 py-2'>
-          <input type="radio" id="Dynamique" name="risk" value="Dynamique" 
-          checked={riskProfile === 'Dynamique'}
-          onChange={() => setriskProfile('Dynamique')} />
+          <input type="radio" id="Dynamique" name="riskProfile" value="Dynamique" 
+          // checked={riskProfile === 'Dynamique'}
+           />
           <label htmlFor="Dynamique">Dynamique</label>
         </div>
         </fieldset>
@@ -150,17 +121,15 @@ const RegisterForm = () => {
         >
           Créer votre compte
         </button>
-        
       </form>
       <p className="mt-2">
-        Avez-vous déjà un compte ? 
-        <NavLink to="/login" className="px-3 text-blue-500 font-semibold">
-           Se connecter
+        Avez-vous déjà un compte ?{' '}
+        <NavLink to="/dashboard" className="px-3 text-blue-500 font-semibold">
+          Se connecter
         </NavLink>
       </p>
     </div>
   );
 };
 
-export default RegisterForm;
-
+export default Register;

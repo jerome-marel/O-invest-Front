@@ -71,13 +71,13 @@ const Header = () => {
       </NavLink>
       
       <div className=" flex justfify-center gap-20 "> 
-      <div className="text-white cursor-pointer hover:underline">
+      <div className="text-white cursor-pointer hover:underline text-lg font-semibold">
         <NavLink to="/dashboard">Dashboard</NavLink>
       </div>
 
       
       {/* Menu déroulant des portefeuilles */}
-      <div className="flex justify-between gap-5"> 
+      <div className="flex justify-between gap-5 text-lg font-semibold"> 
       <div
         className="relative text-white cursor-pointer group hover:underline"
         onClick={togglePortfolioDropdown}
@@ -85,7 +85,7 @@ const Header = () => {
         Portefeuille
         {/* Affichage du menu déroulant si l'état est vrai */}
         {showPortfolioDropdown && (
-         <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md ">
+         <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md">
             {portfolios.map((portfolio) => (
               
               <NavLink
@@ -102,9 +102,11 @@ const Header = () => {
           </div>
         )}
       </div>
-      
-      <button onClick={toggleModal} className="text-white hover:underline ">
-        Ajouter
+      <button 
+        className="rounded-full w-7 h-7 flex items-center justify-center bg-green-500 text-white text-2xl hover:bg-blue-600"
+        onClick={toggleModal}
+        >
+      +
       </button>
       </div>
       </div>
