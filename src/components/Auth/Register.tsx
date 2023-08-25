@@ -1,17 +1,24 @@
 import { NavLink } from 'react-router-dom';
 import { axiosInstance } from '../../utils/axios';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const RegisterForm = () => {
   const Navigate = useNavigate();
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [hasUppercase, setHasUppercase] = useState(false);
+  const [hasNumber, setHasNumber] = useState(false);
+  const [hasSpecialChar, setHasSpecialChar] = useState(false);
+  const [isLengthValid, setIsLengthValid] = useState(false);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     const { email, password, passwordConfirm, first_name, last_name } = e.target;
-    const selectedRiskProfile = e.target.risk.value; 
+    const selectedRiskProfile = e.target.risk.value;
 
     if (password.value === passwordConfirm.value) {
+      setPasswordsMatch(true);
       try {
         await axiosInstance.post('/register', {
           email: email.value,
@@ -19,7 +26,7 @@ const RegisterForm = () => {
           passwordConfirm: passwordConfirm.value,
           lastName: last_name.value,
           firstName: first_name.value,
-          riskProfile: selectedRiskProfile, 
+          riskProfile: selectedRiskProfile,
         });
 
         Navigate('/dashboard');
@@ -27,11 +34,25 @@ const RegisterForm = () => {
         console.error('Error registering:', error);
       }
     } else {
-      console.log("Passwords don't match");
+      setPasswordsMatch(false);
     }
   };
 
+  const handlePasswordConfirmChange = (e) => {
+    setPasswordsMatch(e.target.value === e.target.form.password.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+    setHasUppercase(/[A-Z]/.test(password));
+    setHasNumber(/\d/.test(password));
+    setHasSpecialChar(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\\-]/.test(password));
+    setIsLengthValid(password.length >= 8);
+  };
+
+
   return (
+  
     <div className="max-w-md mx-auto p-6 bg-white border rounded bg-indigo-300 shadow-md">
       <h2 className="text-2xl font-semibold mb-2">S'enregistrer</h2>
       <form onSubmit={handleSignUp}>
@@ -43,7 +64,7 @@ const RegisterForm = () => {
             type="text"
             id="last_name"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            required
+            
           />
         </div>
         <div className="mb-4">
@@ -54,7 +75,7 @@ const RegisterForm = () => {
             type="text"
             id="first_name"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            required
+            
           />
         </div>
         <div className="mb-4">
@@ -65,7 +86,7 @@ const RegisterForm = () => {
             type="email"
             id="email"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            required
+            
           />
         </div>
         <div className="mb-4">
@@ -75,9 +96,22 @@ const RegisterForm = () => {
           <input
             type="password"
             id="password"
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
             required
+            onChange={handlePasswordChange}
           />
+          <ul>
+            <li style={{ color: hasUppercase ? 'green' : 'red' }}>
+              Avoir au moins 1 lettre majuscule
+            </li>
+            <li style={{ color: hasNumber ? 'green' : 'red' }}>Avoir au moins 1 chiffre</li>
+            <li style={{ color: hasSpecialChar ? 'green' : 'red' }}>
+              Avoir au moins 1 caractère spécial
+            </li>
+            <li style={{ color: isLengthValid ? 'green' : 'red' }}>
+              Avoir au moins 8 caractères
+            </li>
+          </ul>
         </div>
         <div className="mb-4">
           <label htmlFor="passwordConfirm" className="block font-medium mb-1">
@@ -86,9 +120,13 @@ const RegisterForm = () => {
           <input
             type="password"
             id="passwordConfirm"
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
             required
+            onChange={handlePasswordConfirmChange}
           />
+          {!passwordsMatch && (
+            <p className="text-red-500">Les mots de passe ne correspondent pas.</p>
+          )}
         </div>
         <fieldset>
         <legend className="font-medium">Sélectionnez votre profil de risque :</legend>
