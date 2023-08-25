@@ -3,34 +3,40 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { register } from '../../stores/actions/UserAction';
 
+
+
 const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordConfirm, setpasswordConfirm] = useState('');
   const dispatch = useDispatch();
-  const [prenom, setPrenom] = useState('');
-  const [nom, setNom] = useState('');
+  const [firstName, setfirstName] = useState('');
+  const [lastName, setlastName] = useState('');
+  const [riskProfile, setriskProfile] =useState('')
+  
 
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    if (password === confirmPassword) {
-      dispatch(register());
+    if (password === passwordConfirm) {
+      dispatch(register({email, password, passwordConfirm, lastName, firstName, riskProfile}));
+      console.log('log envoie de donnée suite register', dispatch(register({email, password, passwordConfirm, lastName, firstName, riskProfile})))
     }
+    // Je recuperebien tout ce que je veux
   };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
 
-    if (e.target.value === confirmPassword) {
+    if (e.target.value === passwordConfirm) {
       setPasswordsMatch(true);
     } else {
       setPasswordsMatch(false);
     }
   };
 
-  const handleConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value);
+  const handlepasswordConfirm = (e) => {
+    setpasswordConfirm(e.target.value);
 
     if (e.target.value === password) {
       setPasswordsMatch(true);
@@ -46,27 +52,27 @@ const RegisterForm = () => {
       <h2 className="text-2xl font-semibold mb-2">S'enregistrer</h2>
       <form onSubmit={handleSignUp}>
       <div className="mb-4">
-          <label htmlFor="nom" className="block font-medium mb-1">
+          <label htmlFor="lastName" className="block font-medium mb-1">
             Nom:
           </label>
           <input
             type="text"
-            id="nom"
+            id="lastName"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={nom}
-            onChange={(e) => setNom(e.target.value)}
+            value={lastName}
+            onChange={(e) => setlastName(e.target.value)}
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="prenom" className="block font-medium mb-1">
+          <label htmlFor="firstName" className="block font-medium mb-1">
             Prénom
           </label>
           <input
             type="text"
-            id="prenom"
+            id="firstName"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={prenom}
-            onChange={(e) => setPrenom(e.target.value)}
+            value={firstName}
+            onChange={(e) => setfirstName(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -96,15 +102,15 @@ const RegisterForm = () => {
         
     
         <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block font-medium mb-1">
+          <label htmlFor="passwordConfirm" className="block font-medium mb-1">
             Confirmer votre mot de passe :
           </label>
           <input
             type="password"
-            id="confirmPassword"
+            id="passwordConfirm"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={confirmPassword}
-            onChange={handleConfirmPassword}
+            value={passwordConfirm}
+            onChange={handlepasswordConfirm}
           />
           {!passwordsMatch && (
             <p className="text-red-500 mt-2">Votre mot de passe ne correspond pas !</p>
@@ -114,17 +120,27 @@ const RegisterForm = () => {
           <legend className='font-medium'>Selectionner votre profil de risque :</legend>
 
           <div className='w-full px-7 py-2'>
-          <input type="radio" id="Prudent" name="risk" value="Prudent" />
+          <input type="radio" id="Prudent" name="risk" value="Prudent"
+          checked={riskProfile === 'Prudent'}
+          onChange={() => setriskProfile('Prudent')} />
           <label htmlFor="Prudent">Prudent</label>
         </div>
 
         <div className='w-full px-7 py-2'>
-          <input type="radio" id="Équilibré" name="risk" value="Équilibré" />
+          <input 
+          type="radio"
+           id="Équilibré"
+            name="risk"
+             value="Équilibré" 
+             checked={riskProfile === 'Equilibre'}
+              onChange={() => setriskProfile('Equilibre')}/>
           <label htmlFor="Équilibré">Équilibré</label>
         </div>
  
         <div className='w-full px-7 py-2'>
-          <input type="radio" id="Dynamique" name="risk" value="Dynamique" />
+          <input type="radio" id="Dynamique" name="risk" value="Dynamique" 
+          checked={riskProfile === 'Dynamique'}
+          onChange={() => setriskProfile('Dynamique')} />
           <label htmlFor="Dynamique">Dynamique</label>
         </div>
         </fieldset>
