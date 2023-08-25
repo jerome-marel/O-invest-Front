@@ -8,13 +8,13 @@ import { axiosInstance } from '../../utils/axios';
 
 
 // Crée une action Redux pour changer un champ dans le formulaire
-export const changeField = createAction('user/changeField');
+export const changeField = createAction('/changeField');
 
 // Crée une action Redux pour gérer la déconnexion de l'utilisateur
-export const logout = createAction('user/logout');
+export const logout = createAction('/logout');
 
 // Crée une action asynchrone (utilisant createAsyncThunk) pour gérer la connexion de l'utilisateur
-export const login = createAsyncThunk('user/login', async (_, thunkAPI) => {
+export const login = createAsyncThunk('/login', async (_, thunkAPI) => {
   // Le paramètre _ est utilisé pour ignorer le premier argument (payload), thunkAPI contient des utilitaires pour interagir avec le store
   console.log("thunkApi", thunkAPI.getState());
 
@@ -32,12 +32,11 @@ export const login = createAsyncThunk('user/login', async (_, thunkAPI) => {
 
 // Action asynchrone pour la création d'un compte utilisateur
 // thunkAPI.getState() pour accéder à l'état global du magasin 
-export const register = createAsyncThunk('user/register', async (_, thunkAPI) => {
-  const { email, password, nom, prenom, profilRisque } = thunkAPI.getState().user.credentials;
-    
+export const register = createAsyncThunk('/register', async (_, thunkAPI) => {
+  const { email, password, last_name, first_name, risk_profile } = thunkAPI.getState().user.credentials;
 
   // Effectue une requête POST vers /register avec les informations d'identification
-  const { data } = await axiosInstance.post('/register', { email, password, nom, prenom, profilRisque });
+  const { data } = await axiosInstance.post('/register', { email, password, last_name, first_name, risk_profile });
 
   
   return data; // Retourne les données du nouvel utilisateur créé

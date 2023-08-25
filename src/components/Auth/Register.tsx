@@ -10,17 +10,17 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const dispatch = useDispatch();
-  const [prenom, setPrenom] = useState('');
-  const [nom, setNom] = useState('');
-  const [profilRisque, setProfilRisque] =useState('')
+  const [first_name, setfirst_name] = useState('');
+  const [last_name, setlast_name] = useState('');
+  const [risk_profile, setrisk_profile] =useState('')
   
 
   const handleSignUp = (e) => {
     e.preventDefault();
 
     if (password === confirmPassword) {
-      dispatch(register({email, password, nom, prenom, profilRisque}));
-      console.log('log premier', dispatch(register({email, password, nom, prenom, profilRisque})))
+      dispatch(register({email, password, last_name, first_name, risk_profile}));
+      console.log('log premier', dispatch(register({email, password, last_name, first_name, risk_profile})))
     }
     // Je recuperebien tout ce que je veux
   };
@@ -52,27 +52,27 @@ const RegisterForm = () => {
       <h2 className="text-2xl font-semibold mb-2">S'enregistrer</h2>
       <form onSubmit={handleSignUp}>
       <div className="mb-4">
-          <label htmlFor="nom" className="block font-medium mb-1">
+          <label htmlFor="last_name" className="block font-medium mb-1">
             Nom:
           </label>
           <input
             type="text"
-            id="nom"
+            id="last_name"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={nom}
-            onChange={(e) => setNom(e.target.value)}
+            value={last_name}
+            onChange={(e) => setlast_name(e.target.value)}
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="prenom" className="block font-medium mb-1">
+          <label htmlFor="first_name" className="block font-medium mb-1">
             Prénom
           </label>
           <input
             type="text"
-            id="prenom"
+            id="first_name"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-            value={prenom}
-            onChange={(e) => setPrenom(e.target.value)}
+            value={first_name}
+            onChange={(e) => setfirst_name(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -121,8 +121,8 @@ const RegisterForm = () => {
 
           <div className='w-full px-7 py-2'>
           <input type="radio" id="Prudent" name="risk" value="Prudent"
-          checked={profilRisque === 'Prudent'}
-          onChange={() => setProfilRisque('Prudent')} />
+          checked={risk_profile === 'Prudent'}
+          onChange={() => setrisk_profile('Prudent')} />
           <label htmlFor="Prudent">Prudent</label>
         </div>
 
@@ -132,15 +132,15 @@ const RegisterForm = () => {
            id="Équilibré"
             name="risk"
              value="Équilibré" 
-             checked={profilRisque === 'Equilibre'}
-              onChange={() => setProfilRisque('Equilibre')}/>
+             checked={risk_profile === 'Equilibre'}
+              onChange={() => setrisk_profile('Equilibre')}/>
           <label htmlFor="Équilibré">Équilibré</label>
         </div>
  
         <div className='w-full px-7 py-2'>
           <input type="radio" id="Dynamique" name="risk" value="Dynamique" 
-          checked={profilRisque === 'Dynamique'}
-          onChange={() => setProfilRisque('Dynamique')} />
+          checked={risk_profile === 'Dynamique'}
+          onChange={() => setrisk_profile('Dynamique')} />
           <label htmlFor="Dynamique">Dynamique</label>
         </div>
         </fieldset>

@@ -58,9 +58,9 @@ const userReducer = createReducer(initialState, (builder) => {
         prenom:'',
         profilrisque:'',
       };
-      state.nom = action.payload.nom;
-      state.prenom = action.payload.prenom;
-      state.profilRisque = action.payload.profilRisque;
+      state.last_name = action.payload.last_name;
+      state.first_name = action.payload.first_name;
+      state.riks_profile = action.payload.riks_profile;
     });
 });
 
