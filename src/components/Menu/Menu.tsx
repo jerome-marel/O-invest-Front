@@ -152,7 +152,7 @@ const Header = () => {
       </Modal>
       <div className="text-white flex items-center space-x-2">
         <NavLink to="/profil" className="hover:underline">
-          <div>Nom Prénom</div>
+          <div>Elon Musk</div>
         </NavLink>
         <div className="border-l pl-4">
           <NavLink to="/" className="text-white hover:underline">
