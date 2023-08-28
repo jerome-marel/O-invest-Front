@@ -31,7 +31,7 @@ const Header = () => {
   const [showPortfolioDropdown, setShowPortfolioDropdown] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const history = useNavigate();
+  const Navigate = useNavigate();
 
   // Fonction pour basculer l'affichage de la liste déroulante des portefeuilles
   const togglePortfolioDropdown = () => {
@@ -51,7 +51,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    const Navigate = useNavigate();
+    
     
     localStorage.removeItem('user');
     Navigate('/');
