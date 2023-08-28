@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const RegisterForm = () => {
   const Navigate = useNavigate();
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [passwordsMatch, setPasswordsMatch] = useState(true); 
   const [hasUppercase, setHasUppercase] = useState(false);
   const [hasNumber, setHasNumber] = useState(false);
   const [hasSpecialChar, setHasSpecialChar] = useState(false);
@@ -29,7 +29,7 @@ const RegisterForm = () => {
           riskProfile: selectedRiskProfile,
         });
 
-        Navigate('/dashboard');
+        Navigate('/login');
       } catch (error) {
         console.error('Error registering:', error);
       }

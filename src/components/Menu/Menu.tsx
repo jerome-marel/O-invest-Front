@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 
+
 // Style de la fenêtre modale
 const style = {
   position: 'absolute' as 'absolute',
@@ -50,9 +51,12 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    // Gérer la déconnexion ici
-    history.push('/'); // Rediriger vers la page de connexion
+    const Navigate = useNavigate();
+    
+    localStorage.removeItem('user');
+    Navigate('/');
   };
+
 
   // Liste de portefeuilles factices
   const portfolios = [
