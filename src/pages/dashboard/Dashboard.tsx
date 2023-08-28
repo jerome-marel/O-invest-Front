@@ -10,7 +10,6 @@ const Dashboard = () => {
   <div className="flex flex-wrap justify-center mt-10 gap-10">
   <CardGlobal />
   <ChartCamembert />
-  
   </div>
  
 <div className="flex flex-col items-center mt-10 h-screen bg-gray-100">

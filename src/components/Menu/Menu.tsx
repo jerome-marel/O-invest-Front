@@ -76,43 +76,46 @@ const Header = () => {
         O'Invest
       </NavLink>
 
-      <div className="flex justfify-center gap-20">
-        <div className="text-white cursor-pointer hover:underline">
-          <NavLink to="/dashboard">Dashboard</NavLink>
-        </div>
+      
+      <div className=" flex justfify-center gap-20 "> 
+      <div className="text-white cursor-pointer hover:underline text-lg font-semibold">
+        <NavLink to="/dashboard">Dashboard</NavLink>
+      </div>
 
-        {/* Menu déroulant des portefeuilles */}
-        <div className="flex justify-between gap-5">
-          <div
-            className="relative text-white cursor-pointer group hover:underline"
-            onClick={togglePortfolioDropdown}
-          >
-            Portefeuille
-            {/* Affichage du menu déroulant si l'état est vrai */}
-            {showPortfolioDropdown && (
-              <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md">
-                {portfolios.map((portfolio) => (
-                  <NavLink
-                    key={portfolio.id}
-                    to={`/portfolio/${portfolio.id}`}
-                    className={`block px-2 py-1 text-black ${
-                      selectedPortfolio === portfolio.id
-                        ? 'bg-blue-100'
-                        : 'hover:bg-gray-100'
-                    }`}
-                    onClick={() => handlePortfolioClick(portfolio)}
-                  >
-                    {portfolio.name}
-                  </NavLink>
-                ))}
-              </div>
-            )}
+      
+      {/* Menu déroulant des portefeuilles */}
+      <div className="flex justify-between gap-5 text-lg font-semibold"> 
+      <div
+        className="relative text-white cursor-pointer group hover:underline"
+        onClick={togglePortfolioDropdown}
+      >
+        Portefeuille
+        {/* Affichage du menu déroulant si l'état est vrai */}
+        {showPortfolioDropdown && (
+         <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md">
+            {portfolios.map((portfolio) => (
+              
+              <NavLink
+                key={portfolio.id}
+                to={`/portfolio/${portfolio.id}`}
+                className={`block px-2 py-1 text-black ${
+                  selectedPortfolio === portfolio.id ? 'bg-blue-100' : 'hover:bg-gray-100'
+                }`}
+                onClick={() => handlePortfolioClick(portfolio)}
+              >
+                {portfolio.name}
+              </NavLink>
+            ))}
           </div>
-
-          <button onClick={toggleModal} className="text-white hover:underline">
-            Ajouter
-          </button>
-        </div>
+        )}
+      </div>
+      <button 
+        className="rounded-full w-7 h-7 flex items-center justify-center bg-green-500 text-white text-2xl hover:bg-blue-600"
+        onClick={toggleModal}
+        >
+      +
+      </button>
+      </div>
       </div>
 
       <Modal
@@ -155,7 +158,7 @@ const Header = () => {
       </Modal>
       <div className="text-white flex items-center space-x-2">
         <NavLink to="/profil" className="hover:underline">
-          <div>Nom Prénom</div>
+          <div>Elon Musk</div>
         </NavLink>
         <div className="border-l pl-4">
           <NavLink

@@ -1,11 +1,13 @@
 import NumberDisplay from "../Number/NumberDisplay";
 import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
+import AssetListModal from '../assets/AssetListModal';
+import { useState } from 'react';
 
-
-const card = () => {
+const Card = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddClick = () => {
-  console.log('click');
+    setIsModalOpen(true);
   };
 
   return (
@@ -21,17 +23,16 @@ const card = () => {
       </p>
       
       <div className="flex justify-end">
-      <button 
-        className="rounded-full w-10 h-10 flex items-center justify-center bg-blue-500 text-white text-4xl hover:bg-blue-600"
-        onClick={() => handleAddClick()}
+        <button
+          className="rounded-full w-10 h-10 flex items-center justify-center bg-blue-500 text-white text-4xl hover:bg-blue-600"
+          onClick={handleAddClick}
         >
-      +
-      </button>
+          +
+        </button>
       </div>
-      
-
+      <AssetListModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };
 
-export default card;
+export default Card;
