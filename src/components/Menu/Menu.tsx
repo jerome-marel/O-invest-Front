@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import { useNavigate } from 'react-router-dom';
+
 
 // Style de la fenêtre modale
 const style = {
@@ -26,10 +28,10 @@ const overlayStyle = {
 };
 
 const Header = () => {
-  
   const [showPortfolioDropdown, setShowPortfolioDropdown] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const Navigate = useNavigate();
 
   // Fonction pour basculer l'affichage de la liste déroulante des portefeuilles
   const togglePortfolioDropdown = () => {
@@ -40,8 +42,7 @@ const Header = () => {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-  
-  
+
   // Fonction pour gérer la fermeture de la fenêtre modale en cliquant à l'extérieur
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
@@ -49,7 +50,13 @@ const Header = () => {
     }
   };
 
-  
+  const handleLogout = () => {
+    
+    
+    localStorage.removeItem('user');
+    Navigate('/');
+  };
+
 
   // Liste de portefeuilles factices
   const portfolios = [
@@ -65,10 +72,10 @@ const Header = () => {
 
   return (
     <div className="flex justify-between items-center bg-blue-500 p-4">
-     
       <NavLink to="/dashboard" className="text-white text-lg font-semibold">
         O'Invest
       </NavLink>
+
       
       <div className=" flex justfify-center gap-20 "> 
       <div className="text-white cursor-pointer hover:underline text-lg font-semibold">
@@ -110,7 +117,7 @@ const Header = () => {
       </button>
       </div>
       </div>
-      
+
       <Modal
         open={isModalOpen}
         onClose={toggleModal}
@@ -122,12 +129,11 @@ const Header = () => {
           style={overlayStyle}
           onClick={handleOverlayClick}
         >
-          
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Créer un portefeuille
             </Typography>
-           
+
             <form>
               <TextField
                 label="Nom du portefeuille"
@@ -155,7 +161,11 @@ const Header = () => {
           <div>Elon Musk</div>
         </NavLink>
         <div className="border-l pl-4">
-          <NavLink to="/" className="text-white hover:underline">
+          <NavLink
+            to="/"
+            className="text-white hover:underline"
+            onClick={handleLogout}
+          >
             Se Déconnecter
           </NavLink>
         </div>

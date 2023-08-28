@@ -11,8 +11,7 @@ const Dashboard = () => {
   <CardGlobal />
   <ChartCamembert />
   </div>
-  
-
+ 
 <div className="flex flex-col items-center mt-10 h-screen bg-gray-100">
       <div className="flex flex-wrap justify-center gap-10">
         <Card />
