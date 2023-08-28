@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
-
+import { axiosInstance } from '../../utils/axios';
 
 // Style de la fenêtre modale
 const style = {
@@ -70,6 +70,51 @@ const Header = () => {
     setSelectedPortfolio(portfolio);
   };
 
+  // const handleCreatePortfolio = async (e) => {
+  //   e.preventDefault();
+     
+  //   const name = e.target.name.value;
+  //   const strategy = e.target.description.value;
+     
+  //   // Récupérer l'ID de l'utilisateur à partir du local storage
+  //   const userId = JSON.parse(localStorage.getItem('userId'));
+  
+  //   try {
+  //     const response = await axiosInstance.post('/dashboard', { name, strategy, userId });
+       
+      
+  //     console.log('Portfolio created:', response.data);
+  //     console.log('Date name strat user ', response);
+       
+  //     toggleModal();
+  //   } catch (error) {
+  //     console.error('Error creating portfolio:', name, strategy, userId, error);
+  //   }
+  // };
+
+  const handleCreatePortfolio = async (e) => {
+    e.preventDefault();
+       
+    const name = e.target.name.value;
+    const strategy = e.target.description.value;
+       
+    // Récupérer l'ID de l'utilisateur à partir du local storage
+    const userId = JSON.parse(localStorage.getItem('userId'));
+    
+    try {
+      const response = await axiosInstance.post('/dashboard', { name, strategy, userId });
+         
+      console.log('Portfolio created:', response.data);
+      
+      // Redirection vers la page du portefeuille nouvellement créé avec le nom et la description
+      Navigate(`/portfolio/${response.data.newPortfolio.id}`, { state: { name, strategy } });
+         
+      toggleModal();
+    } catch (error) {
+      console.error('Error creating portfolio:', name, strategy, userId, error);
+    }
+  };
+
   return (
     <div className="flex justify-between items-center bg-blue-500 p-4">
       <NavLink to="/dashboard" className="text-white text-lg font-semibold">
@@ -119,43 +164,45 @@ const Header = () => {
       </div>
 
       <Modal
-        open={isModalOpen}
-        onClose={toggleModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      open={isModalOpen}
+      onClose={toggleModal}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <div
+        className="fixed inset-0 flex justify-center items-center"
+        style={overlayStyle}
+        onClick={handleOverlayClick}
       >
-        <div
-          className="fixed inset-0 flex justify-center items-center"
-          style={overlayStyle}
-          onClick={handleOverlayClick}
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Créer un portefeuille
-            </Typography>
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Créer un portefeuille
+          </Typography>
 
-            <form>
-              <TextField
-                label="Nom du portefeuille"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-              />
-              <TextField
-                label="Description du portefeuille"
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={4}
-                margin="normal"
-              />
-              <Button type="submit" variant="contained">
-                Créer
-              </Button>
-            </form>
-          </Box>
-        </div>
-      </Modal>
+          <form onSubmit={handleCreatePortfolio}>
+            <TextField
+              label="Nom du portefeuille"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="name"
+            />
+            <TextField
+              label="Description du portefeuille"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              margin="normal"
+              name="description"
+            />
+            <Button type="submit" variant="contained">
+              Créer
+            </Button>
+          </form>
+        </Box>
+      </div>
+    </Modal>
       <div className="text-white flex items-center space-x-2">
         <NavLink to="/profil" className="hover:underline">
           <div>Elon Musk</div>

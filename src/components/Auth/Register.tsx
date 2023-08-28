@@ -3,7 +3,7 @@ import { axiosInstance } from '../../utils/axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-const Register = () => {
+const RegisterForm = () => {
   const Navigate = useNavigate();
   const [passwordsMatch, setPasswordsMatch] = useState(true); 
   const [hasUppercase, setHasUppercase] = useState(false);
@@ -64,7 +64,6 @@ const Register = () => {
             type="text"
             id="last_name"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-
             
           />
         </div>
@@ -77,7 +76,6 @@ const Register = () => {
             id="first_name"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
             
-
           />
         </div>
         <div className="mb-4">
@@ -88,8 +86,7 @@ const Register = () => {
             type="email"
             id="email"
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-
-            name="email"
+            
           />
         </div>
         <div className="mb-4">
@@ -138,18 +135,11 @@ const Register = () => {
           <label htmlFor="Prudent">Prudent</label>
         </div>
         <div className='w-full px-7 py-2'>
-          <input 
-          type="radio"
-           id="Équilibré"
-            name="riskProfile"
-            value="Équilibré"
-            />
+          <input type="radio" id="Équilibré" name="risk" value="Équilibré" />
           <label htmlFor="Équilibré">Équilibré</label>
         </div>
         <div className='w-full px-7 py-2'>
-          <input type="radio" id="Dynamique" name="riskProfile" value="Dynamique" 
-          // checked={riskProfile === 'Dynamique'}
-           />
+          <input type="radio" id="Dynamique" name="risk" value="Dynamique" />
           <label htmlFor="Dynamique">Dynamique</label>
         </div>
       </fieldset>
@@ -170,5 +160,4 @@ const Register = () => {
   );
 };
 
-export default Register;
-
+export default RegisterForm;

@@ -10,9 +10,9 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use((config) => {
 
     // ici le MW essaye de récupérer le user dans le storage
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    console.log(user);
+    
 
     // si il le trouve, il ajoute un headers Authorization avec comme valeur le token du localstorage
     if (user) {
@@ -21,6 +21,9 @@ axiosInstance.interceptors.request.use((config) => {
 
     return config;
 })
+
+
+
 
 // * On utilise cette instance dans userActions.js et recipesActions.js
 

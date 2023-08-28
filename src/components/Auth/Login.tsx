@@ -15,8 +15,15 @@ const Login = () => {
       const response = await axiosInstance.post('/login', { email, password });
   
       if (response.data.token) {
-        
         localStorage.setItem('user', JSON.stringify({ token: response.data.token }));
+        const userId = response.data.user; // Utilisez response.data.user.id au lieu de userId
+        console.log("userId", userId);
+        console.log("Token", response.data.token);
+        console.log(response.data.user)
+        localStorage.setItem('userId', userId); 
+        
+        // Utilisez userId comme nécessaire, par exemple :
+        // Naviguez vers la page du tableau de bord ou effectuez d'autres actions en fonction de l'ID
         Navigate('/dashboard');
       } else {
         console.error('Login failed');

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
@@ -8,7 +8,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles'; // Importez makeStyles
 import assetList from '../../data/assetList';
 
 const style = {
@@ -30,24 +29,8 @@ const overlayStyle = {
   backgroundColor: 'rgba(0, 0, 0, 0.5)',
 };
 
-// Définissez les styles personnalisés pour la barre de défilement
-const useStyles = makeStyles({
-  scrollContainer: {
-    '&::-webkit-scrollbar': {
-      width: '6px',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: 'rgba(0, 0, 0, 0.2)',
-      borderRadius: '3px',
-    },
-    '&::-webkit-scrollbar-track': {
-      backgroundColor: 'transparent',
-    },
-  },
-});
 
 function AssetListModal({ isOpen, onClose }) {
-  const classes = useStyles(); // Utilisez les styles personnalisés
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [sortedAssets, setSortedAssets] = useState(assetList);
 
@@ -84,7 +67,7 @@ function AssetListModal({ isOpen, onClose }) {
           </Typography>
           <Button onClick={handleSortAlphabetically}>Trier par ordre alphabétique</Button>
           <Divider />
-          <List className={classes.scrollContainer}>
+          <List>
             {sortedAssets.map((asset) => (
               <div
                 key={asset.id}
