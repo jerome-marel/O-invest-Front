@@ -27,6 +27,7 @@ const App = () => {
         <Route path="/dashboard" element={<PageWithHeader><DashBoardPage /></PageWithHeader>} />
 
         <Route path="/portfolio/:portfolioId" element={<PageWithHeader> <PortfolioDetail /> </PageWithHeader>} />
+        <Route path="/dashboard/portfolio/:portfolioId" element={<PageWithHeader> <PortfolioDetail /> </PageWithHeader>} />
 
         <Route path="/profil" element={<PageWithHeader><Profil /></PageWithHeader>} />
          

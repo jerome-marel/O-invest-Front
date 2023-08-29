@@ -31,6 +31,8 @@ const Header = () => {
   const [showPortfolioDropdown, setShowPortfolioDropdown] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalName, setModalName] = useState(''); // État local pour le nom du portefeuille
+  const [modalStrategy, setModalStrategy] = useState(''); // État local pour la stratégie du portefeuille
   const Navigate = useNavigate();
 
   // Fonction pour basculer l'affichage de la liste déroulante des portefeuilles
@@ -70,45 +72,24 @@ const Header = () => {
     setSelectedPortfolio(portfolio);
   };
 
-  // const handleCreatePortfolio = async (e) => {
-  //   e.preventDefault();
-     
-  //   const name = e.target.name.value;
-  //   const strategy = e.target.description.value;
-     
-  //   // Récupérer l'ID de l'utilisateur à partir du local storage
-  //   const userId = JSON.parse(localStorage.getItem('userId'));
-  
-  //   try {
-  //     const response = await axiosInstance.post('/dashboard', { name, strategy, userId });
-       
-      
-  //     console.log('Portfolio created:', response.data);
-  //     console.log('Date name strat user ', response);
-       
-  //     toggleModal();
-  //   } catch (error) {
-  //     console.error('Error creating portfolio:', name, strategy, userId, error);
-  //   }
-  // };
 
   const handleCreatePortfolio = async (e) => {
     e.preventDefault();
-       
-    const name = e.target.name.value;
-    const strategy = e.target.description.value;
-       
+         
+    const name = modalName; // Utilisez la valeur de l'état local
+    const strategy = modalStrategy; // Utilisez la valeur de l'état local
+         
     // Récupérer l'ID de l'utilisateur à partir du local storage
     const userId = JSON.parse(localStorage.getItem('userId'));
-    
+      
     try {
-      const response = await axiosInstance.post('/dashboard', { name, strategy, userId });
-         
+      const response = await axiosInstance.post('/dashboard/portfolio', { name, strategy, userId });         
       console.log('Portfolio created:', response.data);
       
+        
       // Redirection vers la page du portefeuille nouvellement créé avec le nom et la description
-      Navigate(`/portfolio/${response.data.newPortfolio.id}`, { state: { name, strategy } });
-         
+      Navigate(`/dashboard/portfolio/${response.data.newPortfolio.id}`, { state: { name, strategy } });
+           
       toggleModal();
     } catch (error) {
       console.error('Error creating portfolio:', name, strategy, userId, error);
@@ -128,21 +109,20 @@ const Header = () => {
       </div>
 
       
-      {/* Menu déroulant des portefeuilles */}
+     
       <div className="flex justify-between gap-5 text-lg font-semibold"> 
       <div
         className="relative text-white cursor-pointer group hover:underline"
         onClick={togglePortfolioDropdown}
       >
         Portefeuille
-        {/* Affichage du menu déroulant si l'état est vrai */}
+        
         {showPortfolioDropdown && (
-         <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md">
+          <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md">
             {portfolios.map((portfolio) => (
-              
               <NavLink
                 key={portfolio.id}
-                to={`/portfolio/${portfolio.id}`}
+                to={`/dashboard/portfolio/${portfolio.id}`} // Utilisez le bon chemin ici
                 className={`block px-2 py-1 text-black ${
                   selectedPortfolio === portfolio.id ? 'bg-blue-100' : 'hover:bg-gray-100'
                 }`}
@@ -153,6 +133,7 @@ const Header = () => {
             ))}
           </div>
         )}
+
       </div>
       <button 
         className="rounded-full w-7 h-7 flex items-center justify-center bg-green-500 text-white text-2xl hover:bg-blue-600"
@@ -180,22 +161,26 @@ const Header = () => {
           </Typography>
 
           <form onSubmit={handleCreatePortfolio}>
-            <TextField
-              label="Nom du portefeuille"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              name="name"
-            />
-            <TextField
-              label="Description du portefeuille"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={4}
-              margin="normal"
-              name="description"
-            />
+          <TextField
+                label="Nom du portefeuille"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                name="name"
+                value={modalName} // Reliez la valeur à l'état local
+                onChange={(e) => setModalName(e.target.value)} // Mettez à jour l'état local lorsqu'il y a un changement
+              />
+              <TextField
+                label="Description du portefeuille"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={4}
+                margin="normal"
+                name="description"
+                value={modalStrategy} // Reliez la valeur à l'état local
+                onChange={(e) => setModalStrategy(e.target.value)} // Mettez à jour l'état local lorsqu'il y a un changement
+              />
             <Button type="submit" variant="contained">
               Créer
             </Button>
