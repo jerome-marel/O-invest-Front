@@ -20,7 +20,7 @@ const RegisterForm = () => {
     if (password.value === passwordConfirm.value) {
       setPasswordsMatch(true);
       try {
-        await axiosInstance.post('/register', {
+        await axiosInstance.post('/api/register', {
           email: email.value,
           password: password.value,
           passwordConfirm: passwordConfirm.value,

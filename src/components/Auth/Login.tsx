@@ -12,7 +12,7 @@ const Login = () => {
     const password = e.target.password.value;
   
     try {
-      const response = await axiosInstance.post('/login', { email, password });
+      const response = await axiosInstance.post('/api/login', { email, password });
   
       if (response.data.token) {
         localStorage.setItem('user', JSON.stringify({ token: response.data.token }));
