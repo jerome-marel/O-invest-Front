@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -34,6 +34,7 @@ const Header = () => {
   const [modalName, setModalName] = useState(''); // État local pour le nom du portefeuille
   const [modalStrategy, setModalStrategy] = useState(''); // État local pour la stratégie du portefeuille
   const Navigate = useNavigate();
+  const [portfolioList, setPortfolioList] = useState([]);
 
   // Fonction pour basculer l'affichage de la liste déroulante des portefeuilles
   const togglePortfolioDropdown = () => {
@@ -53,19 +54,24 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    
-    
     localStorage.removeItem('user');
     Navigate('/');
   };
 
 
-  // Liste de portefeuilles factices
-  const portfolios = [
-    { id: 1, name: 'Portefeuille 1' },
-    { id: 2, name: 'Portefeuille 2' },
-    { id: 3, name: 'Portefeuille 3' },
-  ];
+  useEffect(() => {
+    const fetchPortfolios = async () => {
+      try {
+        const response = await axiosInstance.get('/dashboard/allportfolio'); // Utilisez le bon endpoint
+        setPortfolioList(response.data.allPortfolios); // Assurez-vous que le nom de la propriété est correct
+      } catch (error) {
+        console.error('Error fetching portfolios:', error);
+      }
+    };
+  
+    fetchPortfolios();
+  }, []); 
+  
 
   // Fonction pour gérer la sélection d'un portefeuille
   const handlePortfolioClick = (portfolio) => {
@@ -74,27 +80,27 @@ const Header = () => {
 
 
   const handleCreatePortfolio = async (e) => {
-    e.preventDefault();
-         
-    const name = modalName; // Utilisez la valeur de l'état local
-    const strategy = modalStrategy; // Utilisez la valeur de l'état local
-         
-    // Récupérer l'ID de l'utilisateur à partir du local storage
-    const userId = JSON.parse(localStorage.getItem('userId'));
-      
-    try {
-      const response = await axiosInstance.post('/dashboard/portfolio', { name, strategy, userId });         
-      console.log('Portfolio created:', response.data);
-      
-        
-      // Redirection vers la page du portefeuille nouvellement créé avec le nom et la description
-      Navigate(`/dashboard/portfolio/${response.data.newPortfolio.id}`, { state: { name, strategy } });
-           
-      toggleModal();
-    } catch (error) {
-      console.error('Error creating portfolio:', name, strategy, userId, error);
-    }
-  };
+  e.preventDefault();
+
+  const name = modalName;
+  const strategy = modalStrategy;
+
+  const userId = JSON.parse(localStorage.getItem('userId'));
+
+  try {
+    const response = await axiosInstance.post('/dashboard/portfolio', { name, strategy, userId });
+    console.log('Portfolio created:', response.data);
+
+    // Mettez à jour la liste des portefeuilles avec le nouveau portefeuille créé
+    setPortfolioList([...portfolioList, response.data.newPortfolio]);
+
+    Navigate(`/dashboard/portfolio/${response.data.newPortfolio.id}`, { state: { name, strategy } });
+
+    toggleModal();
+  } catch (error) {
+    console.error('Error creating portfolio:', name, strategy, userId, error);
+  }
+};
 
   return (
     <div className="flex justify-between items-center bg-blue-500 p-4">
@@ -118,18 +124,18 @@ const Header = () => {
         Portefeuille
         
         {showPortfolioDropdown && (
-          <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md">
-            {portfolios.map((portfolio) => (
-              <NavLink
-                key={portfolio.id}
-                to={`/dashboard/portfolio/${portfolio.id}`} // Utilisez le bon chemin ici
-                className={`block px-2 py-1 text-black ${
-                  selectedPortfolio === portfolio.id ? 'bg-blue-100' : 'hover:bg-gray-100'
-                }`}
-                onClick={() => handlePortfolioClick(portfolio)}
-              >
-                {portfolio.name}
-              </NavLink>
+              <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md">
+                {portfolioList.map((portfolio) => (
+                  <NavLink
+                    key={portfolio.id}
+                    to={`/dashboard/portfolio/${portfolio.id}`}
+                    className={`block px-2 py-1 text-black ${
+                      selectedPortfolio === portfolio.id ? 'bg-blue-100' : 'hover:bg-gray-100'
+                    }`}
+                    onClick={() => handlePortfolioClick(portfolio)}
+                  >
+                    {portfolio.name}
+                  </NavLink>
             ))}
           </div>
         )}
