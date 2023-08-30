@@ -64,14 +64,15 @@ import { axiosInstance } from '../../utils/axios';
 import NumberDisplay from '../Number/NumberDisplay';
 
 const AssetList = () => {
-  const [assets, setAssets] = useState([]);
+  const [userPortfolioAssets, setUserPortfolioAssets] = useState([]);
   const { portfolioId } = useParams(); 
 
   useEffect(() => {
     const fetchAssets = async () => {
       try {
-        const response = await axiosInstance.get(`/portfolio/${portfolioId}/addasset`);
-        setAssets(response.data);
+        const response = await axiosInstance.get(`/api/portfolios/${portfolioId}`);
+        console.log("response data Asset.tsx", response.data)
+        setUserPortfolioAssets(response.data.userPortfolioAssets);
       } catch (error) {
         console.error('Error fetching assets:', error);
       }
@@ -79,6 +80,7 @@ const AssetList = () => {
 
     fetchAssets();
   }, [portfolioId]); 
+  
 
   return (
     <div className="bg-white p-4 rounded shadow">
@@ -96,17 +98,19 @@ const AssetList = () => {
           </tr>
         </thead>
         <tbody>
-          {assets.map((asset) => (
-            <tr key={asset.newTransaction.id}>
-              <td className="px-4 py-2">{asset.portfolioAsset.asset.name}</td>
-              <td className="px-4 py-2">{asset.newTransaction.assetPrice}</td>
-              <td className="px-4 py-2">{asset.newTransaction.quantity}</td>
-              <td className="px-4 py-2">{/* Utilisez la propriété appropriée ici */}</td>
+          {userPortfolioAssets.map((asset) => (
+            <tr key={asset.id}>
+              <td className="px-4 py-2">{asset.name}</td>
+              <td className="px-4 py-2">{asset.historicPrice}</td>
+              <td className="px-4 py-2">{asset.quantity}</td>
+              {/* Utilisez la propriété appropriée ici */}
+              <td className="px-4 py-2">{/* ... */}</td>
               <td className="px-4 py-2">
-                <NumberDisplay value={parseFloat(asset.newTransaction.assetPrice) * parseInt(asset.newTransaction.quantity)} />
+                <NumberDisplay value={asset.remainQuantity} />
               </td>
-              <td className="px-4 py-2">{/* Calcul approprié pour la valeur latente */}</td>
-              <td className="px-4 py-2">{asset.newTransaction.note}</td>
+              {/* Calcul approprié pour la valeur latente */}
+              <td className="px-4 py-2">{/* ... */}</td>
+              {/* <td className="px-4 py-2">{asset.note}</td> */}
             </tr>
           ))}
         </tbody>
