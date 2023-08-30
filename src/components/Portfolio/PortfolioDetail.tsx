@@ -38,7 +38,7 @@ const PortfolioDetail = ( ) => {
         <h2 className="text-xl font-bold mb-4">{portfolio.name}</h2>
         <p className="mb-2">{portfolio.strategy}</p>
         <div className="flex justify-end">
-        <AddAssetButton onModalClose={() => {}} />
+        <AddAssetButton onModalClose={() => {}} portfolioId= { portfolioId} />
       </div>
 
         <div className="flex justify-end">
