@@ -1,66 +1,40 @@
+
 // import NumberDisplay from "../Number/NumberDisplay";
 // import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
-
-
-// const cardGlobal = () => {
-
-//   const handleAddClick = () => {
-//   console.log('click');
-//   };
-
-//   return (
-//     <div className="bg-white rounded-lg px-5 py-5">
-    
-//       <h1 className="font-bold text-3xl pb-3">Valorisation Globale</h1>
-//       {/*A dynamiser // Portfolio_NAME*/}
-//       <p className="font-color text-2xl">
-//       54008 $
-//       </p>
-//       <p className="grid flex grid-cols-2 font-color text-2xl ${textColorClass}">
-//         <NumberDisplay value={-5120} />  <NumberPourcentDisplay value={-45} />
-//       </p>
-
-//     </div>
-//   );
-// };
-
-// export default cardGlobal;
-
 import { useState, useEffect } from 'react';
-import NumberDisplay from "../Number/NumberDisplay";
-import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
-import {axiosInstance} from '../../utils/axios';
+import { useParams } from 'react-router-dom'; 
+import { axiosInstance } from '../../utils/axios';
 
 const CardGlobal = () => {
-  const [Data, setData] = useState({
-    value: 0,
-    changeValue: 0,
-    changePercentage: 0,
-  });
+  const [userPortfolioAssets, setUserPortfolioAssets] = useState([]);
+  const [totalInvested, setTotalInvested] = useState(0); // State pour stocker le total investi
+  const { portfolioId } = useParams(); 
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPortfolioData = async () => {
       try {
-        
-        const response = await axiosInstance.get('/api/Routeadefinir'); 
-        setData(response.data);
+        const response = await axiosInstance.get(`/api/portfolios/${portfolioId}`);
+        console.log("response data Asset.tsx", response.data)
+        console.log("userPOrtfolioasset",userPortfolioAssets )
+        console.log("TOTAL ",response.data.portfolio.totalInvested )
+        console.log("user",response.data.userPortfolioAssets )
+        setUserPortfolioAssets( response.data.userPortfolioAssets);
+        setTotalInvested( response.data.portfolio.totalInvested); 
       } catch (error) {
-        console.error('Error fetching global data:', error);
+        console.error('Error fetching portfolio data:', error);
       }
     };
 
-    fetchData();
-  }, []);
+    fetchPortfolioData();
+  }, [portfolioId]); 
 
   return (
-    <div className="bg-white rounded-lg px-5 py-5">
-      <h1 className="font-bold text-3xl pb-3">Valorisation Globale</h1>
-      <p className="font-color text-2xl">
-        {Data.value} $
-      </p>
+    <div className="bg-white p-4 rounded shadow">
+      <h3 className="text-lg font-semibold mb-4">Actifs du portefeuille</h3>
+      <p>Total Invested: {totalInvested} $</p> {/* Affichage du total investi */}
       <p className="grid flex grid-cols-2 font-color text-2xl">
-        <NumberDisplay value={Data.changeValue} />
-        <NumberPourcentDisplay value={Data.changePercentage} />
+        {/* <NumberDisplay value={Data.changeValue} />
+        <NumberPourcentDisplay value={Data.changePercentage} /> */}
       </p>
     </div>
   );
