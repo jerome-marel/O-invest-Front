@@ -11,7 +11,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
-        const response = await axiosInstance.get('/dashboard/allportfolio');
+        const response = await axiosInstance.get('/api/portfolios');
         setPortfolios(response.data.allPortfolios);
       } catch (error) {
         console.error('Error fetching portfolios:', error);

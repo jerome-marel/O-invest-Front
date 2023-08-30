@@ -62,7 +62,7 @@ const Header = () => {
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
-        const response = await axiosInstance.get('/dashboard/allportfolio'); // Utilisez le bon endpoint
+        const response = await axiosInstance.get('/api/portfolios'); // Utilisez le bon endpoint
         setPortfolioList(response.data.allPortfolios); // Assurez-vous que le nom de la propriété est correct
       } catch (error) {
         console.error('Error fetching portfolios:', error);
@@ -88,7 +88,7 @@ const Header = () => {
   const userId = JSON.parse(localStorage.getItem('userId'));
 
   try {
-    const response = await axiosInstance.post('/dashboard/portfolio', { name, strategy, userId });
+    const response = await axiosInstance.post('/api/portfolios', { name, strategy, userId });
     console.log('Portfolio created:', response.data);
 
     // Mettez à jour la liste des portefeuilles avec le nouveau portefeuille créé
