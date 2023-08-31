@@ -37,15 +37,6 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
     
   };
 
-  const searchContainerStyle = {
-    position: 'sticky',
-    top: '0',
-    zIndex: '2',
-    backgroundColor: 'white',
-    padding: '8px 16px',
-    borderBottom: '1px solid #ddd',
-  };
-
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
