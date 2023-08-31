@@ -88,6 +88,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId }) => {
         console.log("data.portfolioAsset",response.data.portfolioAsset )
         console.log("data newtransaction", response.data.newTransaction)
         Navigate(`/portfolio/${portfolioId}`);
+        fetchAssets();
       })
       .catch(error => {
         console.log("data.portfolioAsset",response.data.portfolioAsset )

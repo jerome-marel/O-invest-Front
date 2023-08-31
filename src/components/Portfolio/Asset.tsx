@@ -6,6 +6,7 @@ import { axiosInstance } from '../../utils/axios';
 const AssetList = () => {
   const [userPortfolioAssets, setUserPortfolioAssets] = useState([]);
   const { portfolioId } = useParams(); 
+  
 
   useEffect(() => {
     const fetchAssets = async () => {
@@ -19,7 +20,7 @@ const AssetList = () => {
     };
 
     fetchAssets();
-  }, [portfolioId]); 
+  }, [portfolioId,]); 
   
 
   return (

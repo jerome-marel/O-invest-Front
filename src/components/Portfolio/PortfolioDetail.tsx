@@ -51,6 +51,7 @@ const PortfolioDetail = ( ) => {
         <div className="flex flex-wrap justify-center mt-10 gap-10">
           <CardGlobal />
           <ChartCamembert />
+
           <Asset/>
         </div>
       </div>
