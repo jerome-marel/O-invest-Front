@@ -13,7 +13,7 @@ const CardGlobal = () => {
   useEffect(() => {
     const fetchPortfolioData = async () => {
       try {
-        const response = await axiosInstance.get(`/api/portfolios/${portfolioId}`);
+        const response = await axiosInstance.get(`/api/routeadefinirglobaldahsboard`);
         console.log("response data Asset.tsx", response.data)
         console.log("userPOrtfolioasset",userPortfolioAssets )
         console.log("TOTAL ",response.data.portfolio.totalInvested )
@@ -30,7 +30,7 @@ const CardGlobal = () => {
 
   return (
     <div className="bg-white p-4 rounded shadow">
-      <h3 className="text-lg font-semibold mb-4">Actifs du portefeuille</h3>
+      <h3 className="text-lg font-semibold mb-4">Valorisation Global des Portfolios</h3>
       <p>Total Invested: {totalInvested} $</p> {/* Affichage du total investi */}
       <p className="grid flex grid-cols-2 font-color text-2xl">
         {/* <NumberDisplay value={Data.changeValue} />

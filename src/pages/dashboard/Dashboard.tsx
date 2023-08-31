@@ -1,5 +1,5 @@
 import Card from "../../components/Portfolio/CardPortfolio";  
-import CardGlobal from "../../components/ValueGlobal/CardGlobal";
+import CardGlobalDashboard from "../../components/ValueGlobal/CardGlobalDashboard";
 import ChartCamembert from "../../components/Chart/ChartCamembertDash";
 import {axiosInstance} from '../../utils/axios';
 import { useState, useEffect } from 'react';
@@ -25,7 +25,7 @@ const Dashboard = () => {
 <>
 <div className="flex flex-col items-center justify-center bg-gray-100">
   <div className="flex flex-wrap justify-center mt-10 gap-10">
-  <CardGlobal />
+  <CardGlobalDashboard />
   <ChartCamembert />
   </div>
  
