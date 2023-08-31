@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AssetListModal from '../components/assets/AssetListModal';
 import { axiosInstance } from '../utils/axios';
 
-const AddAssetButton = ({ onModalClose, portfolioId }) => { 
+const AddAssetButton = ({ onModalClose, portfolioId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [assets, setAssets] = useState([]);
 
@@ -39,7 +39,7 @@ const AddAssetButton = ({ onModalClose, portfolioId }) => {
         +
       </button>
       {isModalOpen && (
-        <div className="overlay" onClick={handleCloseModal}>
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50" onClick={handleCloseModal}>
           <AssetListModal
             isOpen={isModalOpen}
             assets={assets}
