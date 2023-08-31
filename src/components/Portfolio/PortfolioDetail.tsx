@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CardGlobal from "../../components/ValueGlobal/CardGlobal";
+import CardGlobalPortfolio from "../ValueGlobal/CardGlobalPortfolio";
 import ChartCamembert from "../../components/Chart/ChartCamembertDash";
 import {axiosInstance} from "../../utils/axios";
-import AssetList from "./Asset";
+import Asset from "./Asset";
 import AddAssetButton from '../AddAssetButton';
 
 
@@ -49,9 +49,10 @@ const PortfolioDetail = ( ) => {
 
       <div className="flex flex-col items-center justify-center bg-gray-100">
         <div className="flex flex-wrap justify-center mt-10 gap-10">
-          <CardGlobal />
+          <CardGlobalPortfolio />
           <ChartCamembert />
-          <AssetList/>
+
+          <Asset/>
         </div>
       </div>
     </>

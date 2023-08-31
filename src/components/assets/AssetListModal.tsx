@@ -101,13 +101,21 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId }) => {
         console.log("Actif ajouté avec succès", response.data);
         handleCloseAssetModal();
         onClose();
+
+
         console.log("data.portfolioAsset", response.data.portfolioAsset);
         console.log("data newtransaction", response.data.newTransaction);
+
         Navigate(`/portfolio/${portfolioId}`);
+        fetchAssets();
       })
       .catch(error => {
+        console.log("data.portfolioAsset",response.data.portfolioAsset )
+        console.log("data newtransaction", response.data.newTransaction)
         console.error("Erreur lors de l'ajout de l'actif :", error);
         if (error.response) {
+          console.log("data.portfolioAsset",response.data.portfolioAsset )
+        console.log("data newtransaction", response.data.newTransaction)
           console.error("Réponse du serveur :", error.response.data);
         }
       });
