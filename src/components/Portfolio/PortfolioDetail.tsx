@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CardGlobalPortfolio from '../ValueGlobal/CardGlobalPortfolio';
 import ChartCamembert from '../../components/Chart/ChartCamembertPortfolio';
@@ -47,7 +47,7 @@ const PortfolioDetail = () => {
       <div className="flex flex-col items-center justify-center bg-gray-100">
         <div className="flex flex-wrap justify-center mt-10 gap-10">
           <CardGlobalPortfolio userPortfolioAssets={userPortfolioAssets} portfolio={portfolio} />
-          <ChartCamembert portfolioData={{ userPortfolioAssets }} /> {/* Passing userPortfolioAssets as part of an object */}
+          <ChartCamembert portfolioData={{ userPortfolioAssets }} /> 
           <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} />
         </div>
       </div>

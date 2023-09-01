@@ -96,6 +96,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
         handleCloseAssetModal();
         onClose();
 
+        console.log("data.newportfolioAsset", response.data.newPortfolioAsset);
 
         console.log("data.portfolioAsset", response.data.portfolioAsset);
         console.log("data newtransaction", response.data.newTransaction);
