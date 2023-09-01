@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CardGlobalPortfolio from '../ValueGlobal/CardGlobalPortfolio';
 import ChartCamembert from '../../components/Chart/ChartCamembertPortfolio';
 import { axiosInstance } from '../../utils/axios';
 import Asset from './Asset';
 import AddAssetButton from '../AddAssetButton';
+import GraphPortfolio from './GraphPortfolio';
 
 // Créez des types pour portfolio et userPortfolioAssets
 interface Portfolio {
@@ -75,13 +76,15 @@ const PortfolioDetail = () => {
             </div>
           </div>
           <CardGlobalPortfolio userPortfolioAssets={userPortfolioAssets} portfolio={portfolio} />
+
           <ChartCamembert userPortfolioAssets={userPortfolioAssets} />
-          <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} />
+        <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} />
           <div className="flex justify-end">
             <AddAssetButton onModalClose={() => {}} portfolioId={portfolioId} handleAddAsset={handleAddAsset} />
           </div>
         </div>
-        
+
+        <GraphPortfolio userPortfolioAssets={userPortfolioAssets} />
       </div>
     </div>
   );

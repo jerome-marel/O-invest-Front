@@ -6,6 +6,7 @@ import DashBoardPage from './pages/dashboard/Dashboard';
 import Header from './components/Menu/Menu';
 import Profil from './components/Profil/Profil'
 import PortfolioDetail from './components/Portfolio/PortfolioDetail';
+import LoggedRoute from './components/LoggedRoute';
 
 
 
@@ -24,13 +25,50 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
-        <Route path="/dashboard" element={<PageWithHeader><DashBoardPage /></PageWithHeader>} />
+       
+        <Route
+          path="/dashboard"
+          element={
+            <LoggedRoute>
+              <PageWithHeader>
+                <DashBoardPage />
+              </PageWithHeader>
+            </LoggedRoute>
+          }
+        />
 
-        <Route path="/portfolio/:portfolioId" element={<PageWithHeader> <PortfolioDetail /> </PageWithHeader>} />
-        <Route path="/dashboard/portfolio/:portfolioId" element={<PageWithHeader> <PortfolioDetail /> </PageWithHeader>} />
+        <Route
+          path="/portfolio/:portfolioId"
+          element={
+            <LoggedRoute>
+              <PageWithHeader>
+                <PortfolioDetail />
+              </PageWithHeader>
+            </LoggedRoute>
+          }
+        />
 
-        <Route path="/profil" element={<PageWithHeader><Profil /></PageWithHeader>} />
-         
+        <Route
+          path="/dashboard/portfolio/:portfolioId"
+          element={
+            <LoggedRoute>
+              <PageWithHeader>
+                <PortfolioDetail />
+              </PageWithHeader>
+            </LoggedRoute>
+          }
+        />
+
+        <Route
+          path="/profil"
+          element={
+            <LoggedRoute>
+              <PageWithHeader>
+                <Profil />
+              </PageWithHeader>
+            </LoggedRoute>
+          }
+        />
       </Routes>
     </div>
   );
