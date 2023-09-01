@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AssetListModal from '../components/assets/AssetListModal';
 import { axiosInstance } from '../utils/axios';
 
-const AddAssetButton = ({ onModalClose, portfolioId }) => {
+const AddAssetButton = ({ onModalClose, portfolioId, handleAddAsset }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [assets, setAssets] = useState([]);
 
@@ -45,6 +45,7 @@ const AddAssetButton = ({ onModalClose, portfolioId }) => {
             assets={assets}
             onClose={handleCloseModal}
             portfolioId={portfolioId} 
+            handleAddAsset={handleAddAsset}
           />
         </div>
       )}

@@ -3,12 +3,9 @@ import { useParams } from 'react-router-dom';
 import { axiosInstance } from '../../utils/axios';
 // import NumberDisplay from '../Number/NumberDisplay';
 
-const AssetList = () => {
-  
-  const { portfolioId } = useParams(); 
+const AssetList = ({userPortfolioAssets, portfolioId }) => {
   
 
-  
 
   return (
     <div className="bg-white p-4 rounded shadow">
