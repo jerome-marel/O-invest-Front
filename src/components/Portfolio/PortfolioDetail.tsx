@@ -7,22 +7,48 @@ import Asset from './Asset';
 import AddAssetButton from '../AddAssetButton';
 import GraphPortfolio from './GraphPortfolio';
 
+// Créez des types pour portfolio et userPortfolioAssets
+interface Portfolio {
+  name: string;
+  totalInvested: number;
+  strategy: string;
+  // Autres propriétés du portefeuille
+}
+interface PortfolioAsset {
+  id: number; // L'identifiant unique de l'actif
+  name: string; // Le nom de l'actif (par exemple, "ADP")
+  remainingQuantity: number; // La quantité restante de l'actif (par exemple, 45)
+  value: number; // La valeur de l'actif (par exemple, 1254.58)
+  // Ajoutez d'autres propriétés si nécessaire
+}
+
 const PortfolioDetail = () => {
   const { portfolioId } = useParams();
-  const [portfolio, setPortfolio] = useState(null); // Initial value set to null
-  const [userPortfolioAssets, setUserPortfolioAssets] = useState([]); // Initial value set to an empty array
+  const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
+  const [userPortfolioAssets, setUserPortfolioAssets] = useState<PortfolioAsset[]>([]);
 
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
         const response = await axiosInstance.get(`/api/portfolios/${portfolioId}`);
         setPortfolio(response.data.portfolio);
-        setUserPortfolioAssets(response.data.userPortfolioAssets);
+  
+        // Convertir totalInvested en nombre
+        const totalInvested = parseFloat(response.data.portfolio.totalInvested);
+        // Convertir remainingQuantity en nombre
+        const userPortfolioAssets = response.data.userPortfolioAssets.map(asset => ({
+          ...asset,
+          remainingQuantity: parseFloat(asset.remainingQuantity),
+        }));
+  
+        setUserPortfolioAssets(userPortfolioAssets);
+        console.log('userPortfolioAssets à partir du portefeuille :', userPortfolioAssets);
+        console.log('Total Invested:', totalInvested);
       } catch (error) {
         console.error('Error fetching portfolio:', error);
       }
     };
-
+  
     fetchPortfolio();
   }, [portfolioId]);
 
@@ -30,30 +56,37 @@ const PortfolioDetail = () => {
     return <div className="bg-gray-100 p-4">Pas de portefeuille</div>;
   }
 
-  const handleAddAsset = (asset) => {
-    setUserPortfolioAssets([...userPortfolioAssets, asset]); // Adding the new asset to the existing array
+  const handleAddAsset = (asset: PortfolioAsset) => {
+    setUserPortfolioAssets([...userPortfolioAssets, asset]);
   };
 
   return (
-    <>
-      <div className="bg-gray-100 p-4">
-        <h2 className="text-xl font-bold mb-4">{portfolio.name}</h2>
-        <p className="mb-2">{portfolio.strategy}</p>
-        <div className="flex justify-end">
-          <AddAssetButton onModalClose={() => {}} portfolioId={portfolioId} handleAddAsset={handleAddAsset} />
-        </div>
-        {/* Other content */}
-      </div>
-
-      <div className="flex flex-col items-center justify-center bg-gray-100">
+    <div className="bg-gradient-to-b from-black to-blue-700 text-white min-h-screen">
+      <div className="flex flex-col items-center justify-center">
         <div className="flex flex-wrap justify-center mt-10 gap-10">
+          <div className="bg-white p-4 rounded-lg shadow-md text-black">
+            <h2 className="text-xl font-bold mb-4">{portfolio.name}</h2>
+            
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold mb-2">Détails du portefeuille</h3>
+              <div className="list-disc pl-6">
+                <div>Investissement total : {portfolio.totalInvested}</div>
+                <div className="mb-2">Stratégie : {portfolio.strategy}</div>
+              </div>
+            </div>
+          </div>
           <CardGlobalPortfolio userPortfolioAssets={userPortfolioAssets} portfolio={portfolio} />
-          <ChartCamembert portfolioData={{ userPortfolioAssets }} /> 
-          <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} />
+
+          <ChartCamembert userPortfolioAssets={userPortfolioAssets} />
+        <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} />
+          <div className="flex justify-end">
+            <AddAssetButton onModalClose={() => {}} portfolioId={portfolioId} handleAddAsset={handleAddAsset} />
+          </div>
         </div>
+
         <GraphPortfolio userPortfolioAssets={userPortfolioAssets} />
       </div>
-    </>
+    </div>
   );
 };
 
