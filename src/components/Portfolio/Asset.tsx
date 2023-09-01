@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; 
-import { axiosInstance } from '../../utils/axios';
 // import NumberDisplay from '../Number/NumberDisplay';
 
 const AssetList = ({userPortfolioAssets, portfolioId }) => {

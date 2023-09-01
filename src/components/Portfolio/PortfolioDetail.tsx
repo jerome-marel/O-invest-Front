@@ -5,6 +5,7 @@ import ChartCamembert from '../../components/Chart/ChartCamembertPortfolio';
 import { axiosInstance } from '../../utils/axios';
 import Asset from './Asset';
 import AddAssetButton from '../AddAssetButton';
+import GraphPortfolio from './GraphPortfolio';
 
 const PortfolioDetail = () => {
   const { portfolioId } = useParams();
@@ -50,6 +51,7 @@ const PortfolioDetail = () => {
           <ChartCamembert portfolioData={{ userPortfolioAssets }} /> 
           <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} />
         </div>
+        <GraphPortfolio userPortfolioAssets={userPortfolioAssets} />
       </div>
     </>
   );
