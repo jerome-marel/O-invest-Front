@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 function TradingViewWidget({ userPortfolioAssets }) {
   const container = useRef();
   const [widgetInitialized, setWidgetInitialized] = useState(false);
-  const symbols = userPortfolioAssets.map((asset) => [asset.name, `${asset.symbol}|1D`]);
-
+  const symbols = userPortfolioAssets.map((asset) => [asset.name, `${asset.symbol}`]);
+    console.log("symbols", symbols)
   useEffect(() => {
     if (!widgetInitialized) {
       const script = document.createElement("script");
@@ -13,7 +13,7 @@ function TradingViewWidget({ userPortfolioAssets }) {
       script.async = true;
       script.innerHTML = `
         {
-          "symbols": [${symbols.map((symbol) => `["${symbol[0]}", "${symbol[1]}"]`).join(',\n')}],
+          "symbols": [${symbols.map((symbol) => `["${symbol[0]}", "${symbol[1]}|1D"]`)}],
           "chartOnly": false,
           "width": 1000,
           "height": 500,
