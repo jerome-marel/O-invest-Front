@@ -4,23 +4,10 @@ import { axiosInstance } from '../../utils/axios';
 // import NumberDisplay from '../Number/NumberDisplay';
 
 const AssetList = () => {
-  const [userPortfolioAssets, setUserPortfolioAssets] = useState([]);
+  
   const { portfolioId } = useParams(); 
   
 
-  useEffect(() => {
-    const fetchAssets = async () => {
-      try {
-        const response = await axiosInstance.get(`/api/portfolios/${portfolioId}`);
-        console.log("response data Asset.tsx", response.data)
-        setUserPortfolioAssets(response.data.userPortfolioAssets);
-      } catch (error) {
-        console.error('Error fetching assets:', error);
-      }
-    };
-
-    fetchAssets();
-  }, [portfolioId,]); 
   
 
   return (

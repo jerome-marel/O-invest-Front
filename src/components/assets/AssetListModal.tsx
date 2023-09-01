@@ -17,7 +17,7 @@ import { utcToZonedTime, format } from 'date-fns-tz';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; 
 
-const AssetListModal = ({ isOpen, assets, onClose, portfolioId }) => {
+const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }) => {
   const overlayStyle = {
     backdropFilter: 'blur(8px)',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -35,15 +35,6 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId }) => {
     p: 4,
     maxHeight: `calc(100vh - 50px)`,
     
-  };
-
-  const searchContainerStyle = {
-    position: 'sticky',
-    top: '0',
-    zIndex: '2',
-    backgroundColor: 'white',
-    padding: '8px 16px',
-    borderBottom: '1px solid #ddd',
   };
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -79,7 +70,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId }) => {
     setQuantity('');
   };
 
-  const handleAddAsset = () => {
+  const handleSubmit = () => {
     if (!selectedAsset || !selectedDate || !quantity) {
       console.error("Veuillez remplir tous les champs avant d'ajouter l'actif.");
       return;
@@ -99,6 +90,9 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId }) => {
     axiosInstance.post(`/api/portfolios/${portfolioId}/addasset`, newAsset)
       .then(response => {
         console.log("Actif ajouté avec succès", response.data);
+        
+
+        handleAddAsset(response.data.newPortfolioAsset);
         handleCloseAssetModal();
         onClose();
 
@@ -107,7 +101,6 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId }) => {
         console.log("data newtransaction", response.data.newTransaction);
 
         Navigate(`/portfolio/${portfolioId}`);
-        fetchAssets();
       })
       .catch(error => {
         console.log("data.portfolioAsset",response.data.portfolioAsset )
@@ -248,7 +241,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId }) => {
             />
             <Button
               onClick={() => {
-                handleAddAsset();
+                handleSubmit();
                 handleCloseAssetModal(); // Fermer la modal après l'ajout
               }}
               variant="contained"
