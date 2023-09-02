@@ -5,7 +5,9 @@ export default {
     "./index.html", // Inclure le fichier HTML principal
   ],
   theme: {
-    extend: {},
+    extend: {
+     
+    },
   },
   plugins: [],
 }

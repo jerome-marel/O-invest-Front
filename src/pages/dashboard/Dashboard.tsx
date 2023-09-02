@@ -3,7 +3,7 @@ import CardGlobalDashboard from "../../components/ValueGlobal/CardGlobalDashboar
 import ChartCamembert from "../../components/Chart/ChartCamembertDash";
 import {axiosInstance} from '../../utils/axios';
 import { useState, useEffect } from 'react';
-
+import GraphDashboard from './GraphDashboard';
 
 const Dashboard = () => {
   const [portfolios, setPortfolios] = useState([]);
@@ -25,14 +25,16 @@ const Dashboard = () => {
 <>
 <div className="flex flex-col items-center justify-center bg-gray-100">
   <div className="flex flex-wrap justify-center mt-10 gap-10">
-  <CardGlobalDashboard />
+  <CardGlobalDashboard  />
   <ChartCamembert />
+  <GraphDashboard/>
   </div>
  
   <div className="flex flex-col items-center mt-10 h-screen bg-gray-100">
           <div className="flex flex-wrap justify-center gap-10">
             {portfolios.map((portfolio) => (
-              <Card key={portfolio.id} portfolio={portfolio} />
+              
+              <Card key={portfolio.id} portfolio={portfolio}  />
             ))}
           </div>
         </div>

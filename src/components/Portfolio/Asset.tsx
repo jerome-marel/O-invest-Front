@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; 
-import { axiosInstance } from '../../utils/axios';
 // import NumberDisplay from '../Number/NumberDisplay';
 
 const AssetList = ({userPortfolioAssets, portfolioId }) => {
@@ -8,11 +5,11 @@ const AssetList = ({userPortfolioAssets, portfolioId }) => {
 
 
   return (
-    <div className="bg-white p-4 rounded shadow">
-      <h3 className="text-lg font-semibold mb-4">Actifs du portefeuille</h3>
+    <div className="bg-white p-4 rounded-2xl shadow">
+      <h3 className="text-lg text-black font-semibold mb-4">Actifs du portefeuille</h3>
       <table className="w-full">
         <thead>
-          <tr className="bg-gray-100">
+          <tr className=" text-black bg-gray-100">
             <th className="px-4 py-2">Nom</th>
             <th className="px-4 py-2">Prix actuel</th>
             <th className="px-4 py-2">Quantité</th>
@@ -26,12 +23,12 @@ const AssetList = ({userPortfolioAssets, portfolioId }) => {
           {userPortfolioAssets.map((asset) => {
             return (
               <tr key={asset.id}>
-                <td className="px-4 py-2">{asset.name}</td>
-                <td className="px-4 py-2">{asset.historicPrice}</td>
-                <td className="px-4 py-2">{asset.remainingQuantity}</td>
-                <td className="px-4 py-2">{asset.averagePrice}</td>
-                <td className="px-4 py-2">{asset.historicPrice * asset.remainingQuantity}</td> 
-                <td className="px-4 py-2"></td>
+                <td className=" text-black px-4 py-2">{asset.name}</td>
+                <td className=" text-black px-4 py-2">{asset.historicPrice}</td>
+                <td className="text-black px-4 py-2">{asset.remainingQuantity}</td>
+                <td className="text-black px-4 py-2">{asset.averagePrice}</td>
+                <td className="text-black px-4 py-2">{asset.historicPrice * asset.remainingQuantity}</td> 
+                <td className="text-black px-4 py-2"></td>
                 {/* <td className="px-4 py-2">{asset.note}</td> */}
               </tr>
               );

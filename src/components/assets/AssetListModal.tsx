@@ -71,21 +71,24 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
   };
 
   const handleSubmit = () => {
-    if (!selectedAsset || !selectedDate || !quantity) {
-      console.error("Veuillez remplir tous les champs avant d'ajouter l'actif.");
-      return;
-    }
-  
-    const americanTimezone = 'America/New_York';
-    const americanDate = utcToZonedTime(selectedDate, americanTimezone);
-    const formattedAmericanDate = format(americanDate, 'yyyy-MM-dd HH:mm:ss');
-  
-    const newAsset = {
-      symbol: selectedAsset.symbol,
-      purchaseDatetime: formattedAmericanDate,
-      quantity: quantity,
-      note: note,
-    };
+    
+    const quantityAsNumber = parseFloat(quantity);
+
+  if (!selectedAsset || !selectedDate || isNaN(quantityAsNumber)) {
+    console.error("Veuillez remplir tous les champs correctement avant d'ajouter l'actif.");
+    return;
+  }
+
+  const americanTimezone = 'America/New_York';
+  const americanDate = utcToZonedTime(selectedDate, americanTimezone);
+  const formattedAmericanDate = format(americanDate, 'yyyy-MM-dd HH:mm:ss');
+
+  const newAsset = {
+    symbol: selectedAsset.symbol,
+    purchaseDatetime: formattedAmericanDate,
+    quantity: quantityAsNumber, // Utilisez la valeur convertie en nombre ici
+    note: note,
+  };
   
     axiosInstance.post(`/api/portfolios/${portfolioId}/addasset`, newAsset)
       .then(response => {
@@ -96,6 +99,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
         handleCloseAssetModal();
         onClose();
 
+        console.log("data.newportfolioAsset", response.data.newPortfolioAsset);
 
         console.log("data.portfolioAsset", response.data.portfolioAsset);
         console.log("data newtransaction", response.data.newTransaction);
@@ -242,7 +246,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
             <Button
               onClick={() => {
                 handleSubmit();
-                handleCloseAssetModal(); // Fermer la modal après l'ajout
+                handleCloseAssetModal(); 
               }}
               variant="contained"
               color="primary"

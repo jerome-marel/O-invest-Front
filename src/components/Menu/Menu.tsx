@@ -58,6 +58,9 @@ const Header = () => {
     Navigate('/');
   };
 
+ 
+  
+
 
   useEffect(() => {
     const fetchPortfolios = async () => {
@@ -103,7 +106,7 @@ const Header = () => {
 };
 
   return (
-    <div className="flex justify-between items-center bg-blue-500 p-4">
+    <div className="flex justify-between items-center bg-[#131722] p-4">
       <NavLink to="/dashboard" className="text-white text-lg font-semibold">
         O'Invest
       </NavLink>

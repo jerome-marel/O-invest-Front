@@ -13,11 +13,8 @@ const CardGlobal = () => {
   useEffect(() => {
     const fetchPortfolioData = async () => {
       try {
-        const response = await axiosInstance.get(`/api/routeadefinirglobaldahsboard`);
-        console.log("response data Asset.tsx", response.data)
-        console.log("userPOrtfolioasset",userPortfolioAssets )
-        console.log("TOTAL ",response.data.portfolio.totalInvested )
-        console.log("user",response.data.userPortfolioAssets )
+        const response = await axiosInstance.get(`/api/portfolios/${portfolioId}`);
+        
         setUserPortfolioAssets( response.data.userPortfolioAssets);
         setTotalInvested( response.data.portfolio.totalInvested); 
       } catch (error) {
