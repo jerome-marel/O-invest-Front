@@ -1,6 +1,7 @@
 // import NumberDisplay from '../Number/NumberDisplay';
 
-const AssetList = ({userPortfolioAssets, portfolioId }) => {
+const AssetList = ({userPortfolioAssets}) => {
+  console.log("userportfoliooo", userPortfolioAssets)
   
 
 
