@@ -134,6 +134,7 @@ const PortfolioDetail = () => {
       try {
         const response = await axiosInstance.get(`/api/portfolios/${portfolioId}`);
         setPortfolio(response.data);
+        console.log("response portfolio", response)
 
         const userPortfolioAssets = response.data.userPortfolioAssets.map((asset) => ({
           ...asset,
@@ -145,6 +146,7 @@ const PortfolioDetail = () => {
         // Récupérez les prix moyens d'achat et stockez-les dans l'état
         const averagePricesResponse = await axiosInstance.get(`/api/portfolios/${portfolioId}/avg`);
         setAveragePrices(averagePricesResponse.data.averagePrices);
+        console.log("response avg", averagePricesResponse)
       } catch (error) {
         console.error('Error fetching portfolio:', error);
       }

@@ -35,6 +35,8 @@ const Header = () => {
   const [modalStrategy, setModalStrategy] = useState(''); // État local pour la stratégie du portefeuille
   const Navigate = useNavigate();
   const [portfolioList, setPortfolioList] = useState([]);
+  const [lastName, setlastName] = useState('');
+  const [firstName, setfirstName] = useState('');
 
   // Fonction pour basculer l'affichage de la liste déroulante des portefeuilles
   const togglePortfolioDropdown = () => {
@@ -67,6 +69,12 @@ const Header = () => {
       try {
         const response = await axiosInstance.get('/api/portfolios'); // Utilisez le bon endpoint
         setPortfolioList(response.data.allPortfolios); // Assurez-vous que le nom de la propriété est correct
+
+        const userName = await axiosInstance.get('/api/users');
+        setlastName(userName.data.userInfo.lastName)
+        setfirstName(userName.data.userInfo.firstName)
+
+
       } catch (error) {
         console.error('Error fetching portfolios:', error);
       }
@@ -199,7 +207,7 @@ const Header = () => {
     </Modal>
       <div className="text-white flex items-center space-x-2">
         <NavLink to="/profil" className="hover:underline">
-          <div>Elon Musk</div>
+          <div>{lastName} {firstName}</div>
         </NavLink>
         <div className="border-l pl-4">
           <NavLink
