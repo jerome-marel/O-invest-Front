@@ -71,6 +71,7 @@ const Header = () => {
         setPortfolioList(response.data.allPortfolios); // Assurez-vous que le nom de la propriété est correct
 
         const userName = await axiosInstance.get('/api/users');
+        console.log(userName)
         setlastName(userName.data.userInfo.lastName)
         setfirstName(userName.data.userInfo.firstName)
 
@@ -207,7 +208,7 @@ const Header = () => {
     </Modal>
       <div className="text-white flex items-center space-x-2">
         <NavLink to="/profil" className="hover:underline">
-          <div>{lastName} {firstName}</div>
+          <div> {firstName} {lastName}</div>
         </NavLink>
         <div className="border-l pl-4">
           <NavLink
