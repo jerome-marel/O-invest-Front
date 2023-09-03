@@ -29,7 +29,7 @@ const AssetList = ({userPortfolioAssets, portfolioId }) => {
                 <td className="text-black px-4 py-2">{asset.averagePrice}</td>
                 <td className="text-black px-4 py-2">{asset.historicPrice * asset.remainingQuantity}</td> 
                 <td className="text-black px-4 py-2"></td>
-                {/* <td className="px-4 py-2">{asset.note}</td> */}
+                
               </tr>
               );
             })}

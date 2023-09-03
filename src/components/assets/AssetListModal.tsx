@@ -86,7 +86,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
   const newAsset = {
     symbol: selectedAsset.symbol,
     purchaseDatetime: formattedAmericanDate,
-    quantity: quantityAsNumber, // Utilisez la valeur convertie en nombre ici
+    quantity: quantityAsNumber, 
     note: note,
   };
   

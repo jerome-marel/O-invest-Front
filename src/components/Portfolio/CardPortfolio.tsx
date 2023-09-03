@@ -22,7 +22,7 @@ const CardPortfolio = ({ portfolio }) => {
       try {
         const response = await axiosInstance.get(`/api/portfolios/${portfolio.id}`);
         setPortfolioData(response.data); 
-        console.log(response.data)
+        console.log("cardportfolio",response.data)
       } catch (error) {
         console.error('Error fetching portfolio:', error);
       }

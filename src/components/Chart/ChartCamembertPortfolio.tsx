@@ -10,7 +10,7 @@ const formatPercentage = (value, total) => {
 
 const options = {
   cutout: 80,
-  spacing: 5, // Définit l'espacement entre les tranches du camembert en pixels
+  spacing: 5, 
   responsive: true,
   maintainAspectRatio: true,
   plugins: {

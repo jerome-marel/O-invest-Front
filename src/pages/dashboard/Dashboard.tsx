@@ -13,6 +13,7 @@ const Dashboard = () => {
       try {
         const response = await axiosInstance.get('/api/portfolios');
         setPortfolios(response.data.allPortfolios);
+        console.log("portfoliosss", response.data)
       } catch (error) {
         console.error('Error fetching portfolios:', error);
       }
@@ -26,7 +27,8 @@ const Dashboard = () => {
   <div className="bg-[#131722]  flex flex-col justify-center items-center">
       <div className="flex flex-wrap justify-center mt-10 gap-10">
       <CardGlobalDashboard  />
-      <ChartCamembert />
+        <ChartCamembert/>
+    
       </div>
   
   <div className="flex flex-wrap justify-center gap-10 m-10 ">

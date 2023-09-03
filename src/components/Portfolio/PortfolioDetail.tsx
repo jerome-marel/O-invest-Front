@@ -34,9 +34,6 @@ const PortfolioDetail = () => {
         setPortfolio(response.data);
         console.log("resposne portfolio", response.data )
   
-        
-        const totalInvested = parseFloat(response.data.portfolio.totalInvested);
-        
         const userPortfolioAssets = response.data.userPortfolioAssets.map(asset => ({
           ...asset,
           remainingQuantity: parseFloat(asset.remainingQuantity),
@@ -44,7 +41,7 @@ const PortfolioDetail = () => {
   
         setUserPortfolioAssets(userPortfolioAssets);
         console.log('userPortfolioAssets à partir du portefeuille :', userPortfolioAssets);
-        console.log('Total Invested:', totalInvested);
+        
       } catch (error) {
         console.error('Error fetching portfolio:', error);
       }
