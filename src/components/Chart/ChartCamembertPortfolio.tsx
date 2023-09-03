@@ -44,14 +44,13 @@ interface ChartCamembertProps {
 const ChartCamembert = ({ userPortfolioAssets }: ChartCamembertProps) => {
   console.log('userPortfolioAssets in ChartCamembert:', userPortfolioAssets);
 
-  // Vérifier si les données sont valides
+ 
   if (!userPortfolioAssets || userPortfolioAssets.length === 0) {
     return <div>Données indisponibles ou invalides</div>;
   }
 
   const labels = userPortfolioAssets.map((asset) => asset.name);
 
-  // Calculer les valeurs pour chaque actif
   const values = userPortfolioAssets.map((asset) => {
     const value = asset.remainingQuantity * asset.historicPrice;
     return parseFloat(value.toFixed(2));
