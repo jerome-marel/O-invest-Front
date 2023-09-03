@@ -35,10 +35,10 @@ const CardGlobal = () => {
   return (
     <div className="bg-white p-4 rounded-2xl shadow">
       <h3 className="text-lg font-semibold mb-4">Valorisation Globale des Portfolios</h3>
-      <p>Total des portfolios : {userPortfolioValuation} $</p>
-      <p> Total investi :  {totalInvested} $</p>
+      <p>Total des portfolios : {parseFloat(userPortfolioValuation).toFixed(2)} $</p>
+      <p> Total investi :  {totalInvested.toFixed(2)} $</p>
       <div className="grid flex grid-cols-2 font-color ">
-        <p> Profit and Loss : <NumberDisplay value={profitAndloss} /></p>
+        <p> Profit and Loss : <NumberDisplay value={profitAndloss.toFixed(2)} /></p>
       </div>
     </div>
   );
