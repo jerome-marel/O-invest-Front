@@ -23,24 +23,28 @@ const Dashboard = () => {
 
   return (
 <>
-<div className="flex flex-col items-center justify-center bg-gray-100">
-  <div className="flex flex-wrap justify-center mt-10 gap-10">
-  <CardGlobalDashboard  />
-  <ChartCamembert />
-  <GraphDashboard/>
-  </div>
- 
-  <div className="flex flex-col items-center mt-10 h-screen bg-gray-100">
-          <div className="flex flex-wrap justify-center gap-10">
-            {portfolios.map((portfolio) => (
-              
-              <Card key={portfolio.id} portfolio={portfolio}  />
-            ))}
-          </div>
-        </div>
+  <div className="bg-[#131722]  flex flex-col justify-center items-center">
+      <div className="flex flex-wrap justify-center mt-10 gap-10">
+      <CardGlobalDashboard  />
+      <ChartCamembert />
       </div>
+  
+  <div className="flex flex-wrap justify-center gap-10 m-10 ">
+  {portfolios.map((portfolio) => (
+                
+                <Card key={portfolio.id} portfolio={portfolio}  />
+                ))}
+  </div>
+    
+      <div className="mt-auto w-full ">
+          
+          <GraphDashboard/>
+      </div>
+    
+  </div>
     </>
   );
 };
 
 export default Dashboard;
+

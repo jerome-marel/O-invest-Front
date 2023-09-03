@@ -92,7 +92,6 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
   
     axiosInstance.post(`/api/portfolios/${portfolioId}/addasset`, newAsset)
       .then(response => {
-        console.log("Actif ajouté avec succès", response.data);
         
 
         handleAddAsset(response.data.newPortfolioAsset);

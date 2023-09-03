@@ -34,9 +34,9 @@ const PortfolioDetail = () => {
         setPortfolio(response.data);
         console.log("resposne portfolio", response.data )
   
-        // Convertir totalInvested en nombre
+        
         const totalInvested = parseFloat(response.data.portfolio.totalInvested);
-        // Convertir remainingQuantity en nombre
+        
         const userPortfolioAssets = response.data.userPortfolioAssets.map(asset => ({
           ...asset,
           remainingQuantity: parseFloat(asset.remainingQuantity),
@@ -71,7 +71,7 @@ const PortfolioDetail = () => {
                 <h3 className="text-lg font-semibold mb-2">Détails du portefeuille</h3>
                 <div className="list-disc pl-6">
                   <div>Investissement total : {portfolio.portfolio.totalInvested}</div>
-                  <div className="mb-2">Stratégie : {portfolio.strategy}</div>
+                  <div className="mb-2">Stratégie : {portfolio.portfolio.strategy}</div>
                 </div>
               </div>
           
