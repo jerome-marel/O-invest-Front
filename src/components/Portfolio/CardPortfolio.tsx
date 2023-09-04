@@ -42,8 +42,9 @@ const CardPortfolio = ({ portfolio }) => {
               <p> Profit / Loss:</p> 
               <p> <NumberDisplay value={portfolioData.profitAndLossRounded} /> </p>
              <p> ROI:</p>
-              <p> <NumberPourcentDisplay value={portfolioData.portfolioROIPercent} />  </p> 
-            </div>
+            <p> {portfolioData.portfolioROIPercent ? <NumberPourcentDisplay value={portfolioData.portfolioROIPercent} /> : '0 %' }  </p>
+            </div> 
+      
           </>
         )}
       </div>
