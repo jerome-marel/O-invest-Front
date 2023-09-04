@@ -67,8 +67,8 @@ const ChartCamembert = ({ portfolioValuations }) => {
     datasets: [
       {
         data: portfolioValuations.map((valuation) => valuation.totalValuation),
-        backgroundColor: ['#FF5733', '#FFC300', '#36A2EB', '#FF33FF', '#00FF00',
-        '#FFFF00', '#FF6600', '#0066CC', '#9900CC', '#009900'], 
+        backgroundColor: ['#D73A1C', '#CC9F00', '#2E7FC2', '#CC29CC', '#00CC00',
+        '#CCCC00', '#CC5500', '#0054A3', '#7D0099', '#007D00'], 
         
         borderWidth: 4,
       },
@@ -93,11 +93,11 @@ const ChartCamembert = ({ portfolioValuations }) => {
         },
       },
       datalabels: {
-        color: '#fff',
-        formatter: ( ctx) => {
+        color: '#fff', // Couleur du texte (peut être supprimée ou modifiée)
+        formatter: (ctx) => {
           let sum = 0;
           let dataArr = ctx.chart.data.datasets[0].data;
-          dataArr.map(data => {
+          dataArr.map((data) => {
             sum += data;
           });
           return '';
@@ -108,7 +108,14 @@ const ChartCamembert = ({ portfolioValuations }) => {
       animateRotate: true,
       animateScale: true,
     },
+    elements: {
+      arc: {
+        borderColor: '#131722', // Couleur de l'outline (noir dans ce cas)
+        borderWidth: 1, // Largeur de l'outline (peut être ajustée)
+      },
+    },
   };
+  
 
   return (
     <div className="w-21 h-21">

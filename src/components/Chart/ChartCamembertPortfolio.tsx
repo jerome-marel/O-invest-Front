@@ -31,6 +31,12 @@ const options = {
     animateRotate: true,
     animateScale: true,
   },
+elements: {
+  arc: {
+    borderColor: '#131722', // Couleur de l'outline (noir dans ce cas)
+    borderWidth: 1, // Largeur de l'outline (peut être ajustée)
+  },
+},
 };
 
 interface ChartCamembertProps {
@@ -57,9 +63,10 @@ const ChartCamembert = ({ userPortfolioAssets }: ChartCamembertProps) => {
   });
 
   const backgroundColors = [
-    '#FF5733', '#FFC300', '#36A2EB', '#FF33FF', '#00FF00',
-    '#FFFF00', '#FF6600', '#0066CC', '#9900CC', '#009900'
+    '#D73A1C', '#CC9F00', '#2E7FC2', '#CC29CC', '#00CC00',
+    '#CCCC00', '#CC5500', '#0054A3', '#7D0099', '#007D00'
   ];
+  
 
   const chartData = {
     labels: labels,
