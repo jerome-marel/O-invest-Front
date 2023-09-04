@@ -106,7 +106,7 @@ const ProfilePage = () => {
               }`}
             />
           </div>
-          <div className="mb-2">
+          {/* <div className="mb-2">
             <label className="text-gray-600 font-semibold">Password</label>
             <input
               type={showPassword ? 'text' : 'password'}
@@ -131,9 +131,9 @@ const ProfilePage = () => {
                 Show Password
               </label>
             )}
-          </div>
+          </div> */}
         </div>
-        <div className="mt-4 text-center">
+        {/* <div className="mt-4 text-center">
           {isEditing ? (
             <button
               onClick={handleSaveClick}
@@ -149,7 +149,7 @@ const ProfilePage = () => {
               Edit Profile
             </button>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );
