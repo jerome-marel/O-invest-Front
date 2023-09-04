@@ -7,11 +7,11 @@ const CardGlobalPortfolio = ({ portfolio }) => {
 
 
   return (
-    <div className="bg-white p-4 rounded-2xl shadow-md">
-      <h3 className="text-lg font-semibold mb-4 text-black">Valorisation Global du Portfolio</h3>
-      <p className=" font-semibold mb-4 text-black">Valorisation Global: {portfolio.portfolioValuation} $</p>
-      <p className=" font-semibold mb-4 text-black">ROI: {portfolio.portfolioROIPercent ? <NumberPourcentDisplay value={portfolio.portfolioROIPercent} /> : '0 %'}</p>
-      <p className=" font-semibold mb-4 text-black">Profit / Loss: <NumberDisplay value={portfolio.profitAndLossRounded} /></p>
+    <div className="bg-[#0c0e15] text-white p-4 rounded-2xl shadow-md">
+      <h3 className="text-lg font-semibold mb-4 ">Valorisation Global du Portfolio</h3>
+      <p className=" font-semibold mb-4 ">Valorisation Global: {portfolio.portfolioValuation} $</p>
+      <p className=" font-semibold mb-4 ">ROI: {portfolio.portfolioROIPercent ? <NumberPourcentDisplay value={portfolio.portfolioROIPercent} /> : '0 %'}</p>
+      <p className=" font-semibold mb-4 ">Profit / Loss: <NumberDisplay value={portfolio.profitAndLossRounded} /></p>
     </div>
   );
 };

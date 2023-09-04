@@ -35,7 +35,7 @@ const CardGlobal = () => {
 
 
   return (
-    <div className="bg-white p-4 rounded-2xl shadow">
+    <div className=" bg-[#0c0e15] text-white p-4 rounded-2xl shadow-md">
       <h3 className="text-lg font-semibold mb-4">Valorisation Globale des Portfolios</h3>
       <p>Total des portfolios : {parseFloat(userPortfolioValuation).toFixed(2)} $</p>
       <p> Total investi :  {totalInvested.toFixed(2)} $</p>
