@@ -1,4 +1,4 @@
-
+import NumberDisplayPercent from "../Number/NumberPourcentDisplay";
 import NumberDisplay from "../Number/NumberDisplay";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; 
@@ -8,6 +8,7 @@ const CardGlobal = () => {
   const [userPortfolioValuation, setUserPortfolioValuation] = useState([]);
   const [totalInvested, setTotalInvested] = useState(0); 
   const [profitAndloss, setProfitAndLoss] = useState(0);
+  const [ROIglobal, setROIglobal] = useState(0);
   const { portfolioId } = useParams(); 
 
     useEffect(() => {
@@ -16,11 +17,12 @@ const CardGlobal = () => {
        
         const response = await axiosInstance.get(`/api/stats`);
         
-       console.log("response", response)
+       console.log("response api stat", response)
       
         setUserPortfolioValuation(response.data.portfolioValuation);
         setTotalInvested(response.data.totalInvestedPortfolios);
         setProfitAndLoss(response.data.profitAndLoss);
+        setROIglobal(response.data.allPortfolioROIPercent)
 
 
       } catch (error) {
@@ -37,8 +39,9 @@ const CardGlobal = () => {
       <h3 className="text-lg font-semibold mb-4">Valorisation Globale des Portfolios</h3>
       <p>Total des portfolios : {parseFloat(userPortfolioValuation).toFixed(2)} $</p>
       <p> Total investi :  {totalInvested.toFixed(2)} $</p>
-      <div className="grid flex grid-cols-2 font-color ">
+      <div className="grid flex font-color ">
         <p> Profit and Loss : <NumberDisplay value={profitAndloss.toFixed(2)} /></p>
+        <p> ROI Global : <NumberDisplayPercent value={ROIglobal.toFixed(2)}/> </p>
       </div>
     </div>
   );
