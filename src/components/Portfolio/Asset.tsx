@@ -22,7 +22,7 @@ const Asset = ({ userPortfolioAssets,  averagePrices, portfolioId, handleAddAsse
         </thead>
         <tbody>
           {userPortfolioAssets.map((asset) => {
-            const averagePrice = averagePrices[asset.symbol] || 0; // Remplacez "symbol" par la propriété appropriée de votre actif
+            const averagePrice = averagePrices[asset.symbol] || 0; 
             return (
               <tr key={asset.id}>
                 <td className="text-black px-4 py-2">{asset.name}</td>
