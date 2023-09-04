@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { axiosInstance } from '../../utils/axios';
+
 
 const ProfilePage = () => {
   const initialUserData = {
@@ -11,7 +13,9 @@ const ProfilePage = () => {
   const [userData, setUserData] = useState(initialUserData);
   const [isEditing, setIsEditing] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const [lastName, setlastName] = useState('');
+  const [firstName, setfirstName] = useState('');
+  const [email, setEmail] = useState('');
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -29,13 +33,31 @@ const ProfilePage = () => {
     }));
   };
 
+  useEffect(() => {
+    const fetchPortfolios = async () => {
+      try {
+        
+        const userName = await axiosInstance.get('/api/users');
+        setlastName(userName.data.userInfo.lastName)
+        setfirstName(userName.data.userInfo.firstName)
+        setEmail(userName.data.userInfo.email)
+
+
+      } catch (error) {
+        console.error('Error fetching portfolios:', error);
+      }
+    };
+  
+    fetchPortfolios();
+  }, []); 
+
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white rounded-lg p-8 shadow-md w-96">
         <div className="text-center mb-4">
           
           <h1 className="text-2xl font-semibold">
-            {userData.firstName} {userData.lastName}
+            {firstName} {lastName}
           </h1>
         </div>
         <div className="mt-6">
@@ -44,7 +66,7 @@ const ProfilePage = () => {
             <input
               type="text"
               name="firstName"
-              value={userData.firstName}
+              value={firstName}
               readOnly={!isEditing}
               onChange={handleChange}
               className={`w-full bg-gray-100 border ${
@@ -59,7 +81,7 @@ const ProfilePage = () => {
             <input
               type="text"
               name="lastName"
-              value={userData.lastName}
+              value={lastName}
               readOnly={!isEditing}
               onChange={handleChange}
               className={`w-full bg-gray-100 border ${
@@ -74,7 +96,7 @@ const ProfilePage = () => {
             <input
               type="email"
               name="email"
-              value={userData.email}
+              value={email}
               readOnly={!isEditing}
               onChange={handleChange}
               className={`w-full bg-gray-100 border ${
@@ -84,7 +106,7 @@ const ProfilePage = () => {
               }`}
             />
           </div>
-          <div className="mb-2">
+          {/* <div className="mb-2">
             <label className="text-gray-600 font-semibold">Password</label>
             <input
               type={showPassword ? 'text' : 'password'}
@@ -109,9 +131,9 @@ const ProfilePage = () => {
                 Show Password
               </label>
             )}
-          </div>
+          </div> */}
         </div>
-        <div className="mt-4 text-center">
+        {/* <div className="mt-4 text-center">
           {isEditing ? (
             <button
               onClick={handleSaveClick}
@@ -127,7 +149,7 @@ const ProfilePage = () => {
               Edit Profile
             </button>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

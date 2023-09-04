@@ -1,16 +1,16 @@
-import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip);
 
-const formatPercentage = (value: number, total: number) => {
+const formatPercentage = (value, total) => {
   const percentage = ((value / total) * 100).toFixed(2);
   return `${percentage}%`;
 };
 
 const options = {
-  cutout: 70,
+  cutout: 80,
+  spacing: 5, 
   responsive: true,
   maintainAspectRatio: true,
   plugins: {
@@ -19,9 +19,9 @@ const options = {
     },
     tooltip: {
       callbacks: {
-        label: (context: any) => {
-          const value = context.parsed as number;
-          const sum = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+        label: (context) => {
+          const value = context.parsed;
+          const sum = context.dataset.data.reduce((a, b) => a + b, 0);
           return formatPercentage(value, sum);
         },
       },
@@ -34,47 +34,42 @@ const options = {
 };
 
 interface ChartCamembertProps {
-  portfolioData: {
-    userPortfolioAssets: {
-      name: string;
-      remainingQuantity: string;
-    }[];
-  };
+  userPortfolioAssets: {
+    name: string;
+    remainingQuantity: number;
+    historicPrice: number;
+  }[];
 }
 
-const ChartCamembert = ({ portfolioData }: ChartCamembertProps) => {
-  if (!portfolioData || !portfolioData.userPortfolioAssets) {
-    return <div>Loading...</div>;
+const ChartCamembert = ({ userPortfolioAssets }: ChartCamembertProps) => {
+  console.log('userPortfolioAssets in ChartCamembert:', userPortfolioAssets);
+
+ 
+  if (!userPortfolioAssets || userPortfolioAssets.length === 0) {
+    return <div>Données indisponibles ou invalides</div>;
   }
 
-  const userPortfolioAssets = portfolioData.userPortfolioAssets;
+  const labels = userPortfolioAssets.map((asset) => asset.name);
 
-  const labels = userPortfolioAssets.map(asset => asset.name);
-  const dataValues = userPortfolioAssets.map(asset => parseFloat(asset.remainingQuantity));
+  const values = userPortfolioAssets.map((asset) => {
+    const value = asset.remainingQuantity * asset.historicPrice;
+    return parseFloat(value.toFixed(2));
+  });
 
   const backgroundColors = [
-    '#FF5733',
-    '#FFC300',
-    '#36A2EB',
-    '#FF6384',
-    '#63FF84',
-    '#84FF63',
-    '#6384FF',
-    '#D563FF',
-  ]; // Ajoutez plus de couleurs si nécessaire
-
-  const totalInvestment = dataValues.reduce((total, value) => total + value, 0);
-
-  const percentageValues = dataValues.map(value => (value / totalInvestment) * 100);
+    '#FF5733', '#FFC300', '#36A2EB', '#FF33FF', '#00FF00',
+    '#FFFF00', '#FF6600', '#0066CC', '#9900CC', '#009900'
+  ];
 
   const chartData = {
     labels: labels,
     datasets: [
       {
-        data: percentageValues,
+        data: values,
         backgroundColor: backgroundColors,
-        hoverBackgroundColor: backgroundColors.map(color => color + '80'), // Légèrement plus clair pour effet au survol
-        borderWidth: 4,
+        hoverBackgroundColor: backgroundColors.map((color) => color + '80'),
+        borderWidth: 2,
+        
       },
     ],
   };

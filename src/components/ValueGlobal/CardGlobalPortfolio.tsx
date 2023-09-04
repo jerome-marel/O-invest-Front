@@ -1,22 +1,17 @@
 import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
 import NumberDisplay from "../Number/NumberDisplay";
 
-const CardGlobalPortfolio = ({ userPortfolioAssets, portfolio }) => {
-  const portfolioValuation = userPortfolioAssets.reduce((total, asset) => {
-    const assetPrice = parseFloat(asset.historicPrice);
-    const remainingQuantity = parseFloat(asset.remainingQuantity);
-    return total + assetPrice * remainingQuantity;
-  }, 0);
+const CardGlobalPortfolio = ({ portfolio }) => {
+  console.log("portfolio dans cardglobal", portfolio)
+  
 
-  const portfolioROIPercent = ((portfolioValuation - parseFloat(portfolio.totalInvested)) / parseFloat(portfolio.totalInvested)) * 100;
-  const profitloss = portfolioValuation - parseFloat(portfolio.totalInvested);
 
   return (
-    <div className="bg-white p-4 rounded shadow">
-      <h3 className="text-lg font-semibold mb-4">Valorisation Global du Portfolio</h3>
-      <p>Valorisation Global: {portfolioValuation.toFixed(2)} $</p>
-      <p>ROI: <NumberPourcentDisplay value={portfolioROIPercent.toFixed(2)} /></p>
-      <p>Profit / Loss: <NumberDisplay value={profitloss.toFixed(2)} /></p>
+    <div className="bg-white p-4 rounded-2xl shadow-md">
+      <h3 className="text-lg font-semibold mb-4 text-black">Valorisation Global du Portfolio</h3>
+      <p className=" font-semibold mb-4 text-black">Valorisation Global: {portfolio.portfolioValuation} $</p>
+      <p className=" font-semibold mb-4 text-black">ROI: {portfolio.portfolioROIPercent ? <NumberPourcentDisplay value={portfolio.portfolioROIPercent} /> : '0 %'}</p>
+      <p className=" font-semibold mb-4 text-black">Profit / Loss: <NumberDisplay value={portfolio.profitAndLossRounded} /></p>
     </div>
   );
 };

@@ -35,6 +35,8 @@ const Header = () => {
   const [modalStrategy, setModalStrategy] = useState(''); // État local pour la stratégie du portefeuille
   const Navigate = useNavigate();
   const [portfolioList, setPortfolioList] = useState([]);
+  const [lastName, setlastName] = useState('');
+  const [firstName, setfirstName] = useState('');
 
   // Fonction pour basculer l'affichage de la liste déroulante des portefeuilles
   const togglePortfolioDropdown = () => {
@@ -58,12 +60,22 @@ const Header = () => {
     Navigate('/');
   };
 
+ 
+  
+
 
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
         const response = await axiosInstance.get('/api/portfolios'); // Utilisez le bon endpoint
         setPortfolioList(response.data.allPortfolios); // Assurez-vous que le nom de la propriété est correct
+
+        const userName = await axiosInstance.get('/api/users');
+        console.log(userName)
+        setlastName(userName.data.userInfo.lastName)
+        setfirstName(userName.data.userInfo.firstName)
+
+
       } catch (error) {
         console.error('Error fetching portfolios:', error);
       }
@@ -103,7 +115,7 @@ const Header = () => {
 };
 
   return (
-    <div className="flex justify-between items-center bg-blue-500 p-4">
+    <div className="flex justify-between items-center bg-[#131722] p-4">
       <NavLink to="/dashboard" className="text-white text-lg font-semibold">
         O'Invest
       </NavLink>
@@ -196,7 +208,7 @@ const Header = () => {
     </Modal>
       <div className="text-white flex items-center space-x-2">
         <NavLink to="/profil" className="hover:underline">
-          <div>Elon Musk</div>
+          <div> {firstName} {lastName}</div>
         </NavLink>
         <div className="border-l pl-4">
           <NavLink
