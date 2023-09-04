@@ -189,9 +189,9 @@ const PortfolioDetail = () => {
         </div>
       </div>
 
-      <div className="flex justify-center mb-4">
-        <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} />
-        <AddAssetButton onModalClose={() => {}} portfolioId={portfolioId} handleAddAsset={handleAddAsset} />
+      <div className="flex justify-center mb-4 w-full flex-wrap" >
+        <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset}/>
+        
       </div>
 
       <div className="mt-auto w-full">
