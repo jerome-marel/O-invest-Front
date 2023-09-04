@@ -167,7 +167,7 @@ const PortfolioDetail = () => {
     <div className="bg-[#131722] text-white min-h-screen flex flex-col justify-center items-center">
       <div className="w-full">
         <div className="bg-blur bg-white p-4 rounded-2xl shadow-md text-black m-6 w-1/3">
-          <h2 className="text-xl font-bold mb-4">{portfolio.name}
+          <h2 className="text-xl font-bold mb-4">{portfolio.portfolio.name}
           {console.log("testestssetset",portfolio)}</h2>
 
           <div className="mt-6">
