@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { axiosInstance } from '../../utils/axios';
+import DeleteProfil from '../Delete/DeleteProfil';
 
 
 const ProfilePage = () => {
@@ -114,9 +115,13 @@ const ProfilePage = () => {
               }`}
             />
           </div>
+
+          <div>
+              <DeleteProfil />
+          </div>
           
         </div>
-        
+
       </div>
     </div>
   );
