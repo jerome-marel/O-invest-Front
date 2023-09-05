@@ -43,7 +43,7 @@ function TradingViewWidget({ userPortfolioAssets }) {
           "lineWidth": 2,
           "lineType": 0,
           "dateRanges": [
-            "1d|1",
+            "1d|5",
             "1w|15",
             "1m|30",
             "3m|60",

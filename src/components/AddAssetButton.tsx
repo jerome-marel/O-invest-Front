@@ -1,6 +1,8 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import AssetListModal from '../components/assets/AssetListModal';
 import { axiosInstance } from '../utils/axios';
+import AddIcon from '@mui/icons-material/Add';
+
 
 const AddAssetButton = ({ onModalClose, portfolioId, handleAddAsset }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,19 +34,23 @@ const AddAssetButton = ({ onModalClose, portfolioId, handleAddAsset }) => {
 
   return (
     <div>
-      <button
-        className="rounded-full w-10 h-10 flex items-center justify-center bg-blue-500 text-white text-4xl hover:bg-blue-600"
-        onClick={handleAddClick}
-      >
-        +
-      </button>
+       <button
+  className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
+  onClick={handleAddClick}
+>
+  <AddIcon className="w-6 h-6" />
+</button>
+
       {isModalOpen && (
-        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50" onClick={handleCloseModal}>
+        <div
+          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
+          onClick={handleCloseModal}
+        >
           <AssetListModal
             isOpen={isModalOpen}
             assets={assets}
             onClose={handleCloseModal}
-            portfolioId={portfolioId} 
+            portfolioId={portfolioId}
             handleAddAsset={handleAddAsset}
           />
         </div>
