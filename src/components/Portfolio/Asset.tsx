@@ -1,13 +1,8 @@
 import AddAssetButton from "../AddAssetButton";
 import './Asset.css';
 
-
 const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset }) => {
-  const containerStyle = {
-    background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
-    display: 'flex',
-    flexDirection: 'column',
-  };
+  
 
   const containerCardStyle = {
     background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',

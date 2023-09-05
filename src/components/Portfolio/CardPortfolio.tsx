@@ -5,7 +5,7 @@ import NumberPourcentDisplay from '../Number/NumberPourcentDisplay';
 import AddAssetButton from '../AddAssetButton';
 import { axiosInstance } from '../../utils/axios';
 
-const CardPortfolio = ({ portfolio }) => { 
+const CardPortfolio = ({ portfolio }) => {
   // Utilisez une seule variable pour stocker le portfolio
   const [portfolioData, setPortfolioData] = useState(null);
 
@@ -21,8 +21,8 @@ const CardPortfolio = ({ portfolio }) => {
     const fetchPortfolio = async () => {
       try {
         const response = await axiosInstance.get(`/api/portfolios/${portfolio.id}`);
-        setPortfolioData(response.data); 
-        console.log("cardportfolio",response.data)
+        setPortfolioData(response.data);
+        console.log("cardportfolio", response.data);
       } catch (error) {
         console.error('Error fetching portfolio:', error);
       }
@@ -36,22 +36,31 @@ const CardPortfolio = ({ portfolio }) => {
     display: 'flex',
     flexDirection: 'column',
   };
-  
+
+  // Ajoutez un style pour tronquer le texte du nom du portefeuille
+  const portfolioNameStyle = {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    maxHeight: '2rem', // Ajustez la hauteur maximale selon vos besoins
+  };
 
   return (
-    <div  style={containerCardStyle} className=" border border-indigo-900 text-white  shadow-md  rounded-2xl px-5 py-5 w-72 h-60" >
+    <div style={containerCardStyle} className="border border-indigo-900 text-white shadow-md rounded-2xl px-5 py-5 w-72 h-60">
       <div onClick={handleCardClick} style={{ cursor: 'pointer' }}>
         {portfolioData && (
           <>
-            <h1 className="font-bold text-3xl pb-3">{portfolioData.portfolio.name}</h1>
-            <p className="font-color "> Valorisation Global: {portfolioData.portfolioValuation} $</p>
+            {/* Utilisez le style pour tronquer le nom du portefeuille */}
+            <h1 className="font-bold text-3xl pb-3" style={portfolioNameStyle}>
+              {portfolioData.portfolio.name}
+            </h1>
+            <p className="font-color"> Valorisation Global: {portfolioData.portfolioValuation} $</p>
             <div className="grid flex grid-cols-2 font-color">
-              <p> Profit / Loss:</p> 
+              <p> Profit / Loss:</p>
               <p> <NumberDisplay value={portfolioData.profitAndLossRounded} /> </p>
-             <p> ROI:</p>
-            <p> {portfolioData.portfolioROIPercent ? <NumberPourcentDisplay value={portfolioData.portfolioROIPercent} /> : '0 %' }  </p>
-            </div> 
-      
+              <p> ROI:</p>
+              <p> {portfolioData.portfolioROIPercent ? <NumberPourcentDisplay value={portfolioData.portfolioROIPercent} /> : '0 %' }  </p>
+            </div>
           </>
         )}
       </div>

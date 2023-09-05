@@ -10,7 +10,7 @@ const formatPercentage = (value, total) => {
 
 
 const options = {
-  cutout: 115,
+  cutout: 130,
   
   spacing:5,
   responsive: true,

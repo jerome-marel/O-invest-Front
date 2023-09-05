@@ -3,6 +3,15 @@ import { axiosInstance } from '../../utils/axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
+
+
+const containerStyle = {
+  background: 'linear-gradient(169deg, rgba(16,14,36,1) 30%, rgba(23,24,80,1) 52%, rgba(49,75,177,1) 93%, rgba(46,50,173,1) 100%)',
+  display: 'flex flex-wrap justify-center gap-10',
+  flexDirection: 'column',
+};
+
+
 const RegisterForm = () => {
   const Navigate = useNavigate();
   const [passwordsMatch, setPasswordsMatch] = useState(true); 
@@ -28,7 +37,6 @@ const RegisterForm = () => {
           firstName: first_name.value,
           riskProfile: selectedRiskProfile,
         });
-
         Navigate('/login');
       } catch (error) {
         console.error('Error registering:', error);
@@ -52,12 +60,12 @@ const RegisterForm = () => {
 
 
   return (
-  
-    <div className="max-w-md mx-auto p-6 bg-white border rounded bg-indigo-300 shadow-md">
-      <h2 className="text-2xl font-semibold mb-2">S'enregistrer</h2>
+  <div style={containerStyle} className="bg-gray-100 min-h-screen flex items-center justify-center"> 
+    <div className="max-w-md bg-white bg-opacity-10 rounded-2xl p-8 shadow-md ">
+      <h2 className="text-2xl font-semibold mb-2 text-white">S'enregistrer</h2>
       <form onSubmit={handleSignUp}>
         <div className="mb-4">
-          <label htmlFor="last_name" className="block font-medium mb-1">
+          <label htmlFor="last_name" className=" text-white block font-medium mb-1">
             Nom:
           </label>
           <input
@@ -68,7 +76,7 @@ const RegisterForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="first_name" className="block font-medium mb-1">
+          <label htmlFor="first_name" className=" text-white block font-medium mb-1">
             Prénom
           </label>
           <input
@@ -79,7 +87,7 @@ const RegisterForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block font-medium mb-1">
+          <label htmlFor="email" className=" text-white block font-medium mb-1">
             Email:
           </label>
           <input
@@ -90,7 +98,7 @@ const RegisterForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="password" className="block font-medium mb-1">
+          <label htmlFor="password" className=" text-white block font-medium mb-1">
             Mot de passe :
           </label>
           <input
@@ -100,8 +108,8 @@ const RegisterForm = () => {
             required
             onChange={handlePasswordChange}
           />
-          <ul>
-            <li style={{ color: hasUppercase ? 'green' : 'red' }}>
+          <ul >
+            <li className="list-none" style={{ color: hasUppercase ? 'green' : 'red' }}>
               Avoir au moins 1 lettre majuscule
             </li>
             <li style={{ color: hasNumber ? 'green' : 'red' }}>Avoir au moins 1 chiffre</li>
@@ -113,8 +121,8 @@ const RegisterForm = () => {
             </li>
           </ul>
         </div>
-        <div className="mb-4">
-          <label htmlFor="passwordConfirm" className="block font-medium mb-1">
+        <div className="mb-4 ">
+          <label htmlFor="passwordConfirm" className=" text-white block font-medium mb-1">
             Confirmer votre mot de passe :
           </label>
           <input
@@ -129,16 +137,16 @@ const RegisterForm = () => {
           )}
         </div>
         <fieldset>
-        <legend className="font-medium">Sélectionnez votre profil de risque :</legend>
-        <div className='w-full px-7 py-2'>
+        <legend className="font-medium text-white ">Sélectionnez votre profil de risque :</legend>
+        <div className=' text-white w-full px-7 py-2'>
           <input type="radio" id="Prudent" name="risk" value="Prudent" defaultChecked />
           <label htmlFor="Prudent">Prudent</label>
         </div>
-        <div className='w-full px-7 py-2'>
+        <div className=' text-white w-full px-7 py-2'>
           <input type="radio" id="Équilibré" name="risk" value="Équilibré" />
           <label htmlFor="Équilibré">Équilibré</label>
         </div>
-        <div className='w-full px-7 py-2'>
+        <div className=' text-white w-full px-7 py-2'>
           <input type="radio" id="Dynamique" name="risk" value="Dynamique" />
           <label htmlFor="Dynamique">Dynamique</label>
         </div>
@@ -150,12 +158,13 @@ const RegisterForm = () => {
           Créer votre compte
         </button>
       </form>
-      <p className="mt-2">
+      <p className="mt-2 text-white ">
         Avez-vous déjà un compte ?{' '}
-        <NavLink to="/login" className="px-3 text-blue-500 font-semibold">
+        <NavLink to="/login" className="px-3 text-blue-300 font-semibold">
           Se connecter
         </NavLink>
       </p>
+    </div>
     </div>
   );
 };

@@ -35,7 +35,7 @@ const AddAssetButton = ({ onModalClose, portfolioId, handleAddAsset }) => {
   return (
     <div>
        <button
-  className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
+  className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
   onClick={handleAddClick}
 >
   <AddIcon className="w-6 h-6" />

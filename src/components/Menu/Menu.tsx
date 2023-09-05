@@ -131,7 +131,7 @@ const Header = () => {
      
       <div className="flex justify-between gap-5 text-lg font-semibold"> 
       <div
-        className="relative text-white cursor-pointer group hover:underline"
+        className="relative text-white cursor-pointer group hover:underline z-50"
         onClick={togglePortfolioDropdown}
       >
         Portefeuille
@@ -155,7 +155,7 @@ const Header = () => {
 
       </div>
       <button
-          className="w-8 h-8 rounded-full bg-green-500 text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
+          className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
           onClick={toggleModal}
         >
           <AddIcon className="w-6 h-6" />
@@ -226,3 +226,5 @@ const Header = () => {
 };
 
 export default Header;
+
+
