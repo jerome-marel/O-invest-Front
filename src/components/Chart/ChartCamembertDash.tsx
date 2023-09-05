@@ -66,7 +66,7 @@ const ChartCamembert = ({ portfolioValuations }) => {
   
 
   return (
-    <div className="w-21 h-21">
+    <div className="w-80 h-80">
       <Doughnut data={data} options={options} />
     </div>
   );

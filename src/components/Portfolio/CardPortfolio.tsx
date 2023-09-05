@@ -39,7 +39,7 @@ const CardPortfolio = ({ portfolio }) => {
   
 
   return (
-    <div  style={containerCardStyle} className=" border border-indigo-900 text-white  shadow-md  rounded-2xl px-5 py-5">
+    <div  style={containerCardStyle} className=" border border-indigo-900 text-white  shadow-md  rounded-2xl px-5 py-5 w-72 h-60" >
       <div onClick={handleCardClick} style={{ cursor: 'pointer' }}>
         {portfolioData && (
           <>

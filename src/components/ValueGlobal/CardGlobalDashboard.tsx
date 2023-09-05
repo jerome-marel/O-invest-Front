@@ -46,7 +46,7 @@ const CardGlobal = () => {
         <p className="text-lg text-white">Total des portfolios : <NumberDisplay value={parseFloat(userPortfolioValuation).toFixed(2)} /></p>
         <p className="text-lg text-white"> Total investi :  <NumberDisplay value={totalInvested.toFixed(2)} /></p>
         <p className="text-lg text-white"> Profit and Loss : <NumberDisplay value={profitAndloss.toFixed(2)} /></p>
-        <p className="text-lg text-white"> ROI Global : <NumberPourcentDisplay value={ROIglobal.toFixed(2)}/> </p>
+        <p className="text-lg text-white"> ROI Global : <NumberPourcentDisplay value={ROIglobal.toFixed(2)}/></p>
         
     </div>
   );
