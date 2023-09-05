@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { axiosInstance } from '../../utils/axios';
+import DeleteProfil from '../Delete/DeleteProfil';
 
 
 const ProfilePage = () => {
@@ -106,50 +107,12 @@ const ProfilePage = () => {
               }`}
             />
           </div>
-          {/* <div className="mb-2">
-            <label className="text-gray-600 font-semibold">Password</label>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              value={userData.password}
-              readOnly={!isEditing}
-              onChange={handleChange}
-              className={`w-full bg-gray-100 border ${
-                isEditing ? 'border-blue-500' : 'border-gray-300'
-              } py-2 px-3 rounded ${
-                isEditing ? 'bg-white' : 'bg-gray-100'
-              }`}
-            />
-            {isEditing && (
-              <label className="mt-2 flex items-center">
-                <input
-                  type="checkbox"
-                  className="mr-1"
-                  checked={showPassword}
-                  onChange={() => setShowPassword(!showPassword)}
-                />
-                Show Password
-              </label>
-            )}
-          </div> */}
+          <div>
+              <DeleteProfil />
+          </div>
+          
         </div>
-        {/* <div className="mt-4 text-center">
-          {isEditing ? (
-            <button
-              onClick={handleSaveClick}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              onClick={handleEditClick}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-            >
-              Edit Profile
-            </button>
-          )}
-        </div> */}
+      
       </div>
     </div>
   );
