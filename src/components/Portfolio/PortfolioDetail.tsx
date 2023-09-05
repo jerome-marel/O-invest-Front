@@ -6,6 +6,7 @@ import { axiosInstance } from '../../utils/axios';
 import Asset from './Asset';
 import GraphPortfolio from './GraphPortfolio';
 import NumberDisplay from '../Number/NumberDisplay';
+import DeletePortfolio from '../Delete/DeleteAsset';
 
 // Créez des types pour portfolio et userPortfolioAssets
 interface Portfolio {
@@ -109,6 +110,7 @@ const PortfolioDetail = () => {
         <div className="lg:col-span-1 ">
           <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset} />
         </div>
+        <DeletePortfolio portfolioId={portfolioId} />
       </div>
   
       {/* Bottom Column */}
