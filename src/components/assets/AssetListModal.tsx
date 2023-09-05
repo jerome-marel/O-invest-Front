@@ -358,6 +358,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
         handleAddAsset(response.data.newPortfolioAsset);
         handleCloseAssetModal();
         onClose();
+        //console.log("assetlistmodal assetadd", response)
       })
       .catch((error) => {
         console.error("Erreur lors de l'ajout de l'actif :", error);

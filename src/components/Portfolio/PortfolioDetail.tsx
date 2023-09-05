@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-
 import { useParams } from 'react-router-dom';
 import CardGlobalPortfolio from '../ValueGlobal/CardGlobalPortfolio';
 import ChartCamembert from '../../components/Chart/ChartCamembertPortfolio';
 import { axiosInstance } from '../../utils/axios';
 import Asset from './Asset';
-import AddAssetButton from '../AddAssetButton';
 import GraphPortfolio from './GraphPortfolio';
 import NumberDisplay from '../Number/NumberDisplay';
 
@@ -28,7 +26,8 @@ const PortfolioDetail = () => {
   const { portfolioId } = useParams();
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [userPortfolioAssets, setUserPortfolioAssets] = useState<PortfolioAsset[]>([]);
-  const [averagePrices, setAveragePrices] = useState({}); // État pour stocker les prix moyens d'achat
+  const [averagePrices, setAveragePrices] = useState({}); 
+  const [addAsset, setAddAsset] = useState([]);
 
 
   useEffect(() => {
@@ -46,15 +45,21 @@ const PortfolioDetail = () => {
 
         setUserPortfolioAssets(userPortfolioAssets);
 
-        // Récupérez les prix moyens d'achat et stockez-les dans l'état
+        
         const averagePricesResponse = await axiosInstance.get(`/api/portfolios/${portfolioId}/avg`);
         setAveragePrices(averagePricesResponse.data.averagePrices);
         console.log("response avg", averagePricesResponse)
+
+        // const AddAssetData = await axiosInstance.get(`/api/portfolios/${portfolioId}/addasset`); 
+        
+        // setAddAsset(AddAssetData)
+        // console.log("Adassetadataa",AddAssetData)
+
+
       } catch (error) {
         console.error('Error fetching portfolio:', error);
       }
     };
-  
     fetchPortfolio();
   }, [portfolioId]);
 
@@ -80,6 +85,18 @@ const PortfolioDetail = () => {
   };
   
   return (
+        {/*<div className="bg-[#131722]  min-h-screen flex flex-col justify-center items-center">
+      <div className="w-full">
+        <div className=" bg-blur bg-[#0c0e15] text-white p-4 rounded-2xl shadow-md  m-6 w-1/3">
+          <h2 className="text-xl font-bold mb-4">{portfolio.portfolio.name}
+          {console.log("testestssetset",portfolio)}</h2>
+
+          <div className="mt-6 ">
+            <h3 className="text-lg font-semibold mb-2">Détails du portefeuille</h3>
+            <div className="list-disc pl-6">
+              <div>Investissement total : {portfolio.portfolio.totalInvested}</div>
+              <div className="mb-2">Stratégie : {portfolio.portfolio.strategy}</div>
+            </div>*/}
     <div style={containerStyle} className="grid grid-cols-1 justify-center mb-10">
       {/* Left Column */}
       <div style={containerStyle} className="grid grid-cols-1 lg:grid-cols-[400px,320px,1fr] justify-between round m-10 border border-indigo-900 rounded-2xl p-5 gap-5 shadow">
@@ -110,7 +127,6 @@ const PortfolioDetail = () => {
       <div style={containerStyle} className="justify-between round m-10 border border-indigo-900 rounded-2xl p-10 shadow">
         <div className="w-full mb-10">
           <GraphPortfolio userPortfolioAssets={userPortfolioAssets} />
-
         </div>
       </div>
     </div>

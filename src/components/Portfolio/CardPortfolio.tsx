@@ -32,7 +32,7 @@ const CardPortfolio = ({ portfolio }) => {
   }, [portfolio.id]);
 
   return (
-    <div className="bg-white rounded-2xl px-5 py-5">
+    <div className="bg-[#0c0e15] text-white  shadow-md  rounded-2xl px-5 py-5">
       <div onClick={handleCardClick} style={{ cursor: 'pointer' }}>
         {portfolioData && (
           <>
@@ -42,8 +42,9 @@ const CardPortfolio = ({ portfolio }) => {
               <p> Profit / Loss:</p> 
               <p> <NumberDisplay value={portfolioData.profitAndLossRounded} /> </p>
              <p> ROI:</p>
-              <p> <NumberPourcentDisplay value={portfolioData.portfolioROIPercent} />  </p> 
-            </div>
+            <p> {portfolioData.portfolioROIPercent ? <NumberPourcentDisplay value={portfolioData.portfolioROIPercent} /> : '0 %' }  </p>
+            </div> 
+      
           </>
         )}
       </div>
