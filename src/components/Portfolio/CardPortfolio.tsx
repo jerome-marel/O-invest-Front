@@ -31,8 +31,15 @@ const CardPortfolio = ({ portfolio }) => {
     fetchPortfolio();
   }, [portfolio.id]);
 
+  const containerCardStyle = {
+    background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
+    display: 'flex',
+    flexDirection: 'column',
+  };
+  
+
   return (
-    <div className="bg-[#0c0e15] text-white  shadow-md  rounded-2xl px-5 py-5">
+    <div  style={containerCardStyle} className=" border border-indigo-900 text-white  shadow-md  rounded-2xl px-5 py-5">
       <div onClick={handleCardClick} style={{ cursor: 'pointer' }}>
         {portfolioData && (
           <>

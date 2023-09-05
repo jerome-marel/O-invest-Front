@@ -26,11 +26,20 @@ const Dashboard = () => {
     };
 
     fetchPortfolios();
-  }, []); 
+  }, []);
+  
+  const containerStyle = {
+    background: 'linear-gradient(169deg, rgba(16,14,36,1) 30%, rgba(23,24,80,1) 52%, rgba(49,75,177,1) 93%, rgba(46,50,173,1) 100%)',
+    display: 'flex flex-wrap justify-center gap-10',
+    flexDirection: 'column',
+  };
+
+  
+
 
   return (
     <>
-      <div className="bg-[#131722]  flex flex-col justify-center items-center">
+      <div style={containerStyle} className="bg-[#131722]  flex flex-col justify-center items-center">
         <div className="flex flex-wrap justify-center mt-10 gap-10">
           <CardGlobalDashboard  />
           
