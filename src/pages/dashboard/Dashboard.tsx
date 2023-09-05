@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import Card from "../../components/Portfolio/CardPortfolio";  
 import CardGlobalDashboard from "../../components/ValueGlobal/CardGlobalDashboard";
 import ChartCamembert from "../../components/Chart/ChartCamembertDash";
-import { axiosInstance } from '../../utils/axios';
+import {axiosInstance} from '../../utils/axios';
+import { useState, useEffect } from 'react';
 import GraphDashboard from './GraphDashboard';
 
 const Dashboard = () => {
