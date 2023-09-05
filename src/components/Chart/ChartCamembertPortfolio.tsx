@@ -8,9 +8,11 @@ const formatPercentage = (value, total) => {
   return `${percentage}%`;
 };
 
+
 const options = {
-  cutout: 80,
-  spacing: 5, // Définit l'espacement entre les tranches du camembert en pixels
+  cutout: 130,
+  
+  spacing:5,
   responsive: true,
   maintainAspectRatio: true,
   plugins: {
@@ -33,8 +35,8 @@ const options = {
   },
 elements: {
   arc: {
-    borderColor: '#131722', // Couleur de l'outline (noir dans ce cas)
-    borderWidth: 1, // Largeur de l'outline (peut être ajustée)
+    borderRadius: 30,
+    
   },
 },
 };
@@ -82,7 +84,7 @@ const ChartCamembert = ({ userPortfolioAssets }: ChartCamembertProps) => {
         data: values,
         backgroundColor: backgroundColors,
         hoverBackgroundColor: backgroundColors.map((color) => color + '80'),
-        borderWidth: 2,
+        borderWidth: 0,
         
       },
     ],

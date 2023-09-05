@@ -79,26 +79,15 @@ const PortfolioDetail = () => {
   
   const containerCardStyle = {
     background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
-    display: 'flex',
+    display: 'flex flex-wrap justify-center gap-10 ',
     flexDirection: 'column',
   };
   
   return (
-      //   {/*<div className="bg-[#131722]  min-h-screen flex flex-col justify-center items-center">
-      // <div className="w-full">
-      //   <div className=" bg-blur bg-[#0c0e15] text-white p-4 rounded-2xl shadow-md  m-6 w-1/3">
-      //     <h2 className="text-xl font-bold mb-4">{portfolio.portfolio.name}
-      //     {console.log("testestssetset",portfolio)}</h2>
-
-      //     <div className="mt-6 ">
-      //       <h3 className="text-lg font-semibold mb-2">Détails du portefeuille</h3>
-      //       <div className="list-disc pl-6">
-      //         <div>Investissement total : {portfolio.portfolio.totalInvested}</div>
-      //         <div className="mb-2">Stratégie : {portfolio.portfolio.strategy}</div>
-      //       </div>*/}
-    <div style={containerStyle} className="grid grid-cols-1 justify-center mb-10">
+      
+    <div style={containerStyle} className="grid grid-cols-1 justify-center ">
       {/* Left Column */}
-      <div style={containerStyle} className="grid grid-cols-1 lg:grid-cols-[400px,320px,1fr] justify-between round m-10 border border-indigo-900 rounded-2xl p-5 gap-5 shadow">
+      <div style={containerCardStyle} className="grid grid-cols-1 lg:grid-cols-[400px,320px,1fr] justify-between round mx-10 border border-indigo-900 rounded-2xl p-5 gap-5 shadow">
         {/* Moitié gauche */}
         <div className="p-3">
           <div style={containerCardStyle} className="border border-indigo-900 p-10 rounded-2xl shadow-lg mb-4">
@@ -117,14 +106,14 @@ const PortfolioDetail = () => {
 </div>
   
         {/* Right Column */}
-        <div className="lg:col-span-1 h-full mt-5">
+        <div className="lg:col-span-1 ">
           <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset} />
         </div>
       </div>
   
       {/* Bottom Column */}
-      <div style={containerStyle} className="justify-between round m-10 border border-indigo-900 rounded-2xl p-10 shadow">
-        <div className="w-full mb-10">
+      <div style={containerStyle} className="justify-between round mx-10 mt-10 border border-indigo-900 rounded-2xl p-10 shadow mb-5">
+        <div className="w-full ">
           <GraphPortfolio userPortfolioAssets={userPortfolioAssets} />
         </div>
       </div>
