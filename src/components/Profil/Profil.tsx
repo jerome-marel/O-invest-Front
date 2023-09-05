@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { axiosInstance } from '../../utils/axios';
+import DeleteProfil from '../Delete/DeleteProfil';
 
 
 const ProfilePage = () => {
@@ -51,18 +52,26 @@ const ProfilePage = () => {
     fetchPortfolios();
   }, []); 
 
+  const containerStyle = {
+    background: 'linear-gradient(169deg, rgba(16,14,36,1) 30%, rgba(23,24,80,1) 52%, rgba(49,75,177,1) 93%, rgba(46,50,173,1) 100%)',
+    display: 'flex flex-wrap justify-center gap-10',
+    flexDirection: 'column',
+  };
+
+  
+
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="bg-white rounded-lg p-8 shadow-md w-96">
+    <div style={containerStyle} className="bg-gray-100 min-h-screen flex items-center justify-center">
+      <div className="bg-white bg-opacity-10 rounded-lg p-8 shadow-md w-96">
         <div className="text-center mb-4">
           
-          <h1 className="text-2xl font-semibold">
+          <h1 className="text-2xl font-semibold text-white">
             {firstName} {lastName}
           </h1>
         </div>
         <div className="mt-6">
           <div className="mb-2">
-            <label className="text-gray-600 font-semibold">First Name</label>
+            <label className="text-white font-semibold">First Name</label>
             <input
               type="text"
               name="firstName"
@@ -77,7 +86,7 @@ const ProfilePage = () => {
             />
           </div>
           <div className="mb-2">
-            <label className="text-gray-600 font-semibold">Last Name</label>
+            <label className="text-white font-semibold">Last Name</label>
             <input
               type="text"
               name="lastName"
@@ -92,7 +101,7 @@ const ProfilePage = () => {
             />
           </div>
           <div className="mb-2">
-            <label className="text-gray-600 font-semibold">Email</label>
+            <label className="text-white font-semibold">Email</label>
             <input
               type="email"
               name="email"
@@ -106,50 +115,13 @@ const ProfilePage = () => {
               }`}
             />
           </div>
-          {/* <div className="mb-2">
-            <label className="text-gray-600 font-semibold">Password</label>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              value={userData.password}
-              readOnly={!isEditing}
-              onChange={handleChange}
-              className={`w-full bg-gray-100 border ${
-                isEditing ? 'border-blue-500' : 'border-gray-300'
-              } py-2 px-3 rounded ${
-                isEditing ? 'bg-white' : 'bg-gray-100'
-              }`}
-            />
-            {isEditing && (
-              <label className="mt-2 flex items-center">
-                <input
-                  type="checkbox"
-                  className="mr-1"
-                  checked={showPassword}
-                  onChange={() => setShowPassword(!showPassword)}
-                />
-                Show Password
-              </label>
-            )}
-          </div> */}
+
+          <div>
+              <DeleteProfil />
+          </div>
+          
         </div>
-        {/* <div className="mt-4 text-center">
-          {isEditing ? (
-            <button
-              onClick={handleSaveClick}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              onClick={handleEditClick}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-            >
-              Edit Profile
-            </button>
-          )}
-        </div> */}
+
       </div>
     </div>
   );

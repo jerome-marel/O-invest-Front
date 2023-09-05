@@ -1,0 +1,14 @@
+/* Ajoutez ces styles CSS à votre feuille de style */
+ul li {
+    list-style-type: none;
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 5px;
+  }
+  
+  ul li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+  }
+  

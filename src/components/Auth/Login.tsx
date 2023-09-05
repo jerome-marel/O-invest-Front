@@ -1,9 +1,19 @@
 import { axiosInstance } from '../../utils/axios'; // Assurez-vous d'avoir axiosInstance configuré
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import './Verif.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const Navigate = useNavigate();
+
+  const containerStyle = {
+    background: 'linear-gradient(169deg, rgba(16,14,36,1) 30%, rgba(23,24,80,1) 52%, rgba(49,75,177,1) 93%, rgba(46,50,173,1) 100%)',
+    display: 'flex flex-wrap justify-center gap-10',
+    flexDirection: 'column',
+  };
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,24 +32,27 @@ const Login = () => {
         console.log(response.data.user)
         localStorage.setItem('userId', userId); 
         
-        // Utilisez userId comme nécessaire, par exemple :
-        // Naviguez vers la page du tableau de bord ou effectuez d'autres actions en fonction de l'ID
         Navigate('/dashboard');
       } else {
         console.error('Login failed');
+        toast.error('Email ou mot de passe incorrect');
       }
     } catch (error) {
       console.error('Error logging in:', error);
+      toast.error('Une erreur s\'est produite lors de la connexion');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-semibold mb-4">Se Connecter</h2>
+    <div style={containerStyle} className="flex items-center justify-center min-h-screen bg-gray-100">
+       <ToastContainer />
+      <div className="bg-white bg-opacity-10 rounded-2xl p-8 shadow-md w-96">
+      
+        
+        <h2 className="text-2xl font-semibold mb-4 text-white">Se Connecter</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium mb-1">
+            <label htmlFor="email" className=" text-white block text-sm font-medium mb-1">
               Email:
             </label>
             <input
@@ -50,7 +63,7 @@ const Login = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium mb-1">
+            <label htmlFor="password" className=" text-white block text-sm font-medium mb-1">
               Mot de Passe:
             </label>
             <input
@@ -67,15 +80,17 @@ const Login = () => {
             Se Connecter
           </button>
         </form>
-        <p className="mt-4 text-sm">
+        <p className="mt-4 text-sm text-white ">
           Créer vous un compte ?{' '}
-          <NavLink to="/register" className="text-blue-500 font-semibold">
+          <NavLink to="/register" className="text-blue-300 font-semibold">
             S'enregistrer
           </NavLink>
         </p>
       </div>
     </div>
+    
   );
+  
 };
 
 export default Login;

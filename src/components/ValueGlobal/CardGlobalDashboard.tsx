@@ -1,4 +1,4 @@
-import NumberDisplayPercent from "../Number/NumberPourcentDisplay";
+import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
 import NumberDisplay from "../Number/NumberDisplay";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; 
@@ -17,7 +17,7 @@ const CardGlobal = () => {
        
         const response = await axiosInstance.get(`/api/stats`);
         
-       console.log("response api stat", response)
+       console.log("response", response)
       
         setUserPortfolioValuation(response.data.portfolioValuation);
         setTotalInvested(response.data.totalInvestedPortfolios);
@@ -33,16 +33,28 @@ const CardGlobal = () => {
     fetchPortfolioData();
   }, [portfolioId]); 
 
+  const containerStyle = {
+    // background: 'linear-gradient(83deg, rgba(8,11,41,1) 25%, rgba(26,28,96,1) 52%)', // Ajustez la hauteur en fonction de vos besoins
+    background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
+    display: 'flex',
+    flexDirection: 'column',
+  };
 
   return (
-    <div className=" bg-[#0c0e15] text-white p-4 rounded-2xl shadow-md">
-      <h3 className="text-lg font-semibold mb-4">Valorisation Globale des Portfolios</h3>
-      <p>Total des portfolios : {parseFloat(userPortfolioValuation).toFixed(2)} $</p>
-      <p> Total investi :  {totalInvested.toFixed(2)} $</p>
-      <div className="grid flex font-color ">
-        <p> Profit and Loss : <NumberDisplay value={profitAndloss.toFixed(2)} /></p>
-        <p> ROI Global : <NumberDisplayPercent value={ROIglobal.toFixed(2)}/> </p>
-      </div>
+    <div style={containerStyle} className=" border border-indigo-900 hover:border-dotted p-10 rounded-2xl shadow-lg">
+      <div className="relative flex w-full justify-center content-start text-white text-2xl mb-12 p-2">Valorisation Globale des Portfolios</div>
+        <p className="text-lg text-white">Total des portfolios : <NumberDisplay value={parseFloat(userPortfolioValuation).toFixed(2)} /></p>
+        <p className="text-lg text-white"> Total investi :  <NumberDisplay value={totalInvested.toFixed(2)} /></p>
+        <p className="text-lg text-white"> Profit and Loss : <NumberDisplay value={profitAndloss.toFixed(2)} /></p>
+        {ROIglobal !== null && ROIglobal !== undefined ? (
+  <p className="text-lg text-white">
+    ROI Global : <NumberPourcentDisplay value={ROIglobal.toFixed(2)} />
+  </p>
+) : (
+  <p className="text-lg text-white">ROI Global : <span className="text-green-500"> 0% </span></p>
+)}
+
+        
     </div>
   );
 };
