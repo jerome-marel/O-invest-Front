@@ -79,7 +79,7 @@ const PortfolioDetail = () => {
   
   const containerCardStyle = {
     background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
-    display: 'flex  ',
+    display: 'flex flex-wrap justify-center gap-10 ',
     flexDirection: 'column',
   };
   
@@ -87,7 +87,7 @@ const PortfolioDetail = () => {
       
     <div style={containerStyle} className="grid grid-cols-1 justify-center ">
       {/* Left Column */}
-      <div style={containerStyle} className="grid grid-cols-1 lg:grid-cols-[400px,320px,1fr] justify-between round mx-10 border border-indigo-900 rounded-2xl p-5 gap-5 shadow">
+      <div style={containerCardStyle} className="grid grid-cols-1 lg:grid-cols-[400px,320px,1fr] justify-between round mx-10 border border-indigo-900 rounded-2xl p-5 gap-5 shadow">
         {/* Moitié gauche */}
         <div className="p-3">
           <div style={containerCardStyle} className="border border-indigo-900 p-10 rounded-2xl shadow-lg mb-4">
