@@ -51,18 +51,26 @@ const ProfilePage = () => {
     fetchPortfolios();
   }, []); 
 
+  const containerStyle = {
+    background: 'linear-gradient(169deg, rgba(16,14,36,1) 30%, rgba(23,24,80,1) 52%, rgba(49,75,177,1) 93%, rgba(46,50,173,1) 100%)',
+    display: 'flex flex-wrap justify-center gap-10',
+    flexDirection: 'column',
+  };
+
+  
+
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="bg-white rounded-lg p-8 shadow-md w-96">
+    <div style={containerStyle} className="bg-gray-100 min-h-screen flex items-center justify-center">
+      <div className="bg-white bg-opacity-10 rounded-lg p-8 shadow-md w-96">
         <div className="text-center mb-4">
           
-          <h1 className="text-2xl font-semibold">
+          <h1 className="text-2xl font-semibold text-white">
             {firstName} {lastName}
           </h1>
         </div>
         <div className="mt-6">
           <div className="mb-2">
-            <label className="text-gray-600 font-semibold">First Name</label>
+            <label className="text-white font-semibold">First Name</label>
             <input
               type="text"
               name="firstName"
@@ -77,7 +85,7 @@ const ProfilePage = () => {
             />
           </div>
           <div className="mb-2">
-            <label className="text-gray-600 font-semibold">Last Name</label>
+            <label className="text-white font-semibold">Last Name</label>
             <input
               type="text"
               name="lastName"
@@ -92,7 +100,7 @@ const ProfilePage = () => {
             />
           </div>
           <div className="mb-2">
-            <label className="text-gray-600 font-semibold">Email</label>
+            <label className="text-white font-semibold">Email</label>
             <input
               type="email"
               name="email"

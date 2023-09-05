@@ -52,9 +52,11 @@ const Dashboard = () => {
           ))}
         </div>
     
-        <div className=" w-full ">
-          <GraphDashboard/>
+        <div style={containerStyle} className="  border border-indigo-900 rounded-2xl  shadow w-full p-10 m-10">
+        <div className="w-full mb-10">
+          <GraphDashboard />
         </div>
+      </div>
       </div>
     </>
   );
