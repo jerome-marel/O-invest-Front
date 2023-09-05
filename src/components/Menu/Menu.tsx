@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../utils/axios';
+import AddIcon from '@mui/icons-material/Add';
 
 // Style de la fenêtre modale
 const style = {
@@ -130,7 +131,7 @@ const Header = () => {
      
       <div className="flex justify-between gap-5 text-lg font-semibold"> 
       <div
-        className="relative text-white cursor-pointer group hover:underline"
+        className="relative text-white cursor-pointer group hover:underline z-50"
         onClick={togglePortfolioDropdown}
       >
         Portefeuille
@@ -153,12 +154,12 @@ const Header = () => {
         )}
 
       </div>
-      <button 
-        className="rounded-full w-7 h-7 flex items-center justify-center bg-green-500 text-white text-2xl hover:bg-blue-600"
-        onClick={toggleModal}
+      <button
+          className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
+          onClick={toggleModal}
         >
-      +
-      </button>
+          <AddIcon className="w-6 h-6" />
+        </button>
       </div>
       </div>
 
@@ -225,3 +226,5 @@ const Header = () => {
 };
 
 export default Header;
+
+

@@ -106,13 +106,13 @@ const PortfolioDetail = () => {
 </div>
   
         {/* Right Column */}
-        <div className="lg:col-span-1 h-full mt-5">
+        <div className="lg:col-span-1 ">
           <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset} />
         </div>
       </div>
   
       {/* Bottom Column */}
-      <div style={containerStyle} className="justify-between round mx-10 mt-10 border border-indigo-900 rounded-2xl p-10 shadow">
+      <div style={containerStyle} className="justify-between round mx-10 mt-10 border border-indigo-900 rounded-2xl p-10 shadow mb-5">
         <div className="w-full ">
           <GraphPortfolio userPortfolioAssets={userPortfolioAssets} />
         </div>

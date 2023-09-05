@@ -8,6 +8,9 @@ import GraphDashboard from './GraphDashboard';
 const Dashboard = () => {
   const [portfolios, setPortfolios] = useState([]);
   const [portfolioValuations, setPortfolioValuations] = useState([]); 
+  const [lastName, setlastName] = useState('');
+  const [firstName, setfirstName] = useState('');
+ 
 
   useEffect(() => {
     const fetchPortfolios = async () => {
@@ -20,6 +23,12 @@ const Dashboard = () => {
         const valuationResponse = await axiosInstance.get('/api/stats/portfolios/weight');
         setPortfolioValuations(valuationResponse.data.portfolioValuations);
         console.log("portfolioValuations", valuationResponse.data);
+
+        const userName = await axiosInstance.get('/api/users');
+        console.log(userName)
+        setlastName(userName.data.userInfo.lastName)
+        setfirstName(userName.data.userInfo.firstName)
+
       } catch (error) {
         console.error('Error fetching portfolios:', error);
       }
@@ -48,7 +57,7 @@ const Dashboard = () => {
         <div className="col-span-1">
           <div style={containerCardStyle} className="border border-indigo-900 p-10 rounded-2xl shadow-lg ml-5 w-full h-full flex flex-col justify-center items-center">
             <h2 className="text-4xl text-white font-bold mb-2">WELCOME BACK</h2>
-            <h2 className="text-3xl text-white font-bold mb-4">USERNAME</h2>
+            <h2 className="text-3xl text-white font-bold mb-4">{firstName} {lastName} </h2>
           </div>
         </div>
   
