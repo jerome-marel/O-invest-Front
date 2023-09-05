@@ -9,8 +9,14 @@ const Asset = ({ userPortfolioAssets,  averagePrices, portfolioId, handleAddAsse
     flexDirection: 'column',
   };
 
+  const containerCardStyle = {
+    background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
+    display: 'flex flex-wrap justify-center gap-10 ',
+    flexDirection: 'column',
+  };
+
   return (
-    <div style={containerStyle} className=" p-4 rounded-2xl shadow border border-indigo-900 ">
+    <div style={containerCardStyle} className=" p-4 rounded-2xl shadow border border-indigo-900 ">
       <div className="flex justify-between"> 
       <h3 className="text-lg text-white font-semibold mb-4">Actifs du portefeuille</h3>
       <p><AddAssetButton onModalClose={() => {}} portfolioId={portfolioId} handleAddAsset={handleAddAsset} /> </p>
@@ -33,7 +39,7 @@ const Asset = ({ userPortfolioAssets,  averagePrices, portfolioId, handleAddAsse
             const averagePrice = averagePrices[asset.symbol] || 0; 
             return (
               <tr key={asset.id}>
-                <td className="text-white center">{asset.name}</td>
+                <td className="text-white ">{asset.name}</td>
                 <td className="text-white px-4 py-2">{asset.historicPrice.toFixed(2)}</td>
                 <td className="text-white px-4 py-2">{asset.remainingQuantity}</td>
                 <td className="text-white px-4 py-2">{averagePrice}</td>
