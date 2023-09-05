@@ -1,7 +1,12 @@
+
 import AddAssetButton from "../AddAssetButton";
+// import NumberDisplay from '../Number/NumberDisplay';
+
+const AssetList = ({userPortfolioAssets, portfolioId }) => {
 
 const Asset = ({ userPortfolioAssets,  averagePrices, portfolioId, handleAddAsset }) => {
   return (
+
     <div className="bg-white p-4 rounded-2xl shadow">
       <div className="flex justify-between"> 
       <h3 className="text-lg text-black font-semibold mb-4">Actifs du portefeuille</h3>
@@ -31,6 +36,7 @@ const Asset = ({ userPortfolioAssets,  averagePrices, portfolioId, handleAddAsse
                 <td className="text-black px-4 py-2">{averagePrice}</td>
                 <td className="text-black px-4 py-2">{(asset.historicPrice * asset.remainingQuantity).toFixed(2)}</td>
                 <td className="text-black px-4 py-2"></td>
+
               </tr>
             );
           })}

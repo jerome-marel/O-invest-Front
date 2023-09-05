@@ -10,7 +10,7 @@ const formatPercentage = (value, total) => {
 
 const options = {
   cutout: 80,
-  spacing: 5, 
+  spacing: 5, // Définit l'espacement entre les tranches du camembert en pixels
   responsive: true,
   maintainAspectRatio: true,
   plugins: {
@@ -44,12 +44,14 @@ interface ChartCamembertProps {
 const ChartCamembert = ({ userPortfolioAssets }: ChartCamembertProps) => {
   console.log('userPortfolioAssets in ChartCamembert:', userPortfolioAssets);
 
- 
+  // Vérifier si les données sont valides
   if (!userPortfolioAssets || userPortfolioAssets.length === 0) {
     return <div>Données indisponibles ou invalides</div>;
   }
 
   const labels = userPortfolioAssets.map((asset) => asset.name);
+
+  // Calculer les valeurs pour chaque actif
 
   const values = userPortfolioAssets.map((asset) => {
     const value = asset.remainingQuantity * asset.historicPrice;
@@ -57,8 +59,10 @@ const ChartCamembert = ({ userPortfolioAssets }: ChartCamembertProps) => {
   });
 
   const backgroundColors = [
+
     '#FF5733', '#FFC300', '#36A2EB', '#FF33FF', '#00FF00',
     '#FFFF00', '#FF6600', '#0066CC', '#9900CC', '#009900'
+
   ];
 
   const chartData = {

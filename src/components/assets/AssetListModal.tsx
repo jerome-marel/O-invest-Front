@@ -347,9 +347,10 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
     const newAsset = {
       symbol: selectedAsset.symbol,
       purchaseDatetime: formattedAmericanDate,
-      quantity: quantityAsNumber,
+      quantity: quantityAsNumber,  // Utilisez la valeur convertie en nombre ici
       note: note,
     };
+
 
     axiosInstance
       .post(`/api/portfolios/${portfolioId}/addasset`, newAsset)
@@ -357,7 +358,6 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
         handleAddAsset(response.data.newPortfolioAsset);
         handleCloseAssetModal();
         onClose();
-        
       })
       .catch((error) => {
         console.error("Erreur lors de l'ajout de l'actif :", error);
