@@ -52,20 +52,17 @@ const ChartCamembert = ({ userPortfolioAssets }: ChartCamembertProps) => {
   const labels = userPortfolioAssets.map((asset) => asset.name);
 
   // Calculer les valeurs pour chaque actif
+
   const values = userPortfolioAssets.map((asset) => {
     const value = asset.remainingQuantity * asset.historicPrice;
     return parseFloat(value.toFixed(2));
   });
 
   const backgroundColors = [
-    '#FF5733',
-    '#FFC300',
-    '#36A2EB',
-    '#FF6384',
-    '#63FF84',
-    '#84FF63',
-    '#6384FF',
-    '#D563FF',
+
+    '#FF5733', '#FFC300', '#36A2EB', '#FF33FF', '#00FF00',
+    '#FFFF00', '#FF6600', '#0066CC', '#9900CC', '#009900'
+
   ];
 
   const chartData = {

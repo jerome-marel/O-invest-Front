@@ -4,7 +4,9 @@ function TradingViewWidget({ userPortfolioAssets }) {
   const container = useRef();
   const [widgetInitialized, setWidgetInitialized] = useState(false);
   const symbols = userPortfolioAssets.map((asset) => [asset.name, `${asset.symbol}`]);
-    console.log("symbols", symbols)
+
+    //console.log("symbols", symbols)
+  
   useEffect(() => {
     if (!widgetInitialized) {
       const script = document.createElement("script");
@@ -15,11 +17,11 @@ function TradingViewWidget({ userPortfolioAssets }) {
         {
           "symbols": [${symbols.map((symbol) => `["${symbol[0]}", "${symbol[1]}|1D"]`)}],
           "chartOnly": false,
-          "width": 1000,
-          "height": 500,
+          "width": "100%",
+          "height": "500",
           "locale": "fr",
-          "colorTheme": "light",
-          "autosize": false,
+          "colorTheme": "dark",
+          "autosize": true,
           "showVolume": false,
           "showMA": false,
           "hideDateRanges": false,
@@ -48,13 +50,16 @@ function TradingViewWidget({ userPortfolioAssets }) {
             "all|1M"
           ]
         }`;
+
       container.current.appendChild(script);
       setWidgetInitialized(true);
     }
   }, [widgetInitialized, symbols]);
 
   return (
-    <div className="tradingview-widget-container" ref={container}>
+
+    <div className="tradingview-widget-container " ref={container}>
+
       <div className="tradingview-widget-container__widget"></div>
     </div>
   );
