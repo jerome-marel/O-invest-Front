@@ -43,7 +43,7 @@ const Dashboard = () => {
           ))}
         </div>
     
-        <div className="mt-auto w-full ">
+        <div className=" w-full ">
           <GraphDashboard/>
         </div>
       </div>

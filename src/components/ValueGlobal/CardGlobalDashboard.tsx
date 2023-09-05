@@ -1,4 +1,4 @@
-
+import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
 import NumberDisplay from "../Number/NumberDisplay";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; 
@@ -8,6 +8,7 @@ const CardGlobal = () => {
   const [userPortfolioValuation, setUserPortfolioValuation] = useState([]);
   const [totalInvested, setTotalInvested] = useState(0); 
   const [profitAndloss, setProfitAndLoss] = useState(0);
+  const [ROIglobal, setROIglobal] = useState(0);
   const { portfolioId } = useParams(); 
 
     useEffect(() => {
@@ -21,6 +22,7 @@ const CardGlobal = () => {
         setUserPortfolioValuation(response.data.portfolioValuation);
         setTotalInvested(response.data.totalInvestedPortfolios);
         setProfitAndLoss(response.data.profitAndLoss);
+        setROIglobal(response.data.allPortfolioROIPercent)
 
 
       } catch (error) {
@@ -41,9 +43,11 @@ const CardGlobal = () => {
   return (
     <div style={containerStyle} className=" border border-indigo-900 hover:border-dotted p-10 rounded-2xl shadow-lg">
       <div className="relative flex w-full justify-center content-start text-white text-2xl mb-12 p-2">Valorisation Globale des Portfolios</div>
-        <div className="text-lg text-white">Total des portfolios : <NumberDisplay value={parseFloat(userPortfolioValuation).toFixed(2)} /></div>
-        <div className="text-lg text-white"> Total investi :  <NumberDisplay value={totalInvested.toFixed(2)} /></div>
-        <div className="text-lg text-white"> Profit and Loss : <NumberDisplay value={profitAndloss.toFixed(2)} /></div>
+        <p className="text-lg text-white">Total des portfolios : <NumberDisplay value={parseFloat(userPortfolioValuation).toFixed(2)} /></p>
+        <p className="text-lg text-white"> Total investi :  <NumberDisplay value={totalInvested.toFixed(2)} /></p>
+        <p className="text-lg text-white"> Profit and Loss : <NumberDisplay value={profitAndloss.toFixed(2)} /></p>
+        <p className="text-lg text-white"> ROI Global : <NumberPourcentDisplay value={ROIglobal.toFixed(2)}/> </p>
+        
     </div>
   );
 };

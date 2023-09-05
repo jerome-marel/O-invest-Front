@@ -96,7 +96,7 @@ const PortfolioDetail = () => {
       //         <div>Investissement total : {portfolio.portfolio.totalInvested}</div>
       //         <div className="mb-2">Stratégie : {portfolio.portfolio.strategy}</div>
       //       </div>*/}
-    <div style={containerStyle} className="grid grid-cols-1 justify-center mb-10">
+    <div style={containerStyle} className="grid grid-cols-1 justify-center ">
       {/* Left Column */}
       <div style={containerStyle} className="grid grid-cols-1 lg:grid-cols-[400px,320px,1fr] justify-between round m-10 border border-indigo-900 rounded-2xl p-5 gap-5 shadow">
         {/* Moitié gauche */}
