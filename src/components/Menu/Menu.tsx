@@ -268,28 +268,28 @@ const Header = () => {
           <div className="p-4">
             <NavLink
               to="/dashboard"
-              className="text-white text-lg font-semibold hover:underline block py-2"
+              className="text-white text-lg font-semibold hover:scale-110 block py-2"
               onClick={closeMobileMenu}
             >
               Tableau de bord
             </NavLink>
             <NavLink
               to="/dashboard/portfolio"
-              className="text-white text-lg font-semibold hover:underline block py-2"
+              className="text-white text-lg font-semibold hover:scale-110 block py-2"
               onClick={closeMobileMenu}
             >
               Portefeuilles
             </NavLink>
             <NavLink
               to="/profil"
-              className="text-white text-lg font-semibold hover:underline block py-2"
+              className="text-white text-lg font-semibold hover:scale-110 block py-2"
               onClick={closeMobileMenu}
             >
               {firstName} {lastName}
             </NavLink>
             <NavLink
               to="/"
-              className="text-white text-lg font-semibold hover:underline block py-2"
+              className="text-white text-lg font-semibold hover:scale-110 block py-2"
               onClick={() => {
                 closeMobileMenu();
                 handleLogout();
