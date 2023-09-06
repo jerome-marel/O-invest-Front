@@ -1,6 +1,6 @@
-import React from 'react';
+
 import AddAssetButton from "../AddAssetButton";
-import DeleteAsset from "../../components/Delete/DeleteAsset"; // Importez le composant "DeleteAsset"
+import DeleteAsset from "../../components/Delete/DeleteAsset"; 
 import './Asset.css';
 
 const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset, handleDeleteAsset }) => {
@@ -40,7 +40,7 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
               <th className="px-4 py-2">Valeur</th>
               <th className="px-4 py-2">Valeur latente</th>
               <th className="px-4 py-2">Note</th>
-              <th className="px-4 py-2">Actions</th> {/* Ajout de la colonne Actions */}
+              
             </tr>
           </thead>
           <tbody>
@@ -53,15 +53,17 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
                   <td className="text-white text-center p-5">{asset.remainingQuantity}</td>
                   <td className="text-white text-center p-5">{averagePrice}</td>
                   <td className="text-white text-center p-5">{(asset.historicPrice * asset.remainingQuantity).toFixed(2)}</td>
-                  <td className="text-white text-center p-5"></td>
-                  <td className="text-white text-center p-5">
+                  <td className="text-white text-center p-5">fdsfs</td>
+                  <td className="text-white text-center p-5">aaaaa
+                  </td>
+                  <td className="text-white text-center  p-5">
                   <DeleteAsset
                       assetSymbol={asset.symbol}
                       assetQuantity={asset.remainingQuantity}
                       portfolioId={portfolioId} // Assurez-vous de passer portfolioId
                       handleDelete={handleDeleteAssetClick}
                     />
-                  </td>
+                    </td>
                 </tr>
               );
             })}

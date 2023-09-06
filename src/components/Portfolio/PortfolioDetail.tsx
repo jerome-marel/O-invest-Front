@@ -29,7 +29,7 @@ const PortfolioDetail = () => {
   const [userPortfolioAssets, setUserPortfolioAssets] = useState<PortfolioAsset[]>([]);
   const [averagePrices, setAveragePrices] = useState({}); 
   const [addAsset, setAddAsset] = useState([]);
-
+  const [valeurLatente, setValeurLatente] = useState([]);
 
   useEffect(() => {
     const fetchPortfolio = async () => {
@@ -56,6 +56,9 @@ const PortfolioDetail = () => {
         // setAddAsset(AddAssetData)
         // console.log("Adassetadataa",AddAssetData)
 
+        const ValeurLatenteResponse = await axiosInstance.get(`/api/portfolios/${portfolioId}/assets/perf`);
+        setValeurLatente(ValeurLatenteResponse.data.oneAssetProfitLoss)
+        console.log('Valeurlatentresposne', ValeurLatenteResponse.data.oneAssetProfitLoss)
 
       } catch (error) {
         console.error('Error fetching portfolio:', error);
