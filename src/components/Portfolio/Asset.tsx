@@ -1,9 +1,9 @@
+import React from 'react';
 import AddAssetButton from "../AddAssetButton";
+import DeleteAsset from "../../components/Delete/DeleteAsset"; // Importez le composant "DeleteAsset"
 import './Asset.css';
 
-const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset }) => {
-  
-
+const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset, handleDeleteAsset }) => {
   const containerCardStyle = {
     background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
     display: 'flex flex-wrap justify-center gap-10',
@@ -13,8 +13,12 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
   const tableContainerStyle = {
     maxHeight: '400px',
     overflowY: 'auto',
-    
   };
+
+  //Props passé au composant 
+  const handleDeleteAssetClick = (assetId) => {
+    handleDeleteAsset(assetId);
+  }
 
   return (
     <div style={containerCardStyle} className="h-full mb-5 rounded-2xl shadow border border-indigo-900 p-5">
@@ -24,7 +28,7 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
           <AddAssetButton onModalClose={() => {}} portfolioId={portfolioId} handleAddAsset={handleAddAsset} />
         </p>
       </div>
-
+      
       <div style={tableContainerStyle}>
         <table className="w-full">
           <thead>
@@ -36,6 +40,7 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
               <th className="px-4 py-2">Valeur</th>
               <th className="px-4 py-2">Valeur latente</th>
               <th className="px-4 py-2">Note</th>
+              <th className="px-4 py-2">Actions</th> {/* Ajout de la colonne Actions */}
             </tr>
           </thead>
           <tbody>
@@ -49,6 +54,14 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
                   <td className="text-white text-center p-5">{averagePrice}</td>
                   <td className="text-white text-center p-5">{(asset.historicPrice * asset.remainingQuantity).toFixed(2)}</td>
                   <td className="text-white text-center p-5"></td>
+                  <td className="text-white text-center p-5">
+                  <DeleteAsset
+                      assetSymbol={asset.symbol}
+                      assetQuantity={asset.remainingQuantity}
+                      portfolioId={portfolioId} // Assurez-vous de passer portfolioId
+                      handleDelete={handleDeleteAssetClick}
+                    />
+                  </td>
                 </tr>
               );
             })}

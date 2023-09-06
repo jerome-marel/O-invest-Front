@@ -6,7 +6,7 @@ import { axiosInstance } from '../../utils/axios';
 import Asset from './Asset';
 import GraphPortfolio from './GraphPortfolio';
 import NumberDisplay from '../Number/NumberDisplay';
-import DeletePortfolio from '../Delete/DeleteAsset';
+import DeletePortfolio from '../Delete/DeletePortfolio';
 
 // Créez des types pour portfolio et userPortfolioAssets
 interface Portfolio {
