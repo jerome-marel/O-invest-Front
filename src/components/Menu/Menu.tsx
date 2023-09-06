@@ -29,7 +29,7 @@ const overlayStyle = {
 };
 
 const Header = () => {
-  const [showPortfolioDropdown, setShowPortfolioDropdown] = useState(false);
+ 
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalName, setModalName] = useState('');
@@ -193,6 +193,51 @@ const Header = () => {
           >
             <AddIcon className="w-6 h-6" />
           </button>
+
+          <Modal
+      open={isModalOpen}
+      onClose={toggleModal}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <div
+        className="fixed inset-0 flex justify-center items-center"
+        style={overlayStyle}
+        onClick={handleOverlayClick}
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Créer un portefeuille
+          </Typography>
+
+          <form onSubmit={handleCreatePortfolio}>
+          <TextField
+                label="Nom du portefeuille"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                name="name"
+                value={modalName} // Reliez la valeur à l'état local
+                onChange={(e) => setModalName(e.target.value)} // Mettez à jour l'état local lorsqu'il y a un changement
+              />
+              <TextField
+                label="Description du portefeuille"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={4}
+                margin="normal"
+                name="description"
+                value={modalStrategy} // Reliez la valeur à l'état local
+                onChange={(e) => setModalStrategy(e.target.value)} // Mettez à jour l'état local lorsqu'il y a un changement
+              />
+            <Button type="submit" variant="contained">
+              Créer
+            </Button>
+          </form>
+        </Box>
+      </div>
+    </Modal>
 
           <div className="flex justify-between gap-5 text-lg font-semibold">
             <div className="text-white flex items-center space-x-2">
