@@ -42,7 +42,8 @@ const CardPortfolio = ({ portfolio }) => {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-    maxHeight: '2rem', // Ajustez la hauteur maximale selon vos besoins
+    maxHeight: '2rem', 
+    
   };
 
   return (
