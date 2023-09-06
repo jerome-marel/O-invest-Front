@@ -31,9 +31,18 @@
   }
   
   .del:hover div {
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     color: #fff;
     background: #ff0000;
+  }
+
+  .iconTrash {
+    transition: color 0.3s; /* Ajoutez une transition de couleur pour le hover */
+  }
+
+  .iconTrash:hover {
+    color: red; /* Changez la couleur au survol */
+    cursor: pointer; /* Ajoutez un curseur pointeur au survol */
   }
   
   
