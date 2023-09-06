@@ -9,6 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../utils/axios';
 import AddIcon from '@mui/icons-material/Add';
 
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
 // Style de la fenêtre modale
 const style = {
   position: 'absolute' as 'absolute',
@@ -264,42 +269,72 @@ const Header = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#100e24] text-white text-center">
-          <div className="p-4">
-            <NavLink
-              to="/dashboard"
-              className="text-white text-lg font-semibold hover:scale-110 block py-2"
-              onClick={closeMobileMenu}
-            >
-              Tableau de bord
-            </NavLink>
-            <NavLink
-              to="/dashboard/portfolio"
-              className="text-white text-lg font-semibold hover:scale-110 block py-2"
-              onClick={closeMobileMenu}
-            >
-              Portefeuilles
-            </NavLink>
-            <NavLink
-              to="/profil"
-              className="text-white text-lg font-semibold hover:scale-110 block py-2"
-              onClick={closeMobileMenu}
-            >
-              {firstName} {lastName}
-            </NavLink>
-            <NavLink
-              to="/"
-              className="text-white text-lg font-semibold hover:scale-110 block py-2"
+  <div className="lg:hidden text-white text-center">
+    <div className="p-4" style={{ backgroundColor: '#100e24' }}>
+      <NavLink
+        to="/dashboard"
+        className="text-white text-lg font-semibold hover:scale-110 block py-2"
+        onClick={closeMobileMenu}
+      >
+        Tableau de bord
+      </NavLink>
+
+      {/* Utilisation du composant Accordion pour afficher la liste des portefeuilles */}
+      <Accordion style={{ backgroundColor: '#100e24',  boxShadow: 'none' }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon  style={{ color: 'white' }}/>}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+          
+          
+          
+        >
+          <div className="bg-[#100e24] text-white text-lg font-semibold" style={{ flex: 1 }}>Portefeuilles</div>
+        </AccordionSummary>
+        <div className="   ">
+          {portfolioList.map((portfolio) => (
+            <NavLink 
+              key={portfolio.id}
+              to={`/dashboard/portfolio/${portfolio.id}`}
+              className={`block text-white bg-[#100e24] border-none ${
+                selectedPortfolio === portfolio.id
+                  ? 'bg-blue-100'
+                  : 'hover:bg-gray-100'
+              }`}
               onClick={() => {
+                setSelectedPortfolio(portfolio);
                 closeMobileMenu();
-                handleLogout();
               }}
             >
-              Se Déconnecter
+              {portfolio.name}
             </NavLink>
-          </div>
+          ))}
         </div>
-      )}
+      </Accordion>
+
+      <NavLink
+        to="/profil"
+        className="text-white text-lg font-semibold hover:scale-110 block py-2"
+        onClick={closeMobileMenu}
+      >
+        {firstName} {lastName}
+      </NavLink>
+      <NavLink
+        to="/"
+        className="text-white text-lg font-semibold hover:scale-110 block py-2"
+        onClick={() => {
+          closeMobileMenu();
+          handleLogout();
+        }}
+      >
+        Se Déconnecter
+      </NavLink>
+    </div>
+  </div>
+)}
+
+
+
     </div>
   );
 };
