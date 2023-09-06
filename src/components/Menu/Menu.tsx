@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -29,7 +29,6 @@ const overlayStyle = {
 };
 
 const Header = () => {
- 
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalName, setModalName] = useState('');
@@ -38,24 +37,32 @@ const Header = () => {
   const [portfolioList, setPortfolioList] = useState([]);
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // État pour gérer le délai de fermeture
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isPortfolioMenuOpen, setIsPortfolioMenuOpen] = useState(false); // État pour le menu des portefeuilles
+  const [isPortfolioMenuOpen, setIsPortfolioMenuOpen] = useState(false);
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const portfolioMenuRef = useRef(null);
+  let openDropdownTimeout;
   let closeDropdownTimeout;
 
-  // Fonction pour afficher le menu déroulant au survol
-  const handlePortfolioHover = () => {
-    setIsDropdownOpen(true);
-
+  const togglePortfolioMenu = () => {
     clearTimeout(closeDropdownTimeout);
+    openDropdownTimeout = setTimeout(() => {
+      setIsPortfolioMenuOpen(true);
+    }, 50); 
   };
 
-  // Fonction pour gérer la fermeture de la fenêtre modale en cliquant à l'extérieur
+  const closePortfolioMenu = () => {
+    clearTimeout(openDropdownTimeout);
+    closeDropdownTimeout = setTimeout(() => {
+      setIsPortfolioMenuOpen(false);
+    }, 50); 
+  };
+
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       toggleModal();
@@ -119,11 +126,6 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Fonction pour ouvrir ou fermer le menu des portefeuilles
-  const togglePortfolioMenu = () => {
-    setIsPortfolioMenuOpen(!isPortfolioMenuOpen);
-  };
-
   return (
     <div className="bg-[#100e24]">
       <div className="flex justify-between items-center p-4">
@@ -133,10 +135,7 @@ const Header = () => {
           </NavLink>
 
           <div className="lg:hidden ml-4">
-            <button
-              className="text-white"
-              onClick={toggleMobileMenu}
-            >
+            <button className="text-white" onClick={toggleMobileMenu}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -161,8 +160,12 @@ const Header = () => {
           </div>
 
           <div
-            className={`relative text-white cursor-pointer group hover:scale-110 z-50 ${isPortfolioMenuOpen ? 'text-blue-500' : ''}`}
-            onClick={togglePortfolioMenu}
+            className={`relative text-white cursor-pointer group hover:scale-110 z-50 ${
+              isPortfolioMenuOpen ? 'text-blue-500' : ''
+            }`}
+            ref={portfolioMenuRef}
+            onMouseEnter={togglePortfolioMenu}
+            onMouseLeave={closePortfolioMenu}
           >
             Portefeuille
             {isPortfolioMenuOpen && (
@@ -178,7 +181,7 @@ const Header = () => {
                     }`}
                     onClick={() => {
                       setSelectedPortfolio(portfolio);
-                      setIsPortfolioMenuOpen(false);
+                      closePortfolioMenu();
                     }}
                   >
                     {portfolio.name}
@@ -195,49 +198,49 @@ const Header = () => {
           </button>
 
           <Modal
-      open={isModalOpen}
-      onClose={toggleModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <div
-        className="fixed inset-0 flex justify-center items-center"
-        style={overlayStyle}
-        onClick={handleOverlayClick}
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Créer un portefeuille
-          </Typography>
+            open={isModalOpen}
+            onClose={toggleModal}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div
+              className="fixed inset-0 flex justify-center items-center"
+              style={overlayStyle}
+              onClick={handleOverlayClick}
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Créer un portefeuille
+                </Typography>
 
-          <form onSubmit={handleCreatePortfolio}>
-          <TextField
-                label="Nom du portefeuille"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                name="name"
-                value={modalName} // Reliez la valeur à l'état local
-                onChange={(e) => setModalName(e.target.value)} // Mettez à jour l'état local lorsqu'il y a un changement
-              />
-              <TextField
-                label="Description du portefeuille"
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={4}
-                margin="normal"
-                name="description"
-                value={modalStrategy} // Reliez la valeur à l'état local
-                onChange={(e) => setModalStrategy(e.target.value)} // Mettez à jour l'état local lorsqu'il y a un changement
-              />
-            <Button type="submit" variant="contained">
-              Créer
-            </Button>
-          </form>
-        </Box>
-      </div>
-    </Modal>
+                <form onSubmit={handleCreatePortfolio}>
+                  <TextField
+                    label="Nom du portefeuille"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    name="name"
+                    value={modalName}
+                    onChange={(e) => setModalName(e.target.value)}
+                  />
+                  <TextField
+                    label="Description du portefeuille"
+                    variant="outlined"
+                    fullWidth
+                    multiline
+                    rows={4}
+                    margin="normal"
+                    name="description"
+                    value={modalStrategy}
+                    onChange={(e) => setModalStrategy(e.target.value)}
+                  />
+                  <Button type="submit" variant="contained">
+                    Créer
+                  </Button>
+                </form>
+              </Box>
+            </div>
+          </Modal>
 
           <div className="flex justify-between gap-5 text-lg font-semibold">
             <div className="text-white flex items-center space-x-2">
@@ -246,7 +249,7 @@ const Header = () => {
                   {firstName} {lastName}
                 </div>
               </NavLink>
-              <div className="border-l pl-4 hover:scale-110">
+              <div className=" pl-4 hover:scale-110">
                 <NavLink
                   to="/"
                   className="text-white"
