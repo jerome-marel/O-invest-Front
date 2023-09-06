@@ -32,26 +32,29 @@ const Header = () => {
   const [showPortfolioDropdown, setShowPortfolioDropdown] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalName, setModalName] = useState('');
-  const [modalStrategy, setModalStrategy] = useState('');
+  const [modalName, setModalName] = useState(''); // État local pour le nom du portefeuille
+  const [modalStrategy, setModalStrategy] = useState(''); // État local pour la stratégie du portefeuille
   const Navigate = useNavigate();
   const [portfolioList, setPortfolioList] = useState([]);
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // État pour gérer le délai de fermeture
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  let closeDropdownTimeout;
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
 
+  let closeDropdownTimeout;
+
+  // Fonction pour afficher le menu déroulant au survol
   const handlePortfolioHover = () => {
-    setShowPortfolioDropdown(true);
+    setIsDropdownOpen(true);
 
     clearTimeout(closeDropdownTimeout);
   };
 
+  // Fonction pour gérer la fermeture de la fenêtre modale en cliquant à l'extérieur
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       toggleModal();
@@ -66,10 +69,11 @@ const Header = () => {
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
-        const response = await axiosInstance.get('/api/portfolios');
-        setPortfolioList(response.data.allPortfolios);
+        const response = await axiosInstance.get('/api/portfolios'); // Utilisez le bon endpoint
+        setPortfolioList(response.data.allPortfolios); // Assurez-vous que le nom de la propriété est correct
 
         const userName = await axiosInstance.get('/api/users');
+        console.log(userName);
         setLastName(userName.data.userInfo.lastName);
         setFirstName(userName.data.userInfo.firstName);
       } catch (error) {
@@ -98,7 +102,9 @@ const Header = () => {
         strategy,
         userId,
       });
+      console.log('Portfolio created:', response.data);
 
+      // Mettez à jour la liste des portefeuilles avec le nouveau portefeuille créé
       setPortfolioList([...portfolioList, response.data.newPortfolio]);
 
       Navigate(`/dashboard/portfolio/${response.data.newPortfolio.id}`, {
@@ -117,37 +123,23 @@ const Header = () => {
     }
   };
 
-  return (
-    <div className="flex justify-between items-center bg-[#100e24] p-4">
-      <div className="flex items-center">
-        <NavLink to="/dashboard" className="text-white text-lg font-semibold">
-          O'Invest
-        </NavLink>
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
-        {isMobileMenuOpen ? (
-          <div className="lg:hidden ml-4">
-            <button className="text-white" onClick={closeMobileMenu}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        ) : (
+  return (
+    <div className="bg-[#100e24]">
+      <div className="flex justify-between items-center p-4">
+        <div className="flex items-center"> {/* Nouvelle div pour O'Invest et le menu burger */}
+          <NavLink to="/dashboard" className="text-white text-lg font-semibold">
+            O'Invest
+          </NavLink>
+  
+          {/* Menu burger pour les écrans mobiles */}
           <div className="lg:hidden ml-4">
             <button
               className="text-white"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={toggleMobileMenu}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -165,157 +157,119 @@ const Header = () => {
               </svg>
             </button>
           </div>
-        )}
+        </div>
+  
+        <div className="hidden lg:flex justify-center gap-20 w-full space-between">
+          <div className="text-white cursor-pointer hover:scale-110 text-lg font-semibold">
+            <NavLink to="/dashboard">Tableau de bord</NavLink>
+          </div>
+  
+          <div
+            className="relative text-white cursor-pointer group hover:scale-110 z-50 "
+            onMouseEnter={handlePortfolioHover}
+            onMouseLeave={() => {
+              // Démarrer le délai de fermeture
+              closeDropdownTimeout = setTimeout(() => {
+                setIsDropdownOpen(false);
+              }, 100); // Délai de 1 seconde
+            }}
+          >
+            Portefeuille
+            {isDropdownOpen && (
+              <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md ">
+                {portfolioList.map((portfolio) => (
+                  <NavLink
+                    key={portfolio.id}
+                    to={`/dashboard/portfolio/${portfolio.id}`}
+                    className={`block px-2 py-1 text-black ${
+                      selectedPortfolio === portfolio.id
+                        ? 'bg-blue-100'
+                        : 'hover:bg-gray-100'
+                    }`}
+                    onClick={() => {
+                      setSelectedPortfolio(portfolio);
+                      setIsDropdownOpen(false); // Fermer la liste déroulante au clic
+                    }}
+                  >
+                    {portfolio.name}
+                  </NavLink>
+                ))}
+              </div>
+              
+            )}
+            
+          </div>
+          <button
+              className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
+              onClick={toggleModal}
+            >
+              <AddIcon className="w-6 h-6" />
+            </button>
+  
+          <div className="flex justify-between gap-5 text-lg font-semibold">
+            <div className="text-white flex items-center space-x-2">
+              <NavLink to="/profil" className="hover:scale-110">
+                <div>
+                  {firstName} {lastName}
+                </div>
+              </NavLink>
+              <div className="border-l pl-4 hover:scale-110">
+                <NavLink
+                  to="/"
+                  className="text-white "
+                  onClick={handleLogout}
+                >
+                  Se Déconnecter
+                </NavLink>
+              </div>
+            </div>
+            
+          </div>
+        </div>
       </div>
-
-      {isMobileMenuOpen ? (
-        <div className="lg:hidden fixed inset-x-0 top-0 z-50 bg-[#100e24] text-white">
-          <div className="flex flex-col items-start gap-3 p-4">
+  
+      
+  
+      {/* Affichage du menu mobile lorsque ouvert */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden bg-[#100e24] text-white text-center">
+          <div className="p-4">
             <NavLink
               to="/dashboard"
-              className="text-white text-lg font-semibold hover:underline"
+              className="text-white text-lg font-semibold hover:underline block py-2"
               onClick={closeMobileMenu}
             >
               Tableau de bord
             </NavLink>
             <NavLink
               to="/dashboard/portfolios"
-              className="text-white text-lg font-semibold hover:underline"
+              className="text-white text-lg font-semibold hover:underline block py-2"
               onClick={closeMobileMenu}
             >
               Portefeuilles
             </NavLink>
             <NavLink
               to="/profil"
-              className="text-white text-lg font-semibold hover:underline"
+              className="text-white text-lg font-semibold hover:underline block py-2"
               onClick={closeMobileMenu}
             >
               {firstName} {lastName}
             </NavLink>
-            <div
-              className="text-white text-lg font-semibold hover:underline cursor-pointer"
+            <NavLink
+              to="/"
+              className="text-white text-lg font-semibold hover:underline block py-2"
               onClick={() => {
-                handleLogout();
                 closeMobileMenu();
+                handleLogout();
               }}
             >
               Se Déconnecter
-            </div>
+            </NavLink>
           </div>
-        </div>
-      ) : (
-        <div className="hidden lg:flex justfify-center gap-10 ">
-          <div>
-            <div className="flex gap-5">
-              <div className="text-white cursor-pointer hover:scale-110 text-lg font-semibold">
-                <NavLink to="/dashboard">Tableau de bord</NavLink>
-              </div>
-
-              <div className="flex justify-between gap-5 text-lg font-semibold">
-                <div
-                  className="relative text-white cursor-pointer group hover:scale-110 z-50"
-                  onMouseEnter={handlePortfolioHover}
-                  onMouseLeave={() => {
-                    closeDropdownTimeout = setTimeout(() => {
-                      setShowPortfolioDropdown(false);
-                    }, 100);
-                  }}
-                >
-                  Portefeuille
-                  {showPortfolioDropdown && (
-                    <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md ">
-                      {portfolioList.map((portfolio) => (
-                        <NavLink
-                          key={portfolio.id}
-                          to={`/dashboard/portfolio/${portfolio.id}`}
-                          className={`block px-2 py-1 text-black ${
-                            selectedPortfolio === portfolio.id
-                              ? 'bg-blue-100'
-                              : 'hover:bg-gray-100'
-                          }`}
-                          onClick={() => {
-                            setSelectedPortfolio(portfolio);
-                            setShowPortfolioDropdown(false);
-                          }}
-                        >
-                          {portfolio.name}
-                        </NavLink>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <button
-                  className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
-                  onClick={toggleModal}
-                >
-                  <AddIcon className="w-6 h-6" />
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-        <NavLink to="/profil" className="hover:scale-110 text-white">
-          <div>
-            {firstName} {lastName}
-          </div>
-        </NavLink>
-        <div className="border-l pl-4 hover:scale-110">
-          <NavLink to="/" className="text-white " onClick={handleLogout}>
-            Se Déconnecter
-          </NavLink>
-        </div>
-      </div>
         </div>
       )}
-
-     
-
-      <Modal
-        open={isModalOpen}
-        onClose={toggleModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <div
-          className="fixed inset-0 flex justify-center items-center"
-          style={overlayStyle}
-          onClick={handleOverlayClick}
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Créer un portefeuille
-            </Typography>
-
-            <form onSubmit={handleCreatePortfolio}>
-              <TextField
-                label="Nom du portefeuille"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                name="name"
-                value={modalName}
-                onChange={(e) => setModalName(e.target.value)}
-              />
-              <TextField
-                label="Description du portefeuille"
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={4}
-                margin="normal"
-                name="description"
-                value={modalStrategy}
-                onChange={(e) => setModalStrategy(e.target.value)}
-              />
-              <Button type="submit" variant="contained">
-                Créer
-              </Button>
-            </form>
-          </Box>
-        </div>
-      </Modal>
     </div>
   );
-};
+            }
 
 export default Header;
