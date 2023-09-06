@@ -158,7 +158,7 @@ const Header = () => {
           <div className="text-white cursor-pointer hover:scale-110 text-lg font-semibold">
             <NavLink to="/dashboard">Tableau de bord</NavLink>
           </div>
-
+          <div className='flex gap-2 text-lg font-semibold'>
           <div
             className={`relative text-white cursor-pointer group hover:scale-110 z-50 ${
               isPortfolioMenuOpen ? 'text-blue-500' : ''
@@ -196,7 +196,7 @@ const Header = () => {
           >
             <AddIcon className="w-6 h-6" />
           </button>
-
+          </div>          
           <Modal
             open={isModalOpen}
             onClose={toggleModal}
