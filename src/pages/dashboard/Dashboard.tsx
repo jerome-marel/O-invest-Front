@@ -36,7 +36,7 @@ const Dashboard = () => {
       <div className="container mx-auto py-10">
         {/* Première ligne */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-          {/* Colonne 1 */}
+         
           <div className="md:col-span-1">
             <div className="bg-gradient-to-r from-[#080b29] via-[#1a1c60] to-[#1a1c60] border border-indigo-900 p-10 rounded-2xl shadow-lg mb-5">
               <h2 className="text-4xl text-white font-bold mb-2">WELCOME BACK</h2>
@@ -44,25 +44,25 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Colonne 2 */}
+         
           <div className="md:col-span-1">
             <p className="text-white">Les 2 cases de Alex</p>
           </div>
 
-          {/* Colonne 3 */}
+         
           <div className="md:col-span-1">
             <CardGlobalDashboard />
           </div>
 
-          {/* Colonne 4 */}
+         
           <div className="md:col-span-1">
             <ChartCamembert portfolioValuations={portfolioValuations} />
           </div>
         </div>
 
         {/* Deuxième ligne */}
-        <div className="md:col-span-2">
-          {/* Liste de cartes de portefeuille */}
+        <div className="md:col-span-2 pt-5">
+          
           <div className="flex flex-wrap justify-center gap-5">
             {portfolios.map((portfolio) => (
               <Card key={portfolio.id} portfolio={portfolio} />
@@ -71,10 +71,10 @@ const Dashboard = () => {
         </div>
 
         {/* Troisième ligne */}
-        <div className="grid grid-cols-1 gap-5">
-          {/* Colonne 1 */}
-          <div className="col-span-1">
-            {/* Camembert */}
+        <div className="grid grid-cols-1 gap-5 ">
+          
+          <div className="col-span-1 pt-5">
+            
             <div className="bg-gradient-to-b from-[#100e24] via-[#171850] to-[#2d32ad] rounded-2xl p-10 shadow">
               <div className="w-full mb-10">
                 <GraphDashboard />
