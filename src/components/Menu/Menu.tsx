@@ -32,14 +32,15 @@ const Header = () => {
   const [showPortfolioDropdown, setShowPortfolioDropdown] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalName, setModalName] = useState(''); // État local pour le nom du portefeuille
-  const [modalStrategy, setModalStrategy] = useState(''); // État local pour la stratégie du portefeuille
+  const [modalName, setModalName] = useState('');
+  const [modalStrategy, setModalStrategy] = useState('');
   const Navigate = useNavigate();
   const [portfolioList, setPortfolioList] = useState([]);
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // État pour gérer le délai de fermeture
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPortfolioMenuOpen, setIsPortfolioMenuOpen] = useState(false); // État pour le menu des portefeuilles
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
@@ -69,11 +70,10 @@ const Header = () => {
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
-        const response = await axiosInstance.get('/api/portfolios'); // Utilisez le bon endpoint
-        setPortfolioList(response.data.allPortfolios); // Assurez-vous que le nom de la propriété est correct
+        const response = await axiosInstance.get('/api/portfolios');
+        setPortfolioList(response.data.allPortfolios);
 
         const userName = await axiosInstance.get('/api/users');
-        console.log(userName);
         setLastName(userName.data.userInfo.lastName);
         setFirstName(userName.data.userInfo.firstName);
       } catch (error) {
@@ -102,9 +102,7 @@ const Header = () => {
         strategy,
         userId,
       });
-      console.log('Portfolio created:', response.data);
 
-      // Mettez à jour la liste des portefeuilles avec le nouveau portefeuille créé
       setPortfolioList([...portfolioList, response.data.newPortfolio]);
 
       Navigate(`/dashboard/portfolio/${response.data.newPortfolio.id}`, {
@@ -113,13 +111,7 @@ const Header = () => {
 
       toggleModal();
     } catch (error) {
-      console.error(
-        'Error creating portfolio:',
-        name,
-        strategy,
-        userId,
-        error
-      );
+      console.error('Error creating portfolio:', error);
     }
   };
 
@@ -127,15 +119,19 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Fonction pour ouvrir ou fermer le menu des portefeuilles
+  const togglePortfolioMenu = () => {
+    setIsPortfolioMenuOpen(!isPortfolioMenuOpen);
+  };
+
   return (
     <div className="bg-[#100e24]">
       <div className="flex justify-between items-center p-4">
-        <div className="flex items-center"> {/* Nouvelle div pour O'Invest et le menu burger */}
+        <div className="flex items-center">
           <NavLink to="/dashboard" className="text-white text-lg font-semibold">
             O'Invest
           </NavLink>
-  
-          {/* Menu burger pour les écrans mobiles */}
+
           <div className="lg:hidden ml-4">
             <button
               className="text-white"
@@ -158,25 +154,19 @@ const Header = () => {
             </button>
           </div>
         </div>
-  
+
         <div className="hidden lg:flex justify-center gap-20 w-full space-between">
           <div className="text-white cursor-pointer hover:scale-110 text-lg font-semibold">
             <NavLink to="/dashboard">Tableau de bord</NavLink>
           </div>
-  
+
           <div
-            className="relative text-white cursor-pointer group hover:scale-110 z-50 "
-            onMouseEnter={handlePortfolioHover}
-            onMouseLeave={() => {
-              // Démarrer le délai de fermeture
-              closeDropdownTimeout = setTimeout(() => {
-                setIsDropdownOpen(false);
-              }, 100); // Délai de 1 seconde
-            }}
+            className={`relative text-white cursor-pointer group hover:scale-110 z-50 ${isPortfolioMenuOpen ? 'text-blue-500' : ''}`}
+            onClick={togglePortfolioMenu}
           >
             Portefeuille
-            {isDropdownOpen && (
-              <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md ">
+            {isPortfolioMenuOpen && (
+              <div className="absolute mt-2 py-2 px-4 bg-white rounded shadow-md">
                 {portfolioList.map((portfolio) => (
                   <NavLink
                     key={portfolio.id}
@@ -188,24 +178,22 @@ const Header = () => {
                     }`}
                     onClick={() => {
                       setSelectedPortfolio(portfolio);
-                      setIsDropdownOpen(false); // Fermer la liste déroulante au clic
+                      setIsPortfolioMenuOpen(false);
                     }}
                   >
                     {portfolio.name}
                   </NavLink>
                 ))}
               </div>
-              
             )}
-            
           </div>
           <button
-              className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
-              onClick={toggleModal}
-            >
-              <AddIcon className="w-6 h-6" />
-            </button>
-  
+            className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
+            onClick={toggleModal}
+          >
+            <AddIcon className="w-6 h-6" />
+          </button>
+
           <div className="flex justify-between gap-5 text-lg font-semibold">
             <div className="text-white flex items-center space-x-2">
               <NavLink to="/profil" className="hover:scale-110">
@@ -216,21 +204,17 @@ const Header = () => {
               <div className="border-l pl-4 hover:scale-110">
                 <NavLink
                   to="/"
-                  className="text-white "
+                  className="text-white"
                   onClick={handleLogout}
                 >
                   Se Déconnecter
                 </NavLink>
               </div>
             </div>
-            
           </div>
         </div>
       </div>
-  
-      
-  
-      {/* Affichage du menu mobile lorsque ouvert */}
+
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-[#100e24] text-white text-center">
           <div className="p-4">
@@ -242,7 +226,7 @@ const Header = () => {
               Tableau de bord
             </NavLink>
             <NavLink
-              to="/dashboard/portfolios"
+              to="/dashboard/portfolio"
               className="text-white text-lg font-semibold hover:underline block py-2"
               onClick={closeMobileMenu}
             >
@@ -270,6 +254,6 @@ const Header = () => {
       )}
     </div>
   );
-            }
+};
 
 export default Header;
