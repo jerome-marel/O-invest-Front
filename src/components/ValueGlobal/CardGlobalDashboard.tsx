@@ -41,7 +41,7 @@ const CardGlobal = () => {
   };
 
   return (
-    <div style={containerStyle} className=" border border-indigo-900 hover:border-dotted p-10 rounded-2xl shadow-lg">
+    <div style={containerStyle} className=" border border-indigo-900 hover:border-dotted p-10 rounded-2xl shadow-lg h-full">
       <div className="relative flex w-full justify-center content-start text-white text-2xl mb-2  p-2 font-bold">Valorisation Globale</div>
         <p className="text-lg text-white font-bold m-2"> <NumberDisplay value={parseFloat(userPortfolioValuation).toFixed(2)} /></p>
       
