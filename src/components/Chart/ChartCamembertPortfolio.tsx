@@ -54,7 +54,7 @@ const ChartCamembert = ({ userPortfolioAssets }: ChartCamembertProps) => {
 
   // Vérifier si les données sont valides
   if (!userPortfolioAssets || userPortfolioAssets.length === 0) {
-    return <div>Données indisponibles ou invalides</div>;
+    return <div className='text-white'>Données indisponibles ou invalides</div>;
   }
 
   const labels = userPortfolioAssets.map((asset) => asset.name);

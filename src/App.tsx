@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
+import LandingPage from './pages/landingPage/LandingPage';
 import LoginPage from './components/Auth/Login';
 import RegisterPage from './components/Auth/Register';
 import DashBoardPage from './pages/dashboard/Dashboard';
@@ -36,6 +36,7 @@ const App = () => {
             </LoggedRoute>
           }
         />
+        
 
         <Route
           path="/portfolio/:portfolioId"

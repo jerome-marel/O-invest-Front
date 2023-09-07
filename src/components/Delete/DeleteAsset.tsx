@@ -1,87 +1,79 @@
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../utils/axios';
-import { PacmanLoader } from 'react-spinners';
-import './delete.css';
+import { FaTrash } from 'react-icons/fa'; // Importez l'icône de la poubelle
+import './modalDeleteAsset.css'; // Importez votre fichier CSS pour les styles personnalisés
 
-const DeletePortfolio = ({ portfolioId }) => {
-    
+const DeleteAsset = ({ assetSymbol, assetQuantity, portfolioId, handleDelete }) => {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [countdown, setCountdown] = useState(3); // Compte à rebours initial
-  const [showYesButton, setShowYesButton] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [quantityToRemove, setQuantityToRemove] = useState(0);
 
-  const handleDelete = async () => {
+  const handleDeleteClick = () => {
+    setShowModal(true);
+  };
+
+  const handleConfirmDelete = async () => {
     try {
-      await axiosInstance.delete(`/api/portfolios/${portfolioId}`);
-      
-      navigate('/dashboard');
-    } catch (error) {
-      console.error('Error deleting portfolio:', error);
-      console.log(portfolioId)
-    }
-  }
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-
-    // Compte à rebours
-    let currentCountdown = 3;
-    const countdownInterval = setInterval(() => {
-      currentCountdown--;
-      setCountdown(currentCountdown);
-      if (currentCountdown === 0) {
-        clearInterval(countdownInterval); // Arrêtez le compte à rebours lorsque le délai est écoulé
-        setShowYesButton(true); // Afficher le bouton "Oui" lorsque le compte à rebours est terminé
+      // Vérifiez si la quantité à supprimer est valide
+      if (quantityToRemove <= 0 || quantityToRemove > assetQuantity) {
+        console.error('Invalid quantity to remove');
+        return;
       }
-    }, 1000); // 1000 millisecondes = 1 seconde
-  }
+  
+      // Supprimez l'actif en utilisant portfolioId
+      await axiosInstance.delete(`/api/portfolios/${portfolioId}/deleteasset`, {
+        data: { symbol: assetSymbol, quantityToRemove },
+      });
+  
+      if (handleDelete) {
+        // Mettez à jour remainingQuantity avec la quantité choisie
+        handleDelete(assetSymbol, quantityToRemove);
+      }
+  
+      // Fermez la modal
+      setShowModal(false);
+    } catch (error) {
+      console.error('Error deleting asset:', error);
+    }
+  };
+  
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setCountdown(3); // Réinitialiser le compte à rebours
-    setShowYesButton(false); // Masquer le bouton "Oui"
-  }
-
-  useEffect(() => {
-    // Vous pouvez utiliser Axios ici pour effectuer des appels API lors du chargement initial du composant si nécessaire.
-  }, []);
+    setShowModal(false);
+  };
 
   return (
-    <div>
-      <div className="del">
-        <div onClick={handleOpenModal}>
-          supprimer le portefeuille
-        </div>
+    <div className="delete-asset">
+      <div
+        className={`iconTrash ${hovered ? 'text-red-500' : ''} cursor-pointer`}
+        onClick={handleDeleteClick}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <FaTrash className="text-base" />
       </div>
 
-      {isModalOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-700 bg-opacity-50">
-          <div>
-            <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2 w-64">
-              ATTENTION
+      {showModal && (
+        <div className="modal" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <span className="modal-close" onClick={handleCloseModal}>
+              &times;
+            </span>
+            <h2>Choisissez la quantité à supprimer</h2>
+            <div className="modal-input">
+              <input
+                type="range"
+                value={quantityToRemove}
+                max={assetQuantity}
+                onChange={(e) => setQuantityToRemove(parseInt(e.target.value, 10))}
+              />
             </div>
-            <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700 w-64 flex flex-col items-center">
-              <p className='mb-2'>Voulez-vous vraiment supprimer ce Portefeuille ?</p>
-              <div className="flex items-center mb-2">
-                <PacmanLoader size={18} color={"red"} />
-                <div className="ml-12">{countdown}</div>
-              </div>
-              {showYesButton ? (
-                <button
-                  className="bg-red-500 text-white px-2 py-1 rounded"
-                  onClick={handleDelete}
-                >
-                  Oui, je confirme
-                </button>
-              ) : null}
-              <button
-                className="bg-gray-300 text-gray-800 px-2 py-1 rounded mt-2"
-                onClick={handleCloseModal}
-              >
-                NON
-              </button>
-            </div>
+            <span>{quantityToRemove}</span>
+            <button  className="modal-button" onClick={handleConfirmDelete}>
+              Valider
+            </button>
           </div>
         </div>
       )}
@@ -89,4 +81,4 @@ const DeletePortfolio = ({ portfolioId }) => {
   );
 };
 
-export default DeletePortfolio;
+export default DeleteAsset;

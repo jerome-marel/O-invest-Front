@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const Navigate = useNavigate();
+  
+
 
   const containerStyle = {
     background: 'linear-gradient(169deg, rgba(16,14,36,1) 30%, rgba(23,24,80,1) 52%, rgba(49,75,177,1) 93%, rgba(46,50,173,1) 100%)',
@@ -17,29 +19,39 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+    
     const email = e.target.email.value;
     const password = e.target.password.value;
-  
+    
     try {
       const response = await axiosInstance.post('/api/login', { email, password });
-  
+    
       if (response.data.token) {
+        // Authentification réussie, redirigez l'utilisateur
         localStorage.setItem('user', JSON.stringify({ token: response.data.token }));
-        const userId = response.data.user; // Utilisez response.data.user.id au lieu de userId
-        console.log("userId", userId);
-        console.log("Token", response.data.token);
-        console.log(response.data.user)
+        const userId = response.data.user;
         localStorage.setItem('userId', userId); 
-        
         Navigate('/dashboard');
       } else {
+        // Affichez un message d'erreur générique en cas d'erreur côté serveur
         console.error('Login failed');
         toast.error('Email ou mot de passe incorrect');
       }
     } catch (error) {
       console.error('Error logging in:', error);
-      toast.error('Une erreur s\'est produite lors de la connexion');
+  
+      if (error.response) {
+        // Affichez un message d'erreur spécifique en fonction du code d'erreur de la réponse du serveur
+        if (error.response.status === 400) {
+          toast.error('Email au format invalide');
+        } else if (error.response.status === 401) {
+          toast.error('Email ou mot de passe incorrect');
+        } else {
+          toast.error('Une erreur s\'est produite lors de la connexion');
+        }
+      } else {
+        toast.error('Une erreur s\'est produite lors de la connexion');
+      }
     }
   };
 

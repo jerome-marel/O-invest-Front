@@ -1,7 +1,3 @@
-
-
-
-
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 
@@ -22,7 +18,7 @@ const ChartCamembert = ({ portfolioValuations }) => {
   };
 
   const options = {
-    cutout: 130,
+    cutout: 115,
     spacing:5,
     responsive: true,
     maintainAspectRatio: true,
@@ -40,7 +36,7 @@ const ChartCamembert = ({ portfolioValuations }) => {
         },
       },
       datalabels: {
-        color: '#fff', // Couleur du texte (peut être supprimée ou modifiée)
+        color: '#fff', 
         formatter: (ctx) => {
           let sum = 0;
           let dataArr = ctx.chart.data.datasets[0].data;
@@ -66,7 +62,7 @@ const ChartCamembert = ({ portfolioValuations }) => {
   
 
   return (
-    <div className="w-80 h-80">
+    <div className="w-72 h-72">
       <Doughnut data={data} options={options} />
     </div>
   );

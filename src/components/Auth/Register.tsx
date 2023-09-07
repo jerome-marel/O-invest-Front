@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { axiosInstance } from '../../utils/axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 
 
@@ -37,6 +38,8 @@ const RegisterForm = () => {
           firstName: first_name.value,
           riskProfile: selectedRiskProfile,
         });
+        toast.success('Compte créé avec succès. Vous pouvez maintenant vous connecter.');
+
         Navigate('/login');
       } catch (error) {
         console.error('Error registering:', error);
