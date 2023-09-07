@@ -298,8 +298,7 @@ const Header = () => {
               to={`/dashboard/portfolio/${portfolio.id}`}
               className={`block text-white bg-[#100e24] border-none ${
                 selectedPortfolio === portfolio.id
-                  ? 'bg-blue-100'
-                  : 'hover:bg-gray-100'
+                  
               }`}
               onClick={() => {
                 setSelectedPortfolio(portfolio);

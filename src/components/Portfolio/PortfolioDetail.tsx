@@ -87,13 +87,7 @@ const PortfolioDetail = () => {
     flexDirection: 'column',
   };
   
-  const portfolioNameStyle = {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    maxHeight: '2rem', 
-    
-  };
+  
   return (
       
     <div style={containerStyle} className="grid grid-cols-1 justify-center ">
@@ -102,9 +96,10 @@ const PortfolioDetail = () => {
         {/* Moitié gauche */}
         <div className="p-3">
           <div style={containerCardStyle} className="border border-indigo-900 p-10 rounded-2xl shadow-lg mb-4">
-            <h2 className="text-2xl text-white font-bold mb-4 " style={portfolioNameStyle} > {portfolio.portfolio.name}</h2>
+            <h2 className="text-2xl text-white font-bold mb-4 " style={{ overflowWrap: 'break-word' }}> {portfolio.portfolio.name}</h2>
             <div className="list-disc pl-6 text-lg text-white" >Investissement total : <NumberDisplay value={portfolio.portfolio.totalInvested} /></div>
-            <div className="list-disc pl-6 text-lg text-white" style={portfolioNameStyle}>Stratégie : {portfolio.portfolio.strategy}</div>
+            <div className="list-disc pl-6 text-lg text-white" style={{ overflowWrap: 'break-word' }}>Stratégie : {portfolio.portfolio.strategy}</div>
+
           </div>
           <CardGlobalPortfolio portfolio={portfolio} />
         </div>
