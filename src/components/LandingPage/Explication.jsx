@@ -14,12 +14,10 @@ function Explication() {
         <div className="w-full shrink-0 grow-0 basis-auto lg:w-6/12 xl:w-8/12">
           <div className="px-6 py-12 md:px-12">
             <h2 className="mb-6 pb-2 text-4xl texte-white font-bold">
-              Pourquoi choisir Oinvest ?
+              Pourquoi nous choisir ?
             </h2>
-            <p className="mb-6 pb-2 text-neutral-500 dark:text-neutral-300">
-              Nunc tincidunt vulputate elit. Mauris varius purus malesuada
-              neque iaculis malesuada. Aenean gravida magna orci, non
-              efficitur est porta id. Donec magna diam.
+            <p className="mb-6 pb-2 text-l text-justify">
+            O'Invest se distingue par son interface conviviale et intuitive. Les clients apprécient la facilité avec laquelle ils peuvent gérer leur portefeuille d'investissements, et suivre leurs performances financières, même s'ils n'ont aucune expérience préalable en investissement.
             </p>
 
             <div className="grid gap-x-6 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
@@ -32,67 +30,10 @@ function Explication() {
                 </p>
               </div>
 
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Analytics
-                </p>
-              </div>
+             
 
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Components
-                </p>
-              </div>
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Updates
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Reports
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Mobile
-                </p>
-              </div>
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Modules
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Blocks
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Templates
-                </p>
-              </div>
+              
+              
             </div>
           </div>
         </div>
