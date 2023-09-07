@@ -113,7 +113,7 @@ const PortfolioDetail = () => {
   
         {/* Right Column */}
         <div className="lg:col-span-1 ">
-          <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset} />
+          <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset}  valeurLatente={valeurLatente}/>
         </div>
         <div className="flex justify-center">
         <DeletePortfolio portfolioId={portfolioId} />
