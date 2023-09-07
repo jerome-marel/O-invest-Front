@@ -6,6 +6,7 @@ import { axiosInstance } from '../../utils/axios';
 import Asset from './Asset';
 import GraphPortfolio from './GraphPortfolio';
 import NumberDisplay from '../Number/NumberDisplay';
+import DeletePortfolio from '../Delete/DeletePortfolio';
 
 // Créez des types pour portfolio et userPortfolioAssets
 interface Portfolio {
@@ -28,7 +29,7 @@ const PortfolioDetail = () => {
   const [userPortfolioAssets, setUserPortfolioAssets] = useState<PortfolioAsset[]>([]);
   const [averagePrices, setAveragePrices] = useState({}); 
   const [addAsset, setAddAsset] = useState([]);
-
+  const [valeurLatente, setValeurLatente] = useState([]);
 
   useEffect(() => {
     const fetchPortfolio = async () => {
@@ -55,6 +56,9 @@ const PortfolioDetail = () => {
         // setAddAsset(AddAssetData)
         // console.log("Adassetadataa",AddAssetData)
 
+        const ValeurLatenteResponse = await axiosInstance.get(`/api/portfolios/${portfolioId}/assets/perf`);
+        setValeurLatente(ValeurLatenteResponse.data.oneAssetProfitLoss)
+        console.log('Valeurlatentresposne', ValeurLatenteResponse.data.oneAssetProfitLoss)
 
       } catch (error) {
         console.error('Error fetching portfolio:', error);
@@ -83,6 +87,7 @@ const PortfolioDetail = () => {
     flexDirection: 'column',
   };
   
+  
   return (
       
     <div style={containerStyle} className="grid grid-cols-1 justify-center ">
@@ -91,9 +96,10 @@ const PortfolioDetail = () => {
         {/* Moitié gauche */}
         <div className="p-3">
           <div style={containerCardStyle} className="border border-indigo-900 p-10 rounded-2xl shadow-lg mb-4">
-            <h2 className="text-2xl text-white font-bold mb-4">{portfolio.portfolio.name}</h2>
-            <div className="list-disc pl-6 text-lg text-white">Investissement total : <NumberDisplay value={portfolio.portfolio.totalInvested} /></div>
-            <div className="list-disc pl-6 text-lg text-white">Stratégie : {portfolio.portfolio.strategy}</div>
+            <h2 className="text-2xl text-white font-bold mb-4 " style={{ overflowWrap: 'break-word' }}> {portfolio.portfolio.name}</h2>
+            <div className="list-disc pl-6 text-lg text-white" >Investissement total : <NumberDisplay value={portfolio.portfolio.totalInvested} /></div>
+            <div className="list-disc pl-6 text-lg text-white" style={{ overflowWrap: 'break-word' }}>Stratégie : {portfolio.portfolio.strategy}</div>
+
           </div>
           <CardGlobalPortfolio portfolio={portfolio} />
         </div>
@@ -109,6 +115,10 @@ const PortfolioDetail = () => {
         <div className="lg:col-span-1 ">
           <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset} />
         </div>
+        <div className="flex justify-center">
+        <DeletePortfolio portfolioId={portfolioId} />
+        </div>
+        
       </div>
   
       {/* Bottom Column */}

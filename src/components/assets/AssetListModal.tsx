@@ -202,6 +202,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
                 minTime={new Date().setHours(15, 30)}
                 maxTime={new Date().setHours(22, 30)}
                 className="w-full border p-2 rounded-md"
+                popperPlacement="left"
               />
 
               <div className="flex items-center mt-2 text-orange-500">

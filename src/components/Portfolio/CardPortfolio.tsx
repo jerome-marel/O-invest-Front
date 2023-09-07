@@ -37,38 +37,36 @@ const CardPortfolio = ({ portfolio }) => {
     flexDirection: 'column',
   };
 
-  // Ajoutez un style pour tronquer le texte du nom du portefeuille
-  const portfolioNameStyle = {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    maxHeight: '2rem', // Ajustez la hauteur maximale selon vos besoins
-  };
+ 
 
   return (
-    <div style={containerCardStyle} className="border border-indigo-900 text-white shadow-md rounded-2xl px-5 py-5 w-72 h-60">
-      <div onClick={handleCardClick} style={{ cursor: 'pointer' }}>
-        {portfolioData && (
-          <>
-            {/* Utilisez le style pour tronquer le nom du portefeuille */}
-            <h1 className="font-bold text-3xl pb-3" style={portfolioNameStyle}>
-              {portfolioData.portfolio.name}
-            </h1>
-            <p className="font-color"> Valorisation Global: {portfolioData.portfolioValuation} $</p>
-            <div className="grid flex grid-cols-2 font-color">
-              <p> Profit / Loss:</p>
-              <p> <NumberDisplay value={portfolioData.profitAndLossRounded} /> </p>
-              <p> ROI:</p>
-              <p> {portfolioData.portfolioROIPercent ? <NumberPourcentDisplay value={portfolioData.portfolioROIPercent} /> : '0 %' }  </p>
-            </div>
-          </>
-        )}
-      </div>
+    <div style={containerCardStyle} className="border border-indigo-900 text-white shadow-md rounded-2xl pl-5 pr-1 pt-1 w-72 h-5/6 flex-col justify-between ">
       <div className="flex justify-end">
         {portfolioData && (
           <AddAssetButton portfolioId={portfolio.id} onModalClose={() => {}} />
         )}
       </div>
+      
+      <div onClick={handleCardClick} style={{ cursor: 'pointer' }}>
+        {portfolioData && (
+          <>
+           
+            <h1 className="font-bold text-3xl pl-3"  style={{ overflowWrap: 'break-word' }}>
+              {portfolioData.portfolio.name}
+            </h1>
+
+            <p className="font-color p-3"> Valorisation Total </p> 
+            <p className='pl-3'>$ {portfolioData.portfolioValuation} </p>
+            <div className="grid flex grid-cols-2 font-color gap-2 p-3">
+              <p> Gains / Pertes</p>
+              <p> ROI</p>
+              <p> <NumberDisplay value={portfolioData.profitAndLossRounded} /> </p>
+              <p> {portfolioData.portfolioROIPercent ? <NumberPourcentDisplay value={portfolioData.portfolioROIPercent} /> : '0 %' }  </p>
+            </div>
+          </>
+        )}
+      </div>
+      
     </div>
   );
 };

@@ -116,7 +116,7 @@ const ProfilePage = () => {
             />
           </div>
 
-          <div>
+          <div className="flex justify-center">
               <DeleteProfil />
           </div>
           

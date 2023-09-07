@@ -36,6 +36,7 @@ const App = () => {
             </LoggedRoute>
           }
         />
+        
 
         <Route
           path="/portfolio/:portfolioId"
