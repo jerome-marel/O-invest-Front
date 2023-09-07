@@ -1,7 +1,9 @@
 import NumberDisplay from "../Number/NumberDisplay";
 import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
 const FlopPerformer = ({ asset }) => {
-  return (
+
+  
+    return (
     <div className="flex flex-col justify-center items-center gap-y-3">
       <h2 className="text-white font-bold ">Flop Performer</h2>
       <p className="font-bold">{asset.symbol}</p>

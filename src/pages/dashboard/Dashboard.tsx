@@ -44,20 +44,25 @@ const Dashboard = () => {
 
   return (
     <div className="bg-gradient-to-b from-[#100e24] via-[#171850] to-[#2d32ad] p-4 min-h-screen">
-      <div className="container mx-auto py-10">
-        {/* Première ligne */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-5 h-full">
-         
+    <div className="container mx-auto py-10">
+      {/* Première ligne */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-5 h-full">
         <div className="md:col-span-1">
-        <div className="bg-gradient-to-r from-[#080b29] via-[#1a1c60] to-[#1a1c60] border border-indigo-900 p-10 rounded-2xl shadow-lg mb-5">
-              <h2 className="text-l text-white mb-2">Bonjour</h2>
-              <h2 className="text-5xl text-white font-bold mb-4" style={{ overflowWrap: 'break-word' }}>{firstName} {lastName}</h2>
-              <p className='text-white'> Nous sommes ravis de vous revoir.</p>
-              <p className='text-white'>  Jetons un coup d'œil à la performance de vos fonds aujourd'hui. </p>
-              <p className='text-white pt-8'> N'hésitez pas à explorer vos portefeuilles en détail, à passer en revue vos </p>
-              <p className='text-white'> transactions récentes ou à effectuer les ajustements nécessaires. </p>
+          <div className="bg-gradient-to-r from-[#080b29] via-[#1a1c60] to-[#1a1c60] border border-indigo-900 p-10 rounded-2xl shadow-lg mb-5">
+            <h2 className="text-l text-white mb-2">Bonjour</h2>
+            <h3 className="text-5xl text-white font-bold mb-4 " style={{ overflowWrap: 'break-word' }}> {firstName} {lastName} </h3>
+            {portfolios.length === 0 ? (
+              <p className='text-white'>Vous n'avez pas de portefeuilles. Créez-en un pour commencer.</p>
+            ) : (
+              <>
+                <p className='text-white'>Nous sommes ravis de vous revoir.</p>
+                <p className='text-white'>Jetons un coup d'œil à la performance de vos fonds aujourd'hui.</p>
+                <p className='text-white pt-8'>N'hésitez pas à explorer vos portefeuilles en détail, à passer en revue vos</p>
+                <p className='text-white'>transactions récentes ou à effectuer les ajustements nécessaires.</p>
+              </>
+            )}
           </div>
-         </div>
+        </div>
 
          <div className="md:col-span-1">
             <CardGlobalDashboard />

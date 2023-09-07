@@ -37,14 +37,7 @@ const CardPortfolio = ({ portfolio }) => {
     flexDirection: 'column',
   };
 
-  // Ajoutez un style pour tronquer le texte du nom du portefeuille
-  const portfolioNameStyle = {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    maxHeight: '2rem', 
-    
-  };
+ 
 
   return (
     <div style={containerCardStyle} className="border border-indigo-900 text-white shadow-md rounded-2xl pl-5 pr-1 pt-1 w-72 h-5/6 flex-col justify-between ">
@@ -58,7 +51,7 @@ const CardPortfolio = ({ portfolio }) => {
         {portfolioData && (
           <>
            
-            <h1 className="font-bold text-3xl pl-3" style={portfolioNameStyle}>
+            <h1 className="font-bold text-3xl pl-3"  style={{ overflowWrap: 'break-word' }}>
               {portfolioData.portfolio.name}
             </h1>
 
