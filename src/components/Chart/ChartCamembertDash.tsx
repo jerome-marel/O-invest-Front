@@ -18,7 +18,7 @@ const ChartCamembert = ({ portfolioValuations }) => {
   };
 
   const options = {
-    cutout: 130,
+    cutout: 115,
     spacing:5,
     responsive: true,
     maintainAspectRatio: true,
@@ -62,7 +62,7 @@ const ChartCamembert = ({ portfolioValuations }) => {
   
 
   return (
-    <div className="w-80 h-80">
+    <div className="w-72 h-72">
       <Doughnut data={data} options={options} />
     </div>
   );

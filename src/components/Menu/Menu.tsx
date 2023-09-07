@@ -296,7 +296,7 @@ const Header = () => {
             <NavLink 
               key={portfolio.id}
               to={`/dashboard/portfolio/${portfolio.id}`}
-              className={`block text-white bg-[#100e24] border-none ${
+              className={`block text-white bg-[#100e24] border-none pb-5 ${
                 selectedPortfolio === portfolio.id
                   
               }`}
