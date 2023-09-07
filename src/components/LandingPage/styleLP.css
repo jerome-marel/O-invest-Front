@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "Blanka-Regular";
+    src: local('Blanka-Regular'), URL(../../fonts/Blanka-Regular.otf) format('opentype');
+  }
+  
+ /* @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap'); */
+
+  h1, p {
+    font-family: "Blanka-Regular";
+    /* font-family: 'Anton', sans-serif; */
+  }
