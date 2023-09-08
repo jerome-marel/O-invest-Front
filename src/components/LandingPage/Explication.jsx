@@ -3,102 +3,32 @@ import React from 'react';
 function Explication() {
   return (
     <>
- <div className="container w-2/3 mx-auto p-16">
-  <section className="">
+ <div className="container mx-auto p-16">
+
     <div className="rounded-lg bg-neutral-100 shadow-xl">
       <div className="flex flex-wrap items-center">
         <div className="block w-full shrink-0 grow-0 basis-auto lg:flex lg:w-6/12 xl:w-4/12">
-          <video controls player  src="public/video/WarrenBuffet.mp4" alt="WarrenBuffet parle de Oinvest"
-            className=" rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg" />
+        <div className='mr-10'>
+  <div className='relative'>
+    <video controls player src="public/video/WarrenBuffet.mp4" alt="WarrenBuffet parle de Oinvest">.
+    </video>
+    <div className="absolute top-2 left-3 justify-center items-center text-white">
+      <p className="text-l font-bold">Warren Buffet, USA</p>
+      <p className='text-l font-bold'>Investisseur de Confiance</p>
+    </div>
+  </div>
+</div>
+
         </div>
-        <div className="w-full shrink-0 grow-0 basis-auto lg:w-6/12 xl:w-8/12">
-          <div className="px-6 py-12 md:px-12">
-            <h2 className="mb-6 pb-2 text-4xl texte-white font-bold">
-              Pourquoi choisir Oinvest ?
-            </h2>
-            <p className="mb-6 pb-2 text-neutral-500 dark:text-neutral-300">
-              Nunc tincidunt vulputate elit. Mauris varius purus malesuada
-              neque iaculis malesuada. Aenean gravida magna orci, non
-              efficitur est porta id. Donec magna diam.
-            </p>
-
-            <div className="grid gap-x-6 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Support
-                  24/7
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Analytics
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Components
-                </p>
-              </div>
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Updates
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Reports
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Mobile
-                </p>
-              </div>
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Modules
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Blocks
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <p className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" className="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Templates
-                </p>
-              </div>
+        <div className="w-full basis-auto lg:w-6/12 xl:w-8/12">
+        <div className="text-center font-bold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-700"> LE PROJET O'INVEST </div>
+            <div className='p-10 grid text-justify gap-10 items-center justify-center'>
+              <p className=''>'' O'Invest est un <b>projet d'école réalisé en seulement 4 semaines</b> , une véritable fin d'apothéose chez <b>O'clock</b>, du cahier des charges jusqu'au Minimum Viable Product (MVP). Le cahier des charges initial définit un objectif ambitieux : <b>développer un tableau de bord en ligne destiné aux investisseurs.</b> Ce tableau de bord révolutionnaire permet aux utilisateurs de suivre et de gérer leurs investissements, même s'ils sont répartis dans différents organismes bancaires. </p>
+              <p className=''>Grâce à O'Invest, les investisseurs ont enfin un outil puissant pour <b>analyser la performance globale de leurs portefeuilles</b>, accéder à des informations essentielles telles que la valeur de chaque ligne d'actif, et ainsi prendre des décisions éclairées. C'est le résultat d'une collaboration acharnée et d'un engagement inébranlable envers la simplification de l'expérience d'investissement pour tous, qu'ils soient novices ou experts en la matière.  "</p>
             </div>
-          </div>
         </div>
       </div>
     </div>
-  </section>
 </div>
      </>
   );

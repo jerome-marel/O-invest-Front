@@ -96,6 +96,7 @@ const AssetListModal = ({ isOpen, assets, onClose, portfolioId, handleAddAsset }
       .post(`/api/portfolios/${portfolioId}/addasset`, newAsset)
       .then((response) => {
         handleAddAsset(response.data.newPortfolioAsset);
+        
         handleCloseAssetModal();
         onClose();
         //console.log("assetlistmodal assetadd", response)

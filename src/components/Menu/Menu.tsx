@@ -116,7 +116,8 @@ const Header = () => {
       });
 
       setPortfolioList([...portfolioList, response.data.newPortfolio]);
-
+      setModalName('');
+      setModalStrategy('');
       Navigate(`/dashboard/portfolio/${response.data.newPortfolio.id}`, {
         state: { name, strategy },
       });
@@ -136,7 +137,7 @@ const Header = () => {
       <div className="flex justify-between items-center p-4">
         <div className="flex items-center">
           <NavLink to="/dashboard" className="text-white text-lg font-semibold">
-            O'Invest
+               <img src='public/Logo Oinvest.svg' alt="logo" className="w-50" />
           </NavLink>
 
           <div className="lg:hidden ml-4">

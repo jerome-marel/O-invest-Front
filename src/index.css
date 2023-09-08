@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+    min-height: 100vh;
+    
+    background: linear-gradient(169deg, rgba(16,14,36,1) 30%, rgba(23,24,80,1) 52%, rgba(49,75,177,1) 93%, rgba(46,50,173,1) 100%);
+}

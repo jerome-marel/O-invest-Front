@@ -10,7 +10,7 @@ function Princing() {
   <div className="container px-5 py-24 mx-auto">
     <div className="flex flex-col text-center w-full mb-20">
       <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">Nos Prix</h1>
-      <b className='bg-clip-text text-3xl text-transparent bg-gradient-to-r from-blue-400 to-purple-700 ml-2'>Investissez dans le meilleur service de gestion de portefeuilles.</b>
+      <b className='bg-clip-text text-3xltext-transparent bg-gradient-to-r from-blue-400 to-purple-700 ml-2'>Investissez dans le meilleur services de gestion de portefeuilles.</b>
     </div>
     <div className="flex flex-wrap justify-center -m-4">
       <div className="p-4 xl:w-1/4 md:w-1/2 w-full">

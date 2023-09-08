@@ -14,16 +14,69 @@ function TradingViewWidget() {
         {
           "symbols": [
             [
+              "NASDAQ",
+              "NDX|1D"
+            ],
+            [
+              "DOW JONES",
+              "DJI|1D"
+            ],
+            [
+              "SP500",
+              "US500|1D"
+            ],
+            [
+              "CAC",
+              "CAC|1D"
+            ],
+            [
+              "DAX",
+              "DAX|1D"
+            ],
+            [
+              "Volatility Index",
+              "VIX|1D"
+            ],
+          
+            [
               "Apple",
               "AAPL|1D"
+            ],
+            [
+              "Amazon",
+              "AMZN|1D"
+            ],
+            [
+              "Coca-cola",
+              "KO|1D"
             ],
             [
               "Google",
               "GOOGL|1D"
             ],
             [
+              "Meta",
+              "META|1D"
+            ],
+            [
               "Microsoft",
               "MSFT|1D"
+            ],
+            [
+              "Netflix",
+              "NFLX|1D"
+            ],
+            [
+              "NVidia",
+              "NVDA|1D"
+            ],
+            [
+              "Pfizer",
+              "PFE|1D"
+            ],
+            [
+              "Tesla",
+              "TSLA|1D"
             ]
           ],
           "chartOnly": false,
