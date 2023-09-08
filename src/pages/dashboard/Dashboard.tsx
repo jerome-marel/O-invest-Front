@@ -41,7 +41,7 @@ const Dashboard = () => {
 
     fetchPortfolios();
   }, []);
-
+console.log(portfolios)
   return (
     <div className="bg-gradient-to-b from-[#100e24] via-[#171850] to-[#2d32ad] p-4  ">
     <div className="container mx-auto ">
