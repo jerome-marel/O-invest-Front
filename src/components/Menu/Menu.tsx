@@ -116,7 +116,8 @@ const Header = () => {
       });
 
       setPortfolioList([...portfolioList, response.data.newPortfolio]);
-
+      setModalName('');
+      setModalStrategy('');
       Navigate(`/dashboard/portfolio/${response.data.newPortfolio.id}`, {
         state: { name, strategy },
       });

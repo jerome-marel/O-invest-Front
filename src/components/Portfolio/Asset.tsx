@@ -47,6 +47,7 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
           </thead>
           <tbody>
             {userPortfolioAssets.map((asset, index) => {
+              console.log(" aaasssseeeett", asset)
               const averagePrice = averagePrices[asset.symbol] || 0;
               return (
                 <tr key={asset.id} className="">

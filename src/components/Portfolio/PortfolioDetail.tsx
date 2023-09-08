@@ -52,11 +52,6 @@ const PortfolioDetail = () => {
         setAveragePrices(averagePricesResponse.data.averagePrices);
         console.log("response avg", averagePricesResponse)
 
-        // const AddAssetData = await axiosInstance.get(`/api/portfolios/${portfolioId}/addasset`); 
-        
-        // setAddAsset(AddAssetData)
-        // console.log("Adassetadataa",AddAssetData)
-
         const ValeurLatenteResponse = await axiosInstance.get(`/api/portfolios/${portfolioId}/assets/perf`);
         setValeurLatente(ValeurLatenteResponse.data.oneAssetProfitLoss)
         console.log('Valeurlatentresposne', ValeurLatenteResponse.data.oneAssetProfitLoss)
