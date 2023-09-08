@@ -4,8 +4,8 @@ import './Asset.css';
 import NumberDisplay from "../Number/NumberDisplay";
 import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
 
-const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset, handleDeleteAsset, valeurLatente }) => {
-
+const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset, handleDeleteAsset, valeurLatente , note}) => {
+ console.log(note)
   console.log("valuer latente", valeurLatente)
   const containerCardStyle = {
     background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
@@ -65,7 +65,13 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
                       "Indisponible"
                     )}
                   </td>
-                  <td className="text-white text-center p-5"></td>
+                  <td className="text-white text-center p-5">
+                    {note[index] ? (
+                      note[index].note
+                    ) : (
+                      "Aucune note"
+                    )}
+                  </td>
                   <td className="text-white text-center  p-5">
                     <DeleteAsset
                       assetSymbol={asset.symbol}

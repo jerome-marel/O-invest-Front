@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../utils/axios';
 import { FaTrash } from 'react-icons/fa'; // Importez l'icône de la poubelle
@@ -32,7 +32,6 @@ const DeleteAsset = ({ assetSymbol, assetQuantity, portfolioId, handleDelete }) 
         handleDelete(assetSymbol, quantityToRemove);
       }
   
-      // Fermez la modal
       setShowModal(false);
     } catch (error) {
       console.error('Error deleting asset:', error);
