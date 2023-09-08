@@ -3,7 +3,7 @@ import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
 
 const FlopPerformer = ({ asset }) => {
   // Vérifier si asset est défini avant d'accéder à sa propriété symbol
-  if (asset === null) {
+  if (!asset) {
     return <div>Aucun actif disponible</div>;
   }
 
