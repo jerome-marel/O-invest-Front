@@ -34,13 +34,13 @@ const AddAssetButton = ({ onModalClose, portfolioId, handleAddAsset }) => {
 
   return (
     <div>
-       <button
-  className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
-  onClick={handleAddClick}
->
-  <AddIcon className="w-6 h-6" />
-</button>
-
+      <button
+        className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center hover:rotate-45 transform transition-transform border-none cursor-pointer"
+        onClick={handleAddClick}
+      >
+        <AddIcon className="w-6 h-6" />
+      </button>
+  
       {isModalOpen && (
         <div
           className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
@@ -57,6 +57,7 @@ const AddAssetButton = ({ onModalClose, portfolioId, handleAddAsset }) => {
       )}
     </div>
   );
+  
 };
 
 export default AddAssetButton;

@@ -30,6 +30,7 @@ const PortfolioDetail = () => {
   const [averagePrices, setAveragePrices] = useState({}); 
   const [addAsset, setAddAsset] = useState([]);
   const [valeurLatente, setValeurLatente] = useState([]);
+  const [note, setNote] = useState([]);
 
   useEffect(() => {
     const fetchPortfolio = async () => {
@@ -59,6 +60,11 @@ const PortfolioDetail = () => {
         const ValeurLatenteResponse = await axiosInstance.get(`/api/portfolios/${portfolioId}/assets/perf`);
         setValeurLatente(ValeurLatenteResponse.data.oneAssetProfitLoss)
         console.log('Valeurlatentresposne', ValeurLatenteResponse.data.oneAssetProfitLoss)
+
+
+        const noteResponse = await axiosInstance.get(`/api/portfolios/${portfolioId}/assets/perf`)
+        setNote(noteResponse.data.transactionNote)
+        console.log("noterepsonse", noteResponse.data.transactionNote)
 
       } catch (error) {
         console.error('Error fetching portfolio:', error);
@@ -113,7 +119,7 @@ const PortfolioDetail = () => {
   
         {/* Right Column */}
         <div className="lg:col-span-1 ">
-          <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset} />
+          <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset}  valeurLatente={valeurLatente}  note={note}/>
         </div>
         <div className="flex justify-center">
         <DeletePortfolio portfolioId={portfolioId} />

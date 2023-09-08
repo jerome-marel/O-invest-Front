@@ -56,7 +56,7 @@ const CardPortfolio = ({ portfolio }) => {
             </h1>
 
             <p className="font-color p-3"> Valorisation Total </p> 
-            <p className='pl-3'>$ {portfolioData.portfolioValuation} </p>
+            <p className='pl-3'> <NumberDisplay value={portfolioData.portfolioValuation} /> </p>
             <div className="grid flex grid-cols-2 font-color gap-2 p-3">
               <p> Gains / Pertes</p>
               <p> ROI</p>

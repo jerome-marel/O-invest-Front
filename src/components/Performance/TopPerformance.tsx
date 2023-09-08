@@ -1,7 +1,9 @@
 import NumberDisplay from "../Number/NumberDisplay";
 import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
 const TopPerformer = ({ asset }) => {
-
+  if (!asset) {
+    return <div>Aucun actif disponible</div>;
+  }
   
   return (
     <div className="flex flex-col justify-center items-center gap-y-3">

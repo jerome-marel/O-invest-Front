@@ -1,9 +1,12 @@
-
 import AddAssetButton from "../AddAssetButton";
 import DeleteAsset from "../../components/Delete/DeleteAsset"; 
 import './Asset.css';
+import NumberDisplay from "../Number/NumberDisplay";
+import NumberPourcentDisplay from "../Number/NumberPourcentDisplay";
 
-const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset, handleDeleteAsset }) => {
+const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset, handleDeleteAsset, valeurLatente , note}) => {
+ console.log(note)
+  console.log("valuer latente", valeurLatente)
   const containerCardStyle = {
     background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
     display: 'flex flex-wrap justify-center gap-10',
@@ -15,7 +18,7 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
     overflowY: 'auto',
   };
 
-  //Props passé au composant 
+  // Props passé au composant 
   const handleDeleteAssetClick = (assetId) => {
     handleDeleteAsset(assetId);
   }
@@ -28,7 +31,7 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
           <AddAssetButton onModalClose={() => {}} portfolioId={portfolioId} handleAddAsset={handleAddAsset} />
         </p>
       </div>
-      
+  
       <div style={tableContainerStyle}>
         <table className="w-full">
           <thead>
@@ -40,11 +43,10 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
               <th className="px-4 py-2">Valeur</th>
               <th className="px-4 py-2">Valeur latente</th>
               <th className="px-4 py-2">Note</th>
-              
             </tr>
           </thead>
           <tbody>
-            {userPortfolioAssets.map((asset) => {
+            {userPortfolioAssets.map((asset, index) => {
               const averagePrice = averagePrices[asset.symbol] || 0;
               return (
                 <tr key={asset.id} className="">
@@ -53,17 +55,31 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
                   <td className="text-white text-center p-5">{asset.remainingQuantity}</td>
                   <td className="text-white text-center p-5">{averagePrice}</td>
                   <td className="text-white text-center p-5">{(asset.historicPrice * asset.remainingQuantity).toFixed(2)}</td>
-                  <td className="text-white text-center p-5">fdsfs</td>
-                  <td className="text-white text-center p-5">aaaaa
+                  <td className="text-white text-center p-5">
+                    {valeurLatente[index] ? (
+                      <>
+                        <NumberDisplay value={valeurLatente[index].assetProfitLoss.toFixed(2)} /> | {" "}
+                        <NumberPourcentDisplay value={valeurLatente[index].assetROIPercent.toFixed(2)} />
+                      </>
+                    ) : (
+                      "Indisponible"
+                    )}
+                  </td>
+                  <td className="text-white text-center p-5">
+                    {note[index] ? (
+                      note[index].note
+                    ) : (
+                      "Aucune note"
+                    )}
                   </td>
                   <td className="text-white text-center  p-5">
-                  <DeleteAsset
+                    <DeleteAsset
                       assetSymbol={asset.symbol}
                       assetQuantity={asset.remainingQuantity}
                       portfolioId={portfolioId} // Assurez-vous de passer portfolioId
                       handleDelete={handleDeleteAssetClick}
                     />
-                    </td>
+                  </td>
                 </tr>
               );
             })}
@@ -72,6 +88,7 @@ const Asset = ({ userPortfolioAssets, averagePrices, portfolioId, handleAddAsset
       </div>
     </div>
   );
+  
 };
 
 export default Asset;

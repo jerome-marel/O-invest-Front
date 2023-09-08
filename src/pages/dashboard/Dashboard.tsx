@@ -49,16 +49,16 @@ const Dashboard = () => {
   };
 
  
-
   return (
     <div className="bg-gradient-to-b from-[#100e24] via-[#171850] to-[#2d32ad] p-4 min-h-screenl">
     
     <div style={containerCardStyle} className="m-12 border border-indigo-900 text-white shadow-md rounded-2xl">
     <div className="container mx-auto py-10">
+
       {/* Première ligne */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5 h-full">
-        <div className="md:col-span-1">
-          <div className="bg-gradient-to-r from-[#080b29] via-[#1a1c60] to-[#1a1c60] border border-indigo-900 p-10 rounded-2xl shadow-lg mb-5">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-5 ">
+        <div className="md:col-span-1 l">
+          <div className="bg-gradient-to-r from-[#080b29] via-[#1a1c60] to-[#1a1c60] border border-indigo-900 p-10 rounded-2xl shadow-lg h-full ">
             <h2 className="text-l text-white mb-2">Bonjour</h2>
             <h3 className="text-5xl text-white font-bold mb-4 " style={{ overflowWrap: 'break-word' }}> {firstName} {lastName} </h3>
             {portfolios.length === 0 ? (
@@ -74,22 +74,22 @@ const Dashboard = () => {
           </div>
         </div>
 
-         <div className="md:col-span-1">
+         <div className="md:col-span-1 h-full">
             <CardGlobalDashboard />
           </div>
 
 
 
-          <div className="md:col-span-1">
+          <div className="md:col-span-1 w-full h-full flex justify-center items-center ">
             <ChartCamembert portfolioValuations={portfolioValuations} />
           </div>
 
 
-         <div className="md:col-span-1 text-white h-full  "> 
+         <div className="md:col-span-1 text-white  flex flex-col justify-between "> 
           <div className='bg-gradient-to-r from-[#080b29] via-[#1a1c60] to-[#1a1c60] border border-indigo-900 p-10 rounded-2xl shadow-lg mb-5'>
             {topPerformer && <TopPerformer asset={topPerformer[0]} />}
           </div >
-          <div  className='bg-gradient-to-r from-[#080b29] via-[#1a1c60] to-[#1a1c60] border border-indigo-900 p-10 rounded-2xl shadow-lg mb-5'>
+          <div  className='bg-gradient-to-r from-[#080b29] via-[#1a1c60] to-[#1a1c60] border border-indigo-900 p-10 rounded-2xl shadow-lg '>
           {flopPerformer && <FlopPerformer asset={flopPerformer[0]} />}
           </div>
           </div>
