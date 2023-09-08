@@ -16,6 +16,8 @@ const Dashboard = () => {
   const [topPerformer, setTopPerformer] = useState('');
   const [flopPerformer, setFlopPerformer] = useState('');
   
+
+
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
@@ -58,8 +60,7 @@ const Dashboard = () => {
     fetchPortfolios();
   }, []);
 
-
- 
+  
   return (
     <div className=" p-4">
     

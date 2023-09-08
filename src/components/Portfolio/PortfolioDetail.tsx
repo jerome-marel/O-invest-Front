@@ -27,10 +27,12 @@ const PortfolioDetail = () => {
   const { portfolioId } = useParams();
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [userPortfolioAssets, setUserPortfolioAssets] = useState<PortfolioAsset[]>([]);
-  const [averagePrices, setAveragePrices] = useState({}); 
-  const [addAsset, setAddAsset] = useState([]);
+  const [averagePrices, setAveragePrices] = useState({});
   const [valeurLatente, setValeurLatente] = useState([]);
   const [note, setNote] = useState([]);
+  const[count, setCount] = useState(0);
+
+
 
   useEffect(() => {
     const fetchPortfolio = async () => {
@@ -66,14 +68,19 @@ const PortfolioDetail = () => {
       }
     };
     fetchPortfolio();
-  }, [portfolioId]);
+  }, [portfolioId, count]);
+
+  
 
   if (!portfolio) {
     return <div className="bg-gray-100 p-4">Pas de portefeuille</div>;
   }
 
   const handleAddAsset = (asset: PortfolioAsset) => {
+    
     setUserPortfolioAssets([...userPortfolioAssets, asset]);
+    
+    setCount(count +1);
   };
 
   const containerStyle = {
@@ -88,6 +95,9 @@ const PortfolioDetail = () => {
     flexDirection: 'column',
   };
   
+  const handleDeleteAsset = () => {
+    setCount(count +1)
+  }
   
   return (
       
@@ -114,7 +124,7 @@ const PortfolioDetail = () => {
   
         {/* Right Column */}
         <div className="lg:col-span-1 ">
-          <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset}  valeurLatente={valeurLatente}  note={note}/>
+          <Asset userPortfolioAssets={userPortfolioAssets} portfolioId={portfolioId} averagePrices={averagePrices} onModalClose={() => {}} handleAddAsset={handleAddAsset}  valeurLatente={valeurLatente}  note={note} handleDeleteAsset={handleDeleteAsset} />
         </div>
         <div className="flex justify-center">
         <DeletePortfolio portfolioId={portfolioId} />
@@ -125,7 +135,7 @@ const PortfolioDetail = () => {
       {/* Bottom Column */}
       <div style={containerStyle} className="justify-between round mx-10 mt-10 border border-indigo-900 rounded-2xl p-10 shadow mb-5">
         <div className="w-full ">
-          <GraphPortfolio userPortfolioAssets={userPortfolioAssets} />
+          <GraphPortfolio userPortfolioAssets={userPortfolioAssets}  count={count}/>
         </div>
       </div>
     </div>
