@@ -41,10 +41,20 @@ const Dashboard = () => {
 
     fetchPortfolios();
   }, []);
-console.log(portfolios)
+
+  const containerCardStyle = {
+    background: 'linear-gradient(107deg, rgba(8,11,41,1) 34%, rgba(26,28,96,1) 85%)',
+    display: 'flex',
+    flexDirection: 'column',
+  };
+
+ 
   return (
-    <div className="bg-gradient-to-b from-[#100e24] via-[#171850] to-[#2d32ad] p-4  ">
-    <div className="container mx-auto ">
+    <div className="bg-gradient-to-b from-[#100e24] via-[#171850] to-[#2d32ad] p-4 min-h-screenl">
+    
+    <div style={containerCardStyle} className="m-12 border border-indigo-900 text-white shadow-md rounded-2xl">
+    <div className="container mx-auto py-10">
+
       {/* Première ligne */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 ">
         <div className="md:col-span-1 l">
@@ -57,8 +67,8 @@ console.log(portfolios)
               <>
                 <p className='text-white'>Nous sommes ravis de vous revoir.</p>
                 <p className='text-white'>Jetons un coup d'œil à la performance de vos fonds aujourd'hui.</p>
-                <p className='text-white pt-8'>N'hésitez pas à explorer vos portefeuilles en détail, à passer en revue vos</p>
-                <p className='text-white'>transactions récentes ou à effectuer les ajustements nécessaires.</p>
+                {/* <p className='text-white pt-8'>N'hésitez pas à explorer vos portefeuilles en détail, à passer en revue vos</p>
+                <p className='text-white'>transactions récentes ou à effectuer les ajustements nécessaires.</p> */}
               </>
             )}
           </div>
@@ -84,10 +94,12 @@ console.log(portfolios)
           </div>
           </div>
         </div>
-
+        </div>
         {/* Deuxième ligne */}
-        <div className="md:col-span-2 pt-5">
-          
+        
+    </div>
+    <div className="md:col-span-2 ">
+        
           <div className="flex flex-wrap justify-center gap-5">
             {portfolios.map((portfolio) => (
               <Card key={portfolio.id} portfolio={portfolio} />
@@ -108,7 +120,6 @@ console.log(portfolios)
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
